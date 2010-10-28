@@ -1,5 +1,9 @@
 <?php
- /**
+
+/* make sure no-one can run anything here if they didn't arrive through 'proper channels' */
+if(!defined("COMPACTCMS_CODE")) die('Illegal entry point!');
+
+/**
  * Copyright (C) 2008 - 2010 by Xander Groesbeek (CompactCMS.nl)
  * 
  * Last changed: $LastChangedDate$
