@@ -1074,7 +1074,7 @@ class MySQL
 				exit($message);
 			}
 		} 
-		if (CCMS_DEVELOPMENT_ENVIRONMENT) echo "<h1>Offending SQL query</h1><p>" . htmlspecialchars($this->last_sql) . "</p><h2>Error Message</h2><p> ";
+		if (defined('CCMS_DEVELOPMENT_ENVIRONMENT')) echo "<h1>Offending SQL query</h1><p>" . htmlspecialchars($this->last_sql) . "</p><h2>Error Message</h2><p> ";
 		exit($this->Error());
 	}
 
