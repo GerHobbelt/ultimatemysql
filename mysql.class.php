@@ -1063,19 +1063,29 @@ class MySQL
 	/**
 	 * Stop executing (die/exit) and show last MySQL error message
 	 */
-	public function Kill($message = "", $prepend_message = true) {
-		if (strlen($message) > 0) {
+	public function Kill($message = "", $prepend_message = true) 
+	{
+		exit($this->MyDyingMessage($message, $prepend_message));
+	}
+
+	/**
+	 * Return the error message ready for throwing back out to the client side while dying, a.k.a. Kill() without the death nor the echo'ing.
+	 */
+	public function MyDyingMessage($message = "", $prepend_message = true) 
+	{
+		if (strlen($message) > 0) 
+		{
 			if ($prepend_message)
 			{
-				echo $message . ' ';
+				$message .= ' ';
 			}
 			else
 			{
-				exit($message);
+				return $message;
 			}
 		} 
-		if (defined('CCMS_DEVELOPMENT_ENVIRONMENT')) echo "<h1>Offending SQL query</h1><p>" . htmlspecialchars($this->last_sql) . "</p><h2>Error Message</h2><p> ";
-		exit($this->Error());
+		if (defined('CCMS_DEVELOPMENT_ENVIRONMENT')) $message .= "<h1>Offending SQL query</h1><p>" . htmlspecialchars($this->last_sql) . "</p><h2>Error Message</h2><p> ";
+		return $message . $this->Error();
 	}
 
 	/**
