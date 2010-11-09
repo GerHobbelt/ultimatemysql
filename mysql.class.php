@@ -1874,7 +1874,7 @@ class MySQL
 			case "integer":
 			case "int":
 				if (is_numeric($value)) {
-					$return_value = intval($value);
+					$return_value = "'" . intval($value) . "'"; // Very tricky to go without the quotes, particularly when feeding integers into enum fields
 				} else {
 					$return_value = "NULL";
 				}
