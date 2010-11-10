@@ -51,6 +51,7 @@ class MySQL
 	const SQLVALUE_DATE     = "date";
 	const SQLVALUE_DATETIME = "datetime";
 	const SQLVALUE_NUMBER   = "number";
+	const SQLVALUE_ENUMERATE = "enum";
 	const SQLVALUE_T_F      = "t-f";
 	const SQLVALUE_TEXT     = "text";
 	const SQLVALUE_TIME     = "time";
@@ -1874,11 +1875,20 @@ class MySQL
 					$return_value = "'" . self::SQLFix($strvalue) . "'";
 				}
 				break;
+			case "enum":
+				if (is_numeric($value)) {
+					$return_value = "'" . intval($value) . "'"; // Very tricky to go without the quotes, particularly when feeding integers into enum fields
+				} else if (!empty($value)) {
+					$return_value = "'" . self::SQLFix(strval($value)) . "'";
+				} else {
+					$return_value = "NULL";
+				}
+				break;
 			case "number":
 			case "integer":
 			case "int":
 				if (is_numeric($value)) {
-					$return_value = "'" . intval($value) . "'"; // Very tricky to go without the quotes, particularly when feeding integers into enum fields
+					$return_value = intval($value);
 				} else {
 					$return_value = "NULL";
 				}
