@@ -495,10 +495,14 @@ class MySQL
 			if ($this->error_number <> 0)
 			{
 				return $this->error_number;
-			} else {
+			} 
+			else 
+			{
 				return -1;
 			}
-		} else {
+		} 
+		else 
+		{
 			return $this->error_number;
 		}
 	}
@@ -562,6 +566,7 @@ class MySQL
 				return false;
 			} else {
 				$index = 0;
+				$columns = array();
 				// Fetchs the array to be returned (column 8 is field comment):
 				while ($array_data = mysql_fetch_array($records, MYSQL_NUM)) {
 					//$columns[$index] = $array_data[8];
@@ -762,6 +767,7 @@ class MySQL
 	 */
 	public function GetColumnNames($table = null) {
 		$this->ResetError();
+		$columns = array();
 		if (! $this->IsConnected()) {
 			return $this->SetError("No connection", -1);
 		}
@@ -915,6 +921,7 @@ class MySQL
 		if (! $records) {
 			return $this->SetError();
 		} else {
+			$tables = array();
 			while ($array_data = mysql_fetch_array($records, MYSQL_NUM)) {
 				$tables[] = $array_data[0];
 			}
@@ -1048,14 +1055,25 @@ class MySQL
 	/**
 	 * [STATIC] Determines if a value of any data type is a date PHP can convert
 	 *
-	 * @param date/string $value
+	 * @param string $value
 	 * @return boolean Returns TRUE if value is date or FALSE if not date
 	 */
-	static public function IsDate($value) {
-		$date = date('Y', strtotime($value));
-		if ($date == "1969" || $date == '') {
+	static public function IsDateStr($value) 
+	{
+		$date = strtotime($value);
+		/* 
+		time == 0 ~ 1970-01-01T00:00:00 is considered an INVALID date here, 
+		because it can easily result from parsing arbitrary input representing 
+		the date eqv. of zero(0)... 
+		
+		time == -1 was the old error signaling return code (pre-PHP 5.1.0)
+		*/
+		if (!is_int($date) || $date <= 0)
+		{
 			return false;
-		} else {
+		} 
+		else 
+		{
 			return true;
 		}
 	}
@@ -1279,7 +1297,7 @@ class MySQL
 		} else if ($this->RowCount() > 0) {
 			return $this->RecordsArray($resultType);
 		} else {
-			return false;
+			return array();
 		}
 	}
 
@@ -1465,7 +1483,8 @@ class MySQL
 	 *
 	 * @param integer $resultType (Optional) The type of array
 	 *                Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH
-	 * @return Records in array form
+	 * @return Records in array form or FALSE on error. May return an 
+	 *         EMPTY array when no records are available.
 	 */
 	public function RecordsArray($resultType = MYSQL_BOTH) {
 		$this->ResetError();
@@ -1473,6 +1492,7 @@ class MySQL
 			if (! mysql_data_seek($this->last_result, 0)) {
 				return $this->SetError();
 			} else {
+				$members = array();
 				//while($member = mysql_fetch_object($this->last_result)){
 				while ($member = mysql_fetch_array($this->last_result, $resultType)){
 					$members[] = $member;
@@ -1790,7 +1810,8 @@ class MySQL
 	 * @param string $value
 	 * @return string SQL formatted value
 	 */
-	static public function SQLFix($value) {
+	static public function SQLFix($value) 
+	{
 		return @mysql_real_escape_string($value);
 	}
 
@@ -1799,8 +1820,14 @@ class MySQL
 	 *
 	 * @param string $value
 	 * @return string
+	 *
+	 * @warning Do NOT use on columns returned by a database query: such data has already
+	 *          been adequately processed by MySQL itself.
+	 *          The only probable place where the SQLUnfix() method MAY be useful is when
+	 *          DIRECTLY accessing strings produced by the SQLValue() method.
 	 */
-	static public function SQLUnfix($value) {
+	static public function SQLUnfix($value)
+	{
 		return @stripslashes($value);
 	}
 
@@ -1888,23 +1915,44 @@ class MySQL
 				}
 				break;
 			case "date":
-				if (self::IsDate($value)) {
+				if (self::IsDateStr($value)) 
+				{
 					$return_value = "'" . date('Y-m-d', strtotime($value)) . "'";
-				} else {
+				} 
+				elseif (is_int($value) && $value > 0) 
+				{
+					$return_value = "'" . date('Y-m-d', $value) . "'";
+				}
+				else
+				{
 					$return_value = "NULL";
 				}
 				break;
 			case "datetime":
-				if (self::IsDate($value)) {
+				if (self::IsDateStr($value)) 
+				{
 					$return_value = "'" . date('Y-m-d H:i:s', strtotime($value)) . "'";
-				} else {
+				} 
+				elseif (is_int($value) && $value > 0) 
+				{
+					$return_value = "'" . date('Y-m-d H:i:s', $value) . "'";
+				}
+				else 
+				{
 					$return_value = "NULL";
 				}
 				break;
 			case "time":
-				if (self::IsDate($value)) {
+				if (self::IsDateStr($value)) 
+				{
 					$return_value = "'" . date('H:i:s', strtotime($value)) . "'";
-				} else {
+				} 
+				elseif (is_int($value) && $value > 0) 
+				{
+					$return_value = "'" . date('H:i:s', $value) . "'";
+				}
+				else 
+				{
 					$return_value = "NULL";
 				}
 				break;
