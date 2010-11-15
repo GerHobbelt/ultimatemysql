@@ -160,49 +160,87 @@ class MySQL
 	}
 
 	/**
-	 * [STATIC] Builds a comma delimited list of columns for use with SQL
+     * Builds a comma delimited list of columns for use with SQL
 	 *
 	 * @param array $valuesArray An array containing the column names.
 	 * @param boolean $addQuotes (Optional) TRUE to add quotes
 	 * @param boolean $showAlias (Optional) TRUE to show column alias
+     * @param boolean $withSortMarker (Optional) TRUE when the field list is meant 
+     *                  for an ORDER BY clause; fields may be prefixed by a 
+     *                  plus(+) or minus(-) to indicate sort order. 
+     *                  Default is ASCending for each field.
 	 * @return string Returns the SQL column list on success or NULL on failure
 	 */
-	private function BuildSQLColumns($columns, $addQuotes = true, $showAlias = true) 
-	{
-		switch (gettype($columns)) 
-		{
-		case "array":
-			$sql = "";
-			foreach ($columns as $key => $value) {
-				// Build the columns
-				if (strlen($sql) != 0) {
-					$sql .= ", ";
-				}
-				if ($addQuotes) {
-					$sql .= "`" . self::SQLFix($value) . "`";
-				} else {
-					$sql .= $value;
-				}
-				if ($showAlias && is_string($key) && (! empty($key))) {
-					$sql .= ' AS "' . self::SQLFix($key) . '"';
-				}
-			}
-			return $sql;
+    private function BuildSQLColumns($columns, $addQuotes = true, $showAlias = true, $withSortMarker = false) 
+    {
+        switch (gettype($columns)) 
+        {
+        case "array":
+            $sql = "";
+            foreach ($columns as $key => $value) 
+            {
+                $asc = '';
+                if ($withSortMarker)
+                {
+                    switch ($value[0])
+                    {
+                    case '+':
+                        $asc = ' ASC';
+                        $value = substr($value, 1);
+                        break;
+                        
+                    case '-':
+                        $asc = ' DESC';
+                        $value = substr($value, 1);
+                        break;
+                    
+                    default:
+                        $asc = ' ASC';
+                        break;
+                    }
+                }
+                
+                // Build the columns
+                if (strlen($sql) != 0) 
+                {
+                    $sql .= ", ";
+                }
+                if ($addQuotes) 
+                {
+                    $sql .= "`" . self::SQLFix($value) . "`";
+                } 
+                else 
+                {
+                    $sql .= $value;
+                }
+                if ($showAlias && is_string($key) && (!empty($key))) 
+                {
+                    $sql .= ' AS "' . self::SQLFix($key) . '"';
+                }
+                else if ($withSortMarker)
+                {
+                    $sql .= $asc;
+                }
+            }
+            return $sql;
 
-		case "string":
-			if ($addQuotes) {
-				return "`" . self::SQLFix($columns) . "`";
-			} else {
-				return $columns;
-			}
+        case "string":
+            if ($addQuotes) 
+            {
+                return "`" . self::SQLFix($columns) . "`";
+            } 
+            else 
+            {
+                return $columns;
+            }
 
-		default:
-			return false;
-		}
-	}
+        default:
+            return false;
+        }
+    }
 
-	/**
-	 * [STATIC] Builds a SQL DELETE statement
+    /**
+     * Builds a SQL DELETE statement
 	 *
 	 * @param string $tableName The name of the table
 	 * @param array $whereArray (Optional) An associative array containing the
@@ -223,7 +261,7 @@ class MySQL
 	}
 
 	/**
-	 * [STATIC] Builds a SQL INSERT statement
+     * Builds a SQL INSERT statement
 	 *
 	 * @param string $tableName The name of the table
 	 * @param array $valuesArray An associative array containing the column
@@ -256,36 +294,47 @@ class MySQL
 	 * @param integer/string $limit (Optional) The limit of rows to return
 	 * @return string Returns a SQL SELECT statement
 	 */
-	public function BuildSQLSelect($tableName, $whereArray = null, $columns = null,
-										  $sortColumns = null, $sortAscending = true, $limit = null) 
-	{
-		if (! is_null($columns)) {
-			$sql = $this->BuildSQLColumns($columns, false, true);
-			if (!is_string($sql)) return false;
-		} else {
-			$sql = "*";
-		}
-		$sql = "SELECT " . $sql . " FROM `" . self::SQLFix($tableName) . "`";
-		if (! is_null($whereArray)) {
-			$wh = $this->BuildSQLWhereClause($whereArray);
-			if (!is_string($wh)) return false;
-			$sql .= $wh;
-		}
-		if (! is_null($sortColumns)) {
-			$ordstr = $this->BuildSQLColumns($sortColumns, false, false);
-			if (!is_string($ordstr)) return false;
-			$sql .= " ORDER BY " . $ordstr . " " . ($sortAscending ? "ASC" : "DESC");
-		}
-		if (! is_null($limit)) {
-			if (1 == preg_match('/[^0-9 ,]/', $limit))
-				return $this->SetError('ERROR: Invalid LIMIT clause specified in BuildSQLSelect method.', -1);
-			$sql .= " LIMIT " . $limit;
-		}
-		return $sql;
-	}
+    public function BuildSQLSelect($tableName, $whereArray = null, $columns = null,
+                                          $sortColumns = null, $limit = null) 
+    {
+        if (!is_null($columns)) 
+        {
+            $sql = $this->BuildSQLColumns($columns, false, true);
+            if (!is_string($sql)) return false;
+            $sql = trim($sql);
+        } 
+        if (empty($sql))
+        {
+            $sql = "*";
+        }
+        $sql = "SELECT " . $sql . " FROM `" . self::SQLFix($tableName) . "`";
+        if (!is_null($whereArray)) 
+        {
+            $wh = $this->BuildSQLWhereClause($whereArray);
+            if (!is_string($wh)) return false;
+            $sql .= ' ' . $wh;
+        }
+        if (!is_null($sortColumns)) 
+        {
+            $ordstr = $this->BuildSQLColumns($sortColumns, false, false, true);
+            if (!is_string($ordstr)) return false;
+            $ordstr = trim($ordstr);
+            if (!empty($ordstr))
+            {
+                $sql .= " ORDER BY " . $ordstr;
+            }
+        }
+        if (!is_null($limit)) 
+        {
+            if (1 == preg_match('/[^0-9 ,]/', $limit))
+                return $this->SetError('ERROR: Invalid LIMIT clause specified in BuildSQLSelect method.', -1);
+            $sql .= " LIMIT " . $limit;
+        }
+        return $sql;
+    }
 
-	/**
-	 * [STATIC] Builds a SQL UPDATE statement
+    /**
+     * Builds a SQL UPDATE statement
 	 *
 	 * @param string $tableName The name of the table
 	 * @param array $valuesArray An associative array containing the column
@@ -324,7 +373,7 @@ class MySQL
 		{
 			$wh = $this->BuildSQLWhereClause($whereArray);
 			if (!is_string($wh)) return false;
-			$sql .= $wh;
+            $sql .= ' ' . $wh;
 		}
 		return $sql;
 	}
@@ -345,7 +394,7 @@ class MySQL
 	}
 	
 	/**
-	 * [STATIC] Builds a SQL WHERE clause from an array.
+     * Builds a SQL WHERE clause from an array.
 	 * If a key is specified, the key is used at the field name and the value
 	 * as a comparison. If a key is not used, the value is used as the clause.
 	 *
@@ -365,17 +414,17 @@ class MySQL
 			{
 				if (strlen($where) == 0)
 				{
-					$where = " WHERE ";
+                    $where = "WHERE ";
 				} 
 				else 
 				{
 					$where .= " AND ";
 				} 
 
-				if (empty($value) && !is_integer($value))
-					return $this->SetError("ERROR: Invalid value specified in BuildSQLWhereClause method", -1);
-				if (is_string($key) && empty($key))
-					return $this->SetError("ERROR: Invalid key specified in BuildSQLWhereClause method", -1);
+                if (is_string($key) && empty($key))
+                    return $this->SetError("ERROR: Invalid key specified in BuildSQLWhereClause method", -1);
+                if (empty($value) && !is_integer($value))
+                    return $this->SetError("ERROR: Invalid value specified in BuildSQLWhereClause method for key '" . $key . "'", -1);
 
 				if (is_string($key))
 				{
@@ -1222,7 +1271,8 @@ class MySQL
 			$this->active_row = -1;
 			return $this->SetError();
 		} else {
-			if (preg_match('/\binsert\b/', strtolower($sql))) {
+            if (preg_match('/\binsert\b/i', $sql)) 
+            {
 				$this->last_insert_id = mysql_insert_id($this->mysql_link);
 				if ($this->last_insert_id === false) {
 					return $this->SetError();
@@ -1230,7 +1280,9 @@ class MySQL
 					$this->active_row = -1;
 					return $this->last_result;
 				}
-			} else if(preg_match('/\bselect\b/', strtolower($sql))) {
+            } 
+            else if(preg_match('/\bselect\b/i', $sql)) 
+            {
 				$numrows = mysql_num_rows($this->last_result);
 				if ($numrows > 0) {
 					$this->active_row = 0;
@@ -1254,7 +1306,7 @@ class MySQL
 	 * @return array A multi-dimensional array containing all the data
 	 *               returned from the query or FALSE on all errors
 	 */
-	public function QueryArray($sql, $resultType = MYSQL_BOTH) 
+    public function QueryArray($sql, $resultType = MYSQL_ASSOC)
 	{
 		if (!$this->Query($sql))
 		{
@@ -1288,13 +1340,12 @@ class MySQL
 	 * @return array A multi-dimensional array containing all the data
 	 *               returned from the query or FALSE on all errors
 	 */
-	public function SelectArray($tableName, $whereArray = null, $columns = null,
-							   $sortColumns = null, $sortAscending = true,
-							   $limit = null, $resultType = MYSQL_BOTH) 
-	{
-		if (!$this->SelectRows($tableName, $whereArray, $columns,
-								$sortColumns, $sortAscending, $limit)) {
-			return false;
+    public function SelectArray($tableName, $whereArray = null, $columns = null,
+                               $sortColumns = null, $limit = null, $resultType = MYSQL_ASSOC)
+    {
+        if (!$this->SelectRows($tableName, $whereArray, $columns, $sortColumns, $limit)) 
+        {
+            return false;
 		} else if ($this->RowCount() > 0) {
 			return $this->RecordsArray($resultType);
 		} else {
@@ -1335,12 +1386,11 @@ class MySQL
 	 * @return object PHP resource object containing the first row or
 	 *                FALSE if no row is returned from the query
 	 */
-	public function SelectSingleRow($tableName, $whereArray = null, $columns = null,
-							   $sortColumns = null, $sortAscending = true,
-							   $limit = null) 
-	{
-		if (!$this->SelectRows($tableName, $whereArray, $columns,
-								$sortColumns, $sortAscending, $limit)) {
+    public function SelectSingleRow($tableName, $whereArray = null, $columns = null,
+                               $sortColumns = null, $limit = null)
+    {
+        if (!$this->SelectRows($tableName, $whereArray, $columns, $sortColumns, $limit)) 
+        {
 			return false;
 		} else if ($this->RowCount() > 0) {
 			return $this->Row();
@@ -1358,7 +1408,8 @@ class MySQL
 	 * @return array An array containing the first row or FALSE if no row
 	 *               is returned from the query
 	 */
-	public function QuerySingleRowArray($sql, $resultType = MYSQL_BOTH) {
+    public function QuerySingleRowArray($sql, $resultType = MYSQL_ASSOC) 
+    {
 		if (!$this->Query($sql))
 		{
 			return false;
@@ -1388,13 +1439,12 @@ class MySQL
 	 * @return array An array containing the first row or FALSE if no row
 	 *               is returned from the query
 	 */
-	public function SelectSingleRowArray($tableName, $whereArray = null, $columns = null,
-							   $sortColumns = null, $sortAscending = true,
-							   $limit = null, $resultType = MYSQL_BOTH) 
-	{
-		if (!$this->SelectRows($tableName, $whereArray, $columns,
-							$sortColumns, $sortAscending, $limit)) {
-			return false;
+    public function SelectSingleRowArray($tableName, $whereArray = null, $columns = null,
+                               $sortColumns = null, $limit = null, $resultType = MYSQL_ASSOC)
+    {
+        if (!$this->SelectRows($tableName, $whereArray, $columns, $sortColumns, $limit)) 
+        {
+            return false;
 		} else if ($this->RowCount() > 0) {
 			return $this->RowArray(null, $resultType);
 		} else {
@@ -1437,13 +1487,12 @@ class MySQL
 	 * @param integer/string $limit (Optional) The limit of rows to return
 	 * @return mixed The value returned or FALSE if no value
 	 */
-	public function SelectSingleValue($tableName, $whereArray = null, $columns = null,
-							   $sortColumns = null, $sortAscending = true,
-							   $limit = null) 
-	{
-		if (!$this->SelectRows($tableName, $whereArray, $columns,
-								$sortColumns, $sortAscending, $limit)) {
-			return false;
+    public function SelectSingleValue($tableName, $whereArray = null, $columns = null,
+                               $sortColumns = null, $limit = null) 
+    {
+        if (!$this->SelectRows($tableName, $whereArray, $columns, $sortColumns, $limit)) 
+        {
+            return false;
 		} else if ($this->RowCount() > 0 && $this->GetColumnCount() > 0) {
 			$row = $this->RowArray(null, MYSQL_NUM);
 			return $row[0];
@@ -1487,7 +1536,8 @@ class MySQL
 	 * @return Records in array form or FALSE on error. May return an 
 	 *         EMPTY array when no records are available.
 	 */
-	public function RecordsArray($resultType = MYSQL_BOTH) {
+    public function RecordsArray($resultType = MYSQL_ASSOC) 
+    {
 		$this->ResetError();
 		if ($this->last_result) {
 			if (! mysql_data_seek($this->last_result, 0)) {
@@ -1584,7 +1634,8 @@ class MySQL
 	 *                Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH
 	 * @return array Array that corresponds to fetched row or FALSE if no rows
 	 */
-	public function RowArray($optional_row_number = null, $resultType = MYSQL_BOTH) {
+    public function RowArray($optional_row_number = null, $resultType = MYSQL_ASSOC) 
+    {
 		$this->ResetError();
 		if (! $this->last_result) {
 			return $this->SetError("No query results exist", -1);
@@ -1712,17 +1763,19 @@ class MySQL
 	 * @param integer/string $limit (Optional) The limit of rows to return
 	 * @return boolean Returns records on success or FALSE on error
 	 */
-	public function SelectRows($tableName, $whereArray = null, $columns = null,
-							   $sortColumns = null, $sortAscending = true,
-							   $limit = null) 
-	{
-		$this->ResetError();
-		if (! $this->IsConnected()) {
-			return $this->SetError("No connection", -1);
-		} else {
-			$sql = $this->BuildSQLSelect($tableName, $whereArray,
-					$columns, $sortColumns, $sortAscending, $limit);
-			if (!is_string($sql)) return false;
+    public function SelectRows($tableName, $whereArray = null, $columns = null,
+                               $sortColumns = null, $limit = null) 
+    {
+        $this->ResetError();
+        if (! $this->IsConnected()) 
+        {
+            return $this->SetError("No connection", -1);
+        } 
+        else 
+        {
+            $sql = $this->BuildSQLSelect($tableName, $whereArray,
+                    $columns, $sortColumns, $limit);
+            if (!is_string($sql)) return false;
 			// Execute the UPDATE
 			if (! $this->Query($sql)) {
 				return false;
@@ -1749,8 +1802,8 @@ class MySQL
 	 */
 	private function SetError($errorMessage = "", $errorNumber = 0) 
 	{
-		if (!$this->Error())
-		{
+        if (!$this->ErrorNumber())
+        {
 			try 
 			{
 				if (strlen($errorMessage) > 0) {
