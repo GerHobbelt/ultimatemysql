@@ -137,14 +137,7 @@ class MySQL
 		$this->ResetError();
 		if ($this->IsConnected()) 
 		{
-			if ($this->active_row < 1) 
-			{
-				return true;
-			} 
-			else 
-			{
-				return false;
-			}
+			return ($this->active_row < 1);
 		} 
 		else 
 		{
@@ -492,14 +485,7 @@ class MySQL
 			$sql = self::BuildSQLDelete($tableName, $whereArray);
 			if (!is_string($sql)) return false;
 			// Execute the UPDATE
-			if (! $this->Query($sql)) 
-			{
-				return false;
-			} 
-			else 
-			{
-				return true;
-			}
+			return !!$this->Query($sql);
 		}
 	}
 
@@ -513,14 +499,7 @@ class MySQL
 		$this->ResetError();
 		if ($this->IsConnected()) 
 		{
-			if ($this->active_row >= ($this->RowCount())) 
-			{
-				return true;
-			} 
-			else 
-			{
-				return false;
-			}
+			return ($this->active_row >= $this->RowCount());
 		} 
 		else 
 		{
@@ -591,25 +570,11 @@ class MySQL
 	{
 		if (gettype($value) == "boolean") 
 		{
-			if ($value == true) 
-			{
-				return true;
-			} 
-			else 
-			{
-				return false;
-			}
+			return ($value == true);
 		} 
 		elseif (is_numeric($value)) 
 		{
-			if (intval($value) > 0) 
-			{
-				return true;
-			} 
-			else 
-			{
-				return false;
-			}
+			return (intval($value) > 0);
 		} 
 		else 
 		{
@@ -1236,14 +1201,7 @@ class MySQL
 		{
 			if (! $this->Query($sql)) return false;
 		}
-		if ($this->RowCount() > 0) 
-		{
-			return true;
-		} 
-		else 
-		{
-			return false;
-		}
+		return ($this->RowCount() > 0);
 	}
 
 	/**
@@ -1286,14 +1244,7 @@ class MySQL
 	 */
 	public function IsConnected() 
 	{
-		if (gettype($this->mysql_link) == "resource") 
-		{
-			return true;
-		} 
-		else 
-		{
-			return false;
-		}
+		return (gettype($this->mysql_link) == "resource");
 	}
 
 	/**
@@ -1312,14 +1263,7 @@ class MySQL
 		
 		time == -1 was the old error signaling return code (pre-PHP 5.1.0)
 		*/
-		if (!is_int($date) || $date <= 0)
-		{
-			return false;
-		} 
-		else 
-		{
-			return true;
-		}
+		return (is_int($date) && $date > 0);
 	}
 
 	/**
@@ -1380,14 +1324,7 @@ class MySQL
 		$this->active_row = $this->RowCount() - 1;
 		if (! $this->ErrorNumber()) 
 		{
-			if (! $this->Seek($this->active_row)) 
-			{
-				return false;
-			} 
-			else 
-			{
-				return true;
-			}
+			return !!$this->Seek($this->active_row);
 		} 
 		else 
 		{
@@ -1442,28 +1379,13 @@ class MySQL
 			// Select a database (if specified)
 			if (strlen($this->db_dbname) > 0) 
 			{
-				if (strlen($this->db_charset) == 0) 
+				if (empty($this->db_charset)) 
 				{
-					if (! $this->SelectDatabase($this->db_dbname)) 
-					{
-						return false;
-					} 
-					else 
-					{
-						return true;
-					}
+					return !!$this->SelectDatabase($this->db_dbname);
 				} 
 				else 
 				{
-					if (! $this->SelectDatabase(
-						$this->db_dbname, $this->db_charset)) 
-					{
-						return false;
-					} 
-					else 
-					{
-						return true;
-					}
+					return !!$this->SelectDatabase($this->db_dbname, $this->db_charset);
 				}
 			} 
 			else 
@@ -2004,7 +1926,7 @@ class MySQL
 	 * specified row number and returns the result
 	 *
 	 * @param integer $row_number Row number
-	 * @return object Fetched row as PHP object
+	 * @return object Fetched row as PHP object on success or FALSE on error
 	 */
 	public function Seek($row_number) 
 	{
@@ -2561,14 +2483,7 @@ class MySQL
 		else 
 		{
 			$sql = "TRUNCATE TABLE `" . self::SQLFix($tableName) . "`";
-			if (! $this->Query($sql))
-			{
-				return false;
-			} 
-			else 
-			{
-				return true;
-			}
+			return !!$this->Query($sql);
 		}
 	}
 
@@ -2600,14 +2515,7 @@ class MySQL
 			$sql = $this->BuildSQLUpdate($tableName, $valuesArray, $whereArray);
 			if (!is_string($sql)) return false;
 			// Execute the UPDATE
-			if (! $this->Query($sql)) 
-			{
-				return false;
-			} 
-			else 
-			{
-				return true;
-			}
+			return !!$this->Query($sql);
 		}
 	}
 	
