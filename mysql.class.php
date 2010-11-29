@@ -1295,6 +1295,8 @@ class MySQL
 	 */
 	public function MyDyingMessage($message = "", $prepend_message = true) 
 	{
+		global $cfg;
+		
 		if (strlen($message) > 0) 
 		{
 			if ($prepend_message)
@@ -1307,6 +1309,7 @@ class MySQL
 			}
 		} 
 		if ($cfg['IN_DEVELOPMENT_ENVIRONMENT']) $message .= "<h1>Offending SQL query</h1><p>" . htmlspecialchars($this->last_sql) . "</p><h2>Error Message</h2><p> ";
+		
 		return $message . $this->Error();
 	}
 
