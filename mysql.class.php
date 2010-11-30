@@ -972,7 +972,7 @@ class MySQL
 	{
 		if ($styleTable === null) 
 		{
-			$tb = 'style="border-collapse:collapse;empty-cells:show" cellpadding="2" cellspacing="2"';
+			$tb = 'style="border-collapse:collapse;empty-cells:show;" cellpadding="2" cellspacing="2"';
 		} 
 		else 
 		{
@@ -980,7 +980,7 @@ class MySQL
 		}
 		if ($styleHeader === null) 
 		{
-			$th = 'style="border-width:1px;border-style:solid;background-color:navy;color:white"';
+			$th = 'style="border-width:1px;border-style:solid;background-color:navy;color:white;"';
 		} 
 		else 
 		{
@@ -988,7 +988,7 @@ class MySQL
 		}
 		if ($styleData === null) 
 		{
-			$td = 'style="border-width:1px;border-style:solid"';
+			$td = 'style="border-width:1px;border-style:solid;"';
 		} 
 		else 
 		{
@@ -1500,6 +1500,31 @@ class MySQL
 	}
 
 	/**
+	 * Executes the given SQL query and returns an array of objects, where 
+	 * each record is an object with the columns serving as object member variables
+	 *
+	 * @param string $sql The query string should not end with a semicolon
+	 * @return array An array of record objects containing all the data
+	 *               returned from the query or FALSE on all errors
+	 */
+	public function QueryObjects($sql)
+	{
+		if (!$this->Query($sql))
+		{
+			return false;
+		}
+		else if ($this->RowCount() > 0) 
+		{
+			return $this->RecordsObjects();
+		} 
+		else 
+		{
+			return array();
+		}
+	}
+
+
+	/**
 	 * Returns a multidimensional array of rows from a table based on a WHERE filter
 	 *
 	 * @param string $tableName The name of the table
@@ -1527,6 +1552,39 @@ class MySQL
 		else if ($this->RowCount() > 0) 
 		{
 			return $this->RecordsArray($resultType);
+		} 
+		else 
+		{
+			return array();
+		}
+	}
+
+	/**
+	 * Returns an array of row (= record) objects from a table based on a WHERE filter
+	 *
+	 * @param string $tableName The name of the table
+	 * @param array $whereArray (Optional) An associative array containing the
+	 *                          column names as keys and values as data. The
+	 *                          values must be SQL ready (i.e. quotes around
+	 *                          strings, formatted dates, ect)
+	 * @param array/string $columns (Optional) The column or list of columns to select
+	 * @param array/string $sortColumns (Optional) Column or list of columns to sort by
+	 * @param boolean $sortAscending (Optional) TRUE for ascending; FALSE for descending
+	 *                               This only works if $sortColumns are specified
+	 * @param integer/string $limit (Optional) The limit of rows to return
+	 * @return array An array of record objects containing all the data
+	 *               returned from the query or FALSE on all errors
+	 */
+	public function SelectObjects($tableName, $whereArray = null, $columns = null,
+							   $sortColumns = null, $limit = null)
+	{
+		if (!$this->SelectRows($tableName, $whereArray, $columns, $sortColumns, $limit)) 
+		{
+			return false;
+		} 
+		else if ($this->RowCount() > 0) 
+		{
+			return $this->RecordsObjects();
 		} 
 		else 
 		{
@@ -1736,10 +1794,11 @@ class MySQL
 	}
 
 	/**
-	 * Returns all records from last query and returns contents as array
+	 * Returns all records from last query and returns contents as array of records
+	 * where each record is presented as an array of columns (fields),
 	 * or FALSE on error
 	 *
-	 * @param integer $resultType (Optional) The type of array
+	 * @param integer $resultType (Optional) The type of array representing one record
 	 *                Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH
 	 * @return Records in array form or FALSE on error. May return an 
 	 *         EMPTY array when no records are available.
@@ -1756,8 +1815,43 @@ class MySQL
 			else 
 			{
 				$members = array();
-				//while($member = mysql_fetch_object($this->last_result)){
 				while ($member = mysql_fetch_array($this->last_result, $resultType))
+				{
+					$members[] = $member;
+				}
+				mysql_data_seek($this->last_result, 0);
+				$this->active_row = 0;
+				return $members;
+			}
+		} 
+		else 
+		{
+			$this->active_row = -1;
+			return $this->SetError("No query results exist", -1);
+		}
+	}
+
+	/**
+	 * Returns all records from last query and returns contents as array of record objects
+	 * (where each record is an object with each column as an attribute (data member variable))
+	 * or FALSE on error
+	 *
+	 * @return Records in array form or FALSE on error. May return an 
+	 *         EMPTY array when no records are available.
+	 */
+	public function RecordsObjects() 
+	{
+		$this->ResetError();
+		if ($this->last_result) 
+		{
+			if (! mysql_data_seek($this->last_result, 0)) 
+			{
+				return $this->SetError();
+			} 
+			else 
+			{
+				$members = array();
+				while($member = mysql_fetch_object($this->last_result))
 				{
 					$members[] = $member;
 				}
@@ -2067,7 +2161,9 @@ class MySQL
 	 * Retrieves all rows in a specified table
 	 *
 	 * @param string $tableName The name of the table
-	 * @return boolean Returns records on success or FALSE on error
+	 * @return boolean Returns an array of records 
+	 *         (each an objects where the columns are individual object member variables) 
+	 *         on success or FALSE on error
 	 */
 	public function SelectTable($tableName) 
 	{
