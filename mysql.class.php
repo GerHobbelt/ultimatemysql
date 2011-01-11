@@ -1011,7 +1011,7 @@ class MySQL
 						$html .= "\t<tr>\n";
 						foreach ($member as $key => $value) 
 						{
-							$html .= "\t\t<th $th><strong>" . htmlspecialchars($key) . "</strong></th>\n";
+							$html .= "\t\t<th $th><strong>" . htmlspecialchars($key, ENT_COMPAT, 'UTF-8') . "</strong></th>\n";
 						}
 						$html .= "\t</tr>\n";
 						$header = true;
@@ -1019,7 +1019,7 @@ class MySQL
 					$html .= "\t<tr>\n";
 					foreach ($member as $key => $value) 
 					{
-						$html .= "\t\t<td $td>" . htmlspecialchars($value) . "</td>\n";
+						$html .= "\t\t<td $td>" . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . "</td>\n";
 					}
 					$html .= "\t</tr>\n";
 				}
@@ -1188,8 +1188,8 @@ class MySQL
 					$child = $doc->createElement($fieldname);
 					$child = $element->appendChild($child);
 
-					// $fieldvalue = iconv("ISO-8859-1", "UTF-8", $fieldvalue);
-					$fieldvalue = htmlspecialchars($fieldvalue);
+					// $fieldvalue = iconv("ISO-8859-1", 'UTF-8', $fieldvalue);
+					$fieldvalue = htmlspecialchars($fieldvalue, ENT_COMPAT, 'UTF-8');
 					$value = $doc->createTextNode($fieldvalue);
 					$value = $child->appendChild($value);
 				} 
@@ -1479,7 +1479,7 @@ class MySQL
 				return $message;
 			}
 		} 
-		if ($cfg['IN_DEVELOPMENT_ENVIRONMENT']) $message .= "<h1>Offending SQL query</h1><p>" . htmlspecialchars($this->last_sql) . "</p><h2>Error Message</h2><p> ";
+		if ($cfg['IN_DEVELOPMENT_ENVIRONMENT']) $message .= "<h1>Offending SQL query</h1><p>" . htmlspecialchars($this->last_sql, ENT_COMPAT, 'UTF-8') . "</p><h2>Error Message</h2><p> ";
 		
 		return $message . $this->Error();
 	}
