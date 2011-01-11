@@ -669,7 +669,7 @@ class MySQL
 	 *                      column count is returned from the last query
 	 * @return integer The total count of columns
 	 */
-	public function GetColumnCount($table = "") 
+	public function GetColumnCount($table = null) 
 	{
 		$this->ResetError();
 		if (!$this->IsConnected()) 
@@ -712,7 +712,7 @@ class MySQL
 	 *                      last returned records are used
 	 * @return string MySQL data (field) type
 	 */
-	public function GetColumnDataType($column, $table = "") 
+	public function GetColumnDataType($column, $table = null) 
 	{
 		$this->ResetError();
 		if (!$this->IsConnected()) 
@@ -1101,9 +1101,13 @@ class MySQL
 	 * into an array. If the database does not contains
 	 * any tables, the returned value is FALSE
 	 *
+	 * @param string $filter [Optional] Comma separated list of acceptable table 
+	 *                       names: no other table will be listed in the results. 
+	 *                       Alternatively, when no filter is specified, all tables 
+	 *                       are listed. This is the default behaviour of this method.
 	 * @return array An array that contains the table names
 	 */
-	public function GetTables() 
+	public function GetTables($filter = null) 
 	{
 		$this->ResetError();
 		if (!$this->IsConnected()) 
@@ -1119,10 +1123,16 @@ class MySQL
 		} 
 		else 
 		{
+			// return an array with non-empty elements: see also http://nl.php.net/manual/en/function.explode.php#99830
+			$accepted = array_filter(explode(',', $filter . ','));
+				
 			$tables = array();
 			while ($array_data = mysql_fetch_array($records, MYSQL_NUM)) 
 			{
-				$tables[] = $array_data[0];
+				if (count($accepted) == 0 || in_array($array_data[0], $accepted))
+				{
+					$tables[] = $array_data[0];
+				}
 			}
 
 			// Returns the array or NULL
@@ -1204,6 +1214,167 @@ class MySQL
 		return $doc->saveXML();
 	}
 
+	
+	
+
+
+	/**
+	 * Produces a SQL script representing the dump of the entire database (when no
+	 * (optional, comma-separated set of) tables has been specified as a method
+	 * argument) or just the specified (comma separated set of) tables.
+	 * You may choose to have either the database/table structure or the records
+	 * dumped. Or both, for a full-fledged database/table dump which can serve as 
+	 * a db/table backup/restore script later on.
+	 *
+	 * @param string $tables [Optional] Comma separated list of tables. When none
+	 *                       are specified, the entire database is assumed (this is the default).
+	 * @param boolean $with_sql_comments [Optional] Include SQL comments in the generated script (default: TRUE).
+	 * @param boolean $with_structure [Optional] Whether to include the table structure creation (and tear-down) SQL statements in the generated script (default: TRUE).
+	 * @param boolean $with_data [Optional] Whether to include the table rows (data) in the generated script (default: TRUE).
+	 * @param boolean $with_drops_and_truncates [Optional] Whether to include the apropriate DROP TABLE and/or TRUNCATE TABLE statements in the generated script (default: TRUE).
+	 *
+	 * @return string the generated SQL script, boolean FALSE when a query error occurred.
+	 */
+	public function Dump($tables = null, $with_sql_comments = true, $with_structure = true, $with_data = true, $with_drops_and_truncates = true) 
+	{
+		$this->ResetError();
+		if (!$this->IsConnected()) 
+		{
+			return $this->SetError("No connection", -1);
+		} 
+
+		$value = '';
+		if ($with_sql_comments)
+		{
+			$value .= '--' . "\r\n";
+			$value .= '-- MySQL database dump' . (!empty($tables) ? ' for these tables: ' . $tables : '') . "\r\n";
+			$value .= '-- Created for CompactCMS (www.compactcms.nl)' . "\r\n";
+			$value .= '--' . "\r\n";
+			$value .= '-- Host: ' . $this->db_host . "\r\n";
+			$value .= '-- Generated: ' . date('M j, Y') . ' at ' . date('H:i') . "\r\n";
+			$value .= '-- MySQL version: ' . mysql_get_server_info() . "\r\n";
+			$value .= '-- PHP version: ' . phpversion() . "\r\n";
+			if (!empty($this->db_dbname))
+			{
+				$value .= '--' . "\r\n";
+				$value .= '-- Database: `' . $this->db_dbname . '`' . "\r\n";
+			}
+			$value .= '--' . "\r\n" . "\r\n" . "\r\n";
+		}
+		
+		if (!($tbl = $this->GetTables($tables)))
+		{
+			if (!$this->ErrorNumber()) 
+			{
+				return $this->SetError("Database has no " . (!empty($tables) ? "matching tables for the set: " . $tables : "tables"), -1);
+			}
+			return false;
+		}
+		
+		foreach ($tbl as $table)
+		{
+			$tv = "\r\n" . "\r\n";
+
+			$this->query_count++;
+			if (!mysql_query('LOCK TABLES ' . $table . ' WRITE', $this->mysql_link))
+			{
+				return $this->SetError();
+			} 
+			if ($with_structure)
+			{
+				if ($with_sql_comments)
+				{
+					$tv .= '--' . "\r\n";
+					$tv .= '-- Table structure for table `' . $table . '`' . "\r\n";
+					$tv .= '--' . "\r\n" . "\r\n";
+				}
+				if ($with_drops_and_truncates)
+				{
+					$tv .= 'DROP TABLE IF EXISTS `' . $table . '`;' . "\r\n";
+				}
+				$this->query_count++;
+				$result = mysql_query('SHOW CREATE TABLE ' . $table, $this->mysql_link);
+				if (!$result)
+				{
+					$this->SetError();
+					mysql_query('UNLOCK TABLES', $this->mysql_link);
+					return false;
+				}
+				$row = mysql_fetch_assoc($result);
+				$tv .= str_replace("\n", "\r\n", str_replace("CREATE TABLE", "CREATE TABLE IF NOT EXISTS", $row['Create Table'])) . ';';
+				$tv .= "\r\n" . "\r\n";
+			}
+			
+			if ($with_data)
+			{
+				if ($with_sql_comments)
+				{
+					$tv .= '--' . "\r\n";
+					$tv .= '-- Dumping data for table `' . $table . '`' . "\r\n";
+					$tv .= '--' . "\r\n" . "\r\n";
+				}
+				
+				if ($with_drops_and_truncates /* && !$with_structure */ )
+				{
+					$tv .= 'TRUNCATE TABLE `' . $table . '`;' . "\r\n" . "\r\n";
+				}
+
+				if (!$this->SelectTable($table))
+				{
+					mysql_query('UNLOCK TABLES', $this->mysql_link);
+					return false;
+				}
+				else if ($this->RowCount() > 0) 
+				{
+					$members = array();
+
+					while($row = $this->RowArray(null, MYSQL_ASSOC))
+					{
+						$k = '';
+						$d = '';
+						foreach ($row as $key => $data)
+						{
+							$k .= '`' . $key . '`, ';
+							// TODO: how do we cope with NULL-valued columns???
+							$d .= '\'' . addslashes($data) . '\', ';
+						}
+						$k = substr($k, 0, -2);
+						$d = substr($d, 0, -2);
+						$tv .= 'INSERT INTO ' . $table . ' (' . $k . ') VALUES (' . $d . ');' . "\r\n";
+					}
+					if ($this->ErrorNumber()) 
+					{
+						mysql_query('UNLOCK TABLES', $this->mysql_link);
+						return false;
+					}
+				} 
+				else 
+				{
+					// no data in table:
+					if ($with_sql_comments)
+					{
+						$tv .= '-- table `' . $table . '` has 0 records.' . "\r\n";
+						$tv .= '--' . "\r\n" . "\r\n";
+					}
+				}
+			}
+
+			$this->query_count++;
+			if (!mysql_query('UNLOCK TABLES', $this->mysql_link))
+			{
+				return $this->SetError();
+			} 
+			
+			$value .= $tv;
+		}
+
+		$value .= "\r\n" . "\r\n";
+
+		return $value;
+	}
+
+
+	
 	/**
 	 * Determines if a query contains any rows
 	 *
@@ -1385,7 +1556,7 @@ class MySQL
 		} 
 		else 
 		{
-			$this->mysql_link = @mysql_connect (
+			$this->mysql_link = @mysql_connect(
 				$this->db_host, $this->db_user, $this->db_pass);
 		}
 		// Connect to mysql server failed?
