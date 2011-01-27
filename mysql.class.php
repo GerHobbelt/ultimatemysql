@@ -135,7 +135,7 @@ class MySQL
 		}
 		else if ($this->HasRecords()) 
 		{
-			return $this->UpdateRows($tableName, $valuesArray, $whereArray);
+			return $this->UpdateRow($tableName, $valuesArray, $whereArray);
 		} 
 		else 
 		{
@@ -2814,7 +2814,7 @@ class MySQL
 	 *                           then all values in the table are updated.
 	 * @return boolean Returns TRUE on success or FALSE on error
 	 */
-	public function UpdateRows($tableName, $valuesArray, $whereArray = null) 
+	public function UpdateRow($tableName, $valuesArray, $whereArray = null) 
 	{
 		$this->ResetError();
 		if (!$this->IsConnected()) 
