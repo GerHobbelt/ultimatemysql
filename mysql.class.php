@@ -38,12 +38,13 @@ if (!defined('COMPACTCMS_CODE')) { die('Illegal entry point!'); } /*MARKER*/
 class MySQL
 {
 	// SET THESE VALUES TO MATCH YOUR DATA CONNECTION
-	private $db_host    = 'localhost';  // server name
-	private $db_user    = '';           // user name
-	private $db_pass    = '';           // password
-	private $db_dbname  = '';           // database name
-	private $db_charset = 'utf8';       // optional character set (i.e. utf8)
-	private $db_pcon    = false;        // use persistent connection?
+	private $db_host             = 'localhost';         // server name
+	private $db_user             = '';                  // user name
+	private $db_pass             = '';                  // password
+	private $db_dbname           = '';                  // database name
+	private $db_charset          = 'utf8';              // optional character set (i.e. utf8)
+	private $db_charsetcollation = 'utf8_unicode_ci';   // optional character set collation (i.e. utf8_unicode_ci)
+	private $db_pcon             = false;              // use persistent connection?
 
 	// constants for SQLValue function
 	const SQLVALUE_BIT      = 'bit';
@@ -86,15 +87,18 @@ class MySQL
 	 * @param string $username (Optional) User name
 	 * @param string $password (Optional) Password
 	 * @param string $charset  (Optional) Character set
+	 * @param string $collation (Optional) Character set collation
 	 */
 	public function __construct($connect = true, $database = null, $server = null,
-								$username = null, $password = null, $charset = null)
+								$username = null, $password = null, $charset = null,
+								$collation = null)
 	{
-		if ($database !== null) $this->db_dbname  = $database;
-		if ($server   !== null) $this->db_host    = $server;
-		if ($username !== null) $this->db_user    = $username;
-		if ($password !== null) $this->db_pass    = $password;
-		if ($charset  !== null) $this->db_charset = $charset;
+		if ($database  !== null) $this->db_dbname  = $database;
+		if ($server    !== null) $this->db_host    = $server;
+		if ($username  !== null) $this->db_user    = $username;
+		if ($password  !== null) $this->db_pass    = $password;
+		if ($charset   !== null) $this->db_charset = $charset;
+		if ($collation !== null) $this->db_charsetcollation = $collation;
 
 		if (strlen($this->db_host) > 0 &&
 			strlen($this->db_user) > 0)
@@ -429,7 +433,7 @@ class MySQL
 				if (is_string($key) && empty($key))
 					return $this->SetError('ERROR: Invalid key specified in BuildSQLWhereClause method', -1);
 				if (empty($value) && !is_integer($value))
-					return $this->SetError('ERROR: Invalid value specified in BuildSQLWhereClause method for key '' . $key . ''', -1);
+					return $this->SetError('ERROR: Invalid value specified in BuildSQLWhereClause method for key "' . $key . '"', -1);
 
 				if (is_string($key))
 				{
@@ -1558,11 +1562,12 @@ class MySQL
 	 * @param string $username (Optional) User name
 	 * @param string $password (Optional) Password
 	 * @param string $charset  (Optional) Character set
+	 * @param string $collation (Optional) Character set collation
 	 * @param boolean $pcon    (Optional) Persistant connection
 	 * @return boolean Returns TRUE on success or FALSE on error
 	 */
 	public function Open($database = null, $server = null, $username = null,
-						 $password = null, $charset = null, $pcon = false)
+						 $password = null, $charset = null, $collation = null, $pcon = false)
 	{
 		$this->ResetError();
 
@@ -1572,6 +1577,7 @@ class MySQL
 		if ($username !== null) $this->db_user    = $username;
 		if ($password !== null) $this->db_pass    = $password;
 		if ($charset  !== null) $this->db_charset = $charset;
+		if ($collation !== null) $this->db_charsetcollation = $collation;
 		if (is_bool($pcon))      $this->db_pcon    = $pcon;
 
 		$this->active_row = -1;
@@ -2319,6 +2325,61 @@ class MySQL
 		return true;
 	}
 
+
+	/**
+	 * Creates a new database and sets up the root access for the database.
+	 *
+	 * @param string $database Database name
+	 * @param string $charset (Optional) Character set (i.e. utf8)
+	 * @param string $collation (Optional) Character set collation (i.e. utf8_unicode_ci)
+	 * @param string $admin_user (Optional) Database admin user name
+	 * @param string $admin_pass (Optional) Database admin password
+	 *
+	 * @return boolean Returns TRUE on success or FALSE on error
+	 */
+	public function CreateDatabase($database, $charset = null, $collation = null, $admin_user = null, $admin_pass = null)
+	{
+		if (!$charset) $charset = $this->db_charset;
+		if (!$collation) $collation = $this->db_charsetcollation;
+		if (!$admin_user) $admin_user = $this->db_user;
+		if (!$admin_pass) $admin_pass = $this->db_pass;
+		$this->ResetError();
+		if (!$this->IsConnected())
+		{
+			return $this->SetError('No connection', -1);
+		}
+
+		$sql = 'CREATE DATABASE `' . self::SQLFix($database) . '`';
+		if (!empty($charset))
+		{
+			$sql .= ' DEFAULT CHARSET=`' . self::SQLFix($charset) . '`';
+
+			if (!empty($collation))
+			{
+				$sql .= ' COLLATE=`' . self::SQLFix($collation) . '`';
+			}
+		}
+		if (!mysql_query($sql, $this->mysql_link))
+		{
+			return $this->SetError();
+		}
+		
+		$sql = 'GRANT ALL PRIVILEGES ON ' . $database . '.* TO \'' . self::SQLFix($admin_user) . '\'@\'' . $this->db_host . '\' IDENTIFIED BY \'' . self::SQLFix($admin_pass) . '\'';
+		if (!mysql_query($sql, $this->mysql_link))
+		{
+			return $this->SetError();
+		}
+		
+		$sql = 'FLUSH PRIVILEGES';
+		if (!mysql_query($sql, $this->mysql_link))
+		{
+			return $this->SetError();
+		}
+		
+		return true;
+	}
+
+	
 	/**
 	 * Gets rows in a table based on a WHERE filter
 	 *
