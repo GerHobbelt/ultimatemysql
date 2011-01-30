@@ -621,8 +621,10 @@ class MySQL
 		{
 			return $this->SetError('No connection', -1);
 		}
+		$sql = 'SHOW FULL COLUMNS FROM `' . self::SQLFix($table) . '`';
+		$this->last_sql = $sql;
 		$this->query_count++;
-		$records = mysql_query('SHOW FULL COLUMNS FROM `' . self::SQLFix($table) . '`', $this->mysql_link);
+		$records = mysql_query($sql, $this->mysql_link);
 		if (!$records)
 		{
 			return $this->SetError();
@@ -671,8 +673,10 @@ class MySQL
 		}
 		else
 		{
+			$sql = 'SELECT * FROM `' . self::SQLFix($table) . '` LIMIT 1';
+			$this->last_sql = $sql;
 			$this->query_count++;
-			$records = mysql_query('SELECT * FROM `' . self::SQLFix($table) . '` LIMIT 1', $this->mysql_link);
+			$records = mysql_query($sql, $this->mysql_link);
 			if (!$records)
 			{
 				return $this->SetError();
@@ -728,15 +732,25 @@ class MySQL
 		else
 		{
 			if (is_numeric($column)) $column = $this->GetColumnName($column, $table);
+
+			$sql = 'SELECT `' . self::SQLFix($column) . '` FROM `' . self::SQLFix($table) . '` LIMIT 1';
+			$this->last_sql = $sql;
 			$this->query_count++;
-			$result = mysql_query('SELECT `' . self::SQLFix($column) . '` FROM `' . self::SQLFix($table) . '` LIMIT 1', $this->mysql_link);
-			if (mysql_num_fields($result) > 0)
+			$result = mysql_query($sql, $this->mysql_link);
+			if (!$result)
 			{
-				return mysql_field_type($result, 0);
+				return $this->SetError('The specified column or table does not exist, or no data was returned');
 			}
 			else
 			{
-				return $this->SetError('The specified column or table does not exist, or no data was returned', -1);
+				if (mysql_num_fields($result) > 0)
+				{
+					return mysql_field_type($result, 0);
+				}
+				else
+				{
+					return $this->SetError('The specified column or table does not exist, or no data was returned', -1);
+				}
 			}
 		}
 	}
@@ -825,8 +839,10 @@ class MySQL
 		}
 		else
 		{
+			$sql = 'SELECT `' . self::SQLFix($column) . '` FROM `' . self::SQLFix($table) . '` LIMIT 1';
+			$this->last_sql = $sql;
 			$this->query_count++;
-			$records = mysql_query('SELECT `' . self::SQLFix($column) . '` FROM `' . self::SQLFix($table) . '` LIMIT 1', $this->mysql_link);
+			$records = mysql_query($sql, $this->mysql_link);
 			if (!$records)
 			{
 				return $this->SetError();
@@ -873,8 +889,10 @@ class MySQL
 		}
 		else
 		{
+			$sql = 'SELECT * FROM `' . self::SQLFix($table) . '` LIMIT 1';
+			$this->last_sql = $sql;
 			$this->query_count++;
-			$records = mysql_query('SELECT * FROM `' . self::SQLFix($table) . '` LIMIT 1', $this->mysql_link);
+			$records = mysql_query($sql, $this->mysql_link);
 			if (!$records)
 			{
 				return $this->SetError();
@@ -927,8 +945,10 @@ class MySQL
 		}
 		else
 		{
+			$sql = 'SHOW COLUMNS FROM `' . self::SQLFix($table) . '`';
+			$this->last_sql = $sql;
 			$this->query_count++;
-			$result = mysql_query('SHOW COLUMNS FROM `' . self::SQLFix($table) . '`', $this->mysql_link);
+			$result = mysql_query($sql, $this->mysql_link);
 			if (!$result)
 			{
 				return $this->SetError();
@@ -1102,9 +1122,12 @@ class MySQL
 		{
 			return $this->SetError('No connection', -1);
 		}
+
 		// Query to get the tables in the current database:
+		$sql = 'SHOW TABLES';
+		$this->last_sql = $sql;
 		$this->query_count++;
-		$records = mysql_query('SHOW TABLES', $this->mysql_link);
+		$records = mysql_query($sql, $this->mysql_link);
 		if (!$records)
 		{
 			return $this->SetError();
@@ -1263,8 +1286,10 @@ class MySQL
 		{
 			$tv = "\r\n" . "\r\n";
 
+			$sql = 'LOCK TABLES `' . self::SQLFix($table) . '` WRITE';
+			$this->last_sql = $sql;
 			$this->query_count++;
-			if (!mysql_query('LOCK TABLES `' . self::SQLFix($table) . '` WRITE', $this->mysql_link))
+			if (!mysql_query($sql, $this->mysql_link))
 			{
 				return $this->SetError();
 			}
@@ -1280,8 +1305,10 @@ class MySQL
 				{
 					$tv .= 'DROP TABLE IF EXISTS `' . self::SQLFix($table) . '`;' . "\r\n";
 				}
+				$sql = 'SHOW CREATE TABLE `' . self::SQLFix($table) . '`';
+				$this->last_sql = $sql;
 				$this->query_count++;
-				$result = mysql_query('SHOW CREATE TABLE `' . self::SQLFix($table) . '`', $this->mysql_link);
+				$result = mysql_query($sql, $this->mysql_link);
 				if (!$result)
 				{
 					$this->SetError();
@@ -1375,8 +1402,10 @@ class MySQL
 				}
 			}
 
+			$sql = 'UNLOCK TABLES';
+			$this->last_sql = $sql;
 			$this->query_count++;
-			if (!mysql_query('UNLOCK TABLES', $this->mysql_link))
+			if (!mysql_query($sql, $this->mysql_link))
 			{
 				return $this->SetError();
 			}
@@ -2292,6 +2321,8 @@ class MySQL
 		{
 			return $this->SetError('No connection', -1);
 		}
+		$this->last_sql = '(SELECT DATABASE ' . $database . ')';
+		$this->query_count++;
 		if (!mysql_select_db($database, $this->mysql_link))
 		{
 			return $this->SetError();
@@ -2300,7 +2331,7 @@ class MySQL
 		{
 			if (!empty($charset))
 			{
-				if (!mysql_query('SET CHARACTER SET `' . self::SQLFix($charset) . '`', $this->mysql_link))
+				if (!$this->Query('SET CHARACTER SET `' . self::SQLFix($charset) . '`'))
 				{
 					return $this->SetError();
 				}
@@ -2343,21 +2374,21 @@ class MySQL
 				$sql .= ' COLLATE=`' . self::SQLFix($collation) . '`';
 			}
 		}
-		if (!mysql_query($sql, $this->mysql_link))
+		if (!$this->Query($sql))
 		{
-			return $this->SetError();
+			return false;
 		}
 		
 		$sql = 'GRANT ALL PRIVILEGES ON ' . $database . '.* TO \'' . self::SQLFix($admin_user) . '\'@\'' . $this->db_host . '\' IDENTIFIED BY \'' . self::SQLFix($admin_pass) . '\'';
-		if (!mysql_query($sql, $this->mysql_link))
+		if (!$this->Query($sql))
 		{
-			return $this->SetError();
+			return false;
 		}
 		
 		$sql = 'FLUSH PRIVILEGES';
-		if (!mysql_query($sql, $this->mysql_link))
+		if (!$this->Query($sql))
 		{
-			return $this->SetError();
+			return false;
 		}
 		
 		return true;
@@ -2745,9 +2776,12 @@ class MySQL
 		{
 			if (!$this->in_transaction)
 			{
-				if (!mysql_query('START TRANSACTION', $this->mysql_link))
+				$sql = 'START TRANSACTION';
+				$this->last_sql = $sql;
+				$this->query_count++;
+				if (!mysql_query($sql, $this->mysql_link))
 				{
-					return $this->SetError();
+					return $this->SetError('Could not start transaction');
 				}
 				else
 				{
@@ -2778,7 +2812,10 @@ class MySQL
 		{
 			if ($this->in_transaction)
 			{
-				if (!mysql_query('COMMIT', $this->mysql_link))
+				$sql = 'COMMIT';
+				$this->last_sql = $sql;
+				$this->query_count++;
+				if (!mysql_query($sql, $this->mysql_link))
 				{
 					// $this->TransactionRollback();
 					return $this->SetError();
@@ -2810,7 +2847,10 @@ class MySQL
 		}
 		else
 		{
-			if (!mysql_query('ROLLBACK', $this->mysql_link))
+			$sql = 'ROLLBACK';
+			$this->last_sql = $sql;
+			$this->query_count++;
+			if (!mysql_query($sql, $this->mysql_link))
 			{
 				return $this->SetError('Could not rollback transaction', -1);
 			}
