@@ -1262,7 +1262,7 @@ class MySQL
 	 *
 	 * @return string the generated SQL script, boolean FALSE when a query error occurred.
 	 */
-	public function Dump($tables = null, $with_sql_comments = true, $with_structure = true, $with_data = true, $with_drops_and_truncates = true)
+	public function Dump($tables = null, $with_sql_comments = true, $with_structure = true, $with_data = true, $with_drops_and_truncates = true, $create_database = false)
 	{
 		$this->ResetError();
 		if (!$this->IsConnected())
@@ -1289,6 +1289,65 @@ class MySQL
 			$value .= '--' . "\r\n" . "\r\n" . "\r\n";
 		}
 
+		$charset = null;    // or should we assume a default of UTF8 if nothing works below?
+		if (!empty($this->db_dbname))
+		{
+			if ($with_sql_comments)
+			{
+				$tv .= '--' . "\r\n";
+				$tv .= '-- Create the database if it doesn\'t exist yet for database `' . self::SQLFix($this->db_dbname) . '`' . "\r\n";
+				$tv .= '--' . "\r\n" . "\r\n";
+			}
+
+			$sql = 'SHOW CREATE DATABASE `' . self::SQLFix($this->db_dbname) . '`';
+			$this->last_sql = $sql;
+			$this->query_count++;
+			$result = $this->QuerySingleValue($sql);
+			if (!$result)
+			{
+				return false;
+			}
+			$result = str_replace('CREATE DATABASE', 'CREATE DATABASE IF NOT EXISTS', $result);
+			$tv = $result . "\r\n";
+			
+			$tv = 'USE `' . self::SQLFix($this->db_dbname) . '`;' . "\r\n";
+			
+			// http://stackoverflow.com/questions/1049728/how-do-i-see-what-character-set-a-database-table-column-is-in-mysql
+			$sql = 'SHOW VARIABLES LIKE "character_set_database"';
+			$this->last_sql = $sql;
+			$this->query_count++;
+			$charset = $this->QuerySingleValue($sql);
+			if (!$charset)
+			{
+				return false;
+			}
+			$sql = 'SHOW VARIABLES LIKE "collation_database"';
+			$this->last_sql = $sql;
+			$this->query_count++;
+			$collation = $this->QuerySingleValue($sql);
+			if (!$collation)
+			{
+				return false;
+			}
+			$result = 'ALTER DATABASE `' . self::SQLFix($this->db_dbname) . '` DEFAULT CHARACTER SET `' . self::SQLFix($charset) . '` COLLATE `' . self::SQLFix($collation) . '`;';
+			$tv .= $result . "\r\n" . "\r\n" . "\r\n";
+			
+			if ($with_structure && $create_database)
+			{
+				$value .= $tv;
+			}
+		}
+		
+		if (!empty($this->db_charset))
+		{
+			$charset = $this->db_charset;
+		}
+		if (!empty($charset))
+		{
+			$result = 'SET CHARACTER SET `' . self::SQLFix($charset) . '`;';
+			$value .= $result . "\r\n" . "\r\n" . "\r\n";
+		}
+		
 		if (!($tbl = $this->GetTables($tables)))
 		{
 			if (!$this->ErrorNumber())
