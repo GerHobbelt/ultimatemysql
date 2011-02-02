@@ -1309,9 +1309,9 @@ class MySQL
 			}
 			$result = str_replace('CREATE DATABASE', 'CREATE DATABASE IF NOT EXISTS', $result);
 			$tv = $result . "\r\n";
-			
+
 			$tv = 'USE `' . self::SQLFix($this->db_dbname) . '`;' . "\r\n";
-			
+
 			// http://stackoverflow.com/questions/1049728/how-do-i-see-what-character-set-a-database-table-column-is-in-mysql
 			$sql = 'SHOW VARIABLES LIKE "character_set_database"';
 			$this->last_sql = $sql;
@@ -1331,13 +1331,13 @@ class MySQL
 			}
 			$result = 'ALTER DATABASE `' . self::SQLFix($this->db_dbname) . '` DEFAULT CHARACTER SET `' . self::SQLFix($charset) . '` COLLATE `' . self::SQLFix($collation) . '`;';
 			$tv .= $result . "\r\n" . "\r\n" . "\r\n";
-			
+
 			if ($with_structure && $create_database)
 			{
 				$value .= $tv;
 			}
 		}
-		
+
 		if (!empty($this->db_charset))
 		{
 			$charset = $this->db_charset;
@@ -1347,7 +1347,7 @@ class MySQL
 			$result = 'SET CHARACTER SET `' . self::SQLFix($charset) . '`;';
 			$value .= $result . "\r\n" . "\r\n" . "\r\n";
 		}
-		
+
 		if (!($tbl = $this->GetTables($tables)))
 		{
 			if (!$this->ErrorNumber())
@@ -2453,23 +2453,23 @@ class MySQL
 		{
 			return false;
 		}
-		
+
 		$sql = 'GRANT ALL PRIVILEGES ON ' . $database . '.* TO \'' . self::SQLFix($admin_user) . '\'@\'' . $this->db_host . '\' IDENTIFIED BY \'' . self::SQLFix($admin_pass) . '\'';
 		if (!$this->Query($sql))
 		{
 			return false;
 		}
-		
+
 		$sql = 'FLUSH PRIVILEGES';
 		if (!$this->Query($sql))
 		{
 			return false;
 		}
-		
+
 		return true;
 	}
 
-	
+
 	/**
 	 * Gets rows in a table based on a WHERE filter
 	 *
