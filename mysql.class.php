@@ -1292,6 +1292,8 @@ class MySQL
 		$charset = null;    // or should we assume a default of UTF8 if nothing works below?
 		if (!empty($this->db_dbname))
 		{
+			$tv = "\r\n" . "\r\n";
+
 			if ($with_sql_comments)
 			{
 				$tv .= '--' . "\r\n";
@@ -1310,7 +1312,7 @@ class MySQL
 			$result = str_replace('CREATE DATABASE', 'CREATE DATABASE IF NOT EXISTS', $result);
 			$tv = $result . "\r\n";
 
-			$tv = 'USE `' . self::SQLFix($this->db_dbname) . '`;' . "\r\n";
+			$tv .= 'USE `' . self::SQLFix($this->db_dbname) . '`;' . "\r\n";
 
 			// http://stackoverflow.com/questions/1049728/how-do-i-see-what-character-set-a-database-table-column-is-in-mysql
 			$sql = 'SHOW VARIABLES LIKE "character_set_database"';
