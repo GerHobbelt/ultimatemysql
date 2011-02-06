@@ -1296,6 +1296,8 @@ class MySQL
 
 			if ($with_sql_comments)
 			{
+				$tv .= '-- ========================================================' . "\r\n";
+				$tv .= "\r\n";
 				$tv .= '--' . "\r\n";
 				$tv .= '-- Create the database if it doesn\'t exist yet for database `' . self::SQLFix($this->db_dbname) . '`' . "\r\n";
 				$tv .= '--' . "\r\n" . "\r\n";
@@ -1304,37 +1306,42 @@ class MySQL
 			$sql = 'SHOW CREATE DATABASE `' . self::SQLFix($this->db_dbname) . '`';
 			$this->last_sql = $sql;
 			$this->query_count++;
-			$result = $this->QuerySingleValue($sql);
-			if (!$result)
+			$result = $this->QuerySingleRowArray($sql);
+			if (!$result || empty($result['Create Database']))
 			{
 				return false;
 			}
+			$result = $result['Create Database'];
 			$result = str_replace('CREATE DATABASE', 'CREATE DATABASE IF NOT EXISTS', $result);
-			$tv = $result . "\r\n";
+			$tv .= $result . ' ; ' . "\r\n" . "\r\n";
 
-			$tv .= 'USE `' . self::SQLFix($this->db_dbname) . '`;' . "\r\n";
+			$tv .= 'USE `' . self::SQLFix($this->db_dbname) . '`;' . "\r\n" . "\r\n";
 
 			// http://stackoverflow.com/questions/1049728/how-do-i-see-what-character-set-a-database-table-column-is-in-mysql
 			$sql = 'SHOW VARIABLES LIKE "character_set_database"';
 			$this->last_sql = $sql;
 			$this->query_count++;
-			$charset = $this->QuerySingleValue($sql);
-			if (!$charset)
+			$charset = $this->QuerySingleRow($sql);
+			if (!$charset || empty($charset->Value))
 			{
 				return false;
 			}
+			$charset = $charset->Value;
+			
 			$sql = 'SHOW VARIABLES LIKE "collation_database"';
 			$this->last_sql = $sql;
 			$this->query_count++;
-			$collation = $this->QuerySingleValue($sql);
-			if (!$collation)
+			$collation = $this->QuerySingleRow($sql);
+			if (!$collation || empty($collation->Value))
 			{
 				return false;
 			}
+			$collation = $collation->Value;
+			
 			$result = 'ALTER DATABASE `' . self::SQLFix($this->db_dbname) . '` DEFAULT CHARACTER SET `' . self::SQLFix($charset) . '` COLLATE `' . self::SQLFix($collation) . '`;';
 			$tv .= $result . "\r\n" . "\r\n" . "\r\n";
 
-			if ($with_structure && $create_database)
+			if ($with_structure && !$create_database)
 			{
 				$value .= $tv;
 			}
@@ -1374,6 +1381,8 @@ class MySQL
 			{
 				if ($with_sql_comments)
 				{
+					$tv .= '-- --------------------------------------------------------' . "\r\n";
+					$tv .= "\r\n";
 					$tv .= '--' . "\r\n";
 					$tv .= '-- Table structure for table `' . self::SQLFix($table) . '`' . "\r\n";
 					$tv .= '--' . "\r\n" . "\r\n";
@@ -1735,7 +1744,7 @@ class MySQL
 		}
 		else
 		{
-			if (preg_match('/\binsert\b/i', $sql))
+			if (preg_match('/^\s*insert\b/i', $sql))
 			{
 				$this->last_insert_id = mysql_insert_id($this->mysql_link);
 				if ($this->last_insert_id === false)
@@ -1748,7 +1757,7 @@ class MySQL
 					return $this->last_result;
 				}
 			}
-			else if (preg_match('/\bselect\b/i', $sql))
+			else if (preg_match('/^\s*select\b/i', $sql) || preg_match('/^\s*show\b/i', $sql))
 			{
 				$numrows = mysql_num_rows($this->last_result);
 				if ($numrows > 0)
