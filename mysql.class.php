@@ -1327,7 +1327,7 @@ class MySQL
 				return false;
 			}
 			$charset = $charset->Value;
-			
+
 			$sql = 'SHOW VARIABLES LIKE "collation_database"';
 			$this->last_sql = $sql;
 			$this->query_count++;
@@ -1337,7 +1337,7 @@ class MySQL
 				return false;
 			}
 			$collation = $collation->Value;
-			
+
 			$result = 'ALTER DATABASE `' . self::SQLFix($this->db_dbname) . '` DEFAULT CHARACTER SET `' . self::SQLFix($charset) . '` COLLATE `' . self::SQLFix($collation) . '`;';
 			$tv .= $result . "\r\n" . "\r\n" . "\r\n";
 
