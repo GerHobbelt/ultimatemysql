@@ -14,6 +14,7 @@
  *   Emre Erkan
  *   Vincent van Daal
  */
+
 class MySQL
 {
 	// SET THESE VALUES TO MATCH YOUR DATA CONNECTION
@@ -21,7 +22,7 @@ class MySQL
 	private $db_user    = "";       // user name
 	private $db_pass    = "";           // password
 	private $db_dbname  = "";           // database name
-	private $db_charset = "";           // optional character set (i.e. utf8)
+	private $db_charset = "utf8";		// optional character set (i.e. utf8)
 	private $db_pcon    = false;        // use persistent connection?
 
 	// constants for SQLValue function
