@@ -1,6 +1,6 @@
 <?php
 // Include the Ultimate MySQL class and create the object
-include("mysql.class.php");
+include("../mysql.class.php");
 $db = new MySQL();
 
 // Connect to the database

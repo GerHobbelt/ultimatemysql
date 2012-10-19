@@ -27,7 +27,7 @@ INSERT INTO `test` VALUES ('4', 'Yellow', '1');
 */
 
 // Make sure you include the class
-include("mysql.class.php");
+include("../mysql.class.php");
 
 // We will pass in our connection information but please note that
 // this information can be set aurtomatically for you in the header

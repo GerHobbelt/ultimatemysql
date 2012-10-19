@@ -17,7 +17,7 @@ CREATE TABLE `test` (
 */
 
 // Make sure you include the class
-include("mysql.class.php");
+include("../mysql.class.php");
 
 // We will pass in our connection information but please note that
 // this information can be set aurtomatically for you in the header
