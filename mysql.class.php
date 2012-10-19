@@ -17,6 +17,8 @@ if (!defined('COMPACTCMS_CODE')) { die('Illegal entry point!'); } /*MARKER*/
  *   Douglas Gintz
  *   Emre Erkan
  *   Vincent van Daal
+ *   Xander Groesbeek   (SQLValue:int quoting; QueryArray tweak)
+ *   Ger Hobbelt
  */
 
 class MySQL
@@ -2507,7 +2509,7 @@ class MySQL
 	 *
 	 * @param string $tableName The name of the table
 	 * @return boolean Returns an array of records
-	 *         (each an objects where the columns are individual object member variables)
+	 *         (each an object where the columns are individual object member variables)
 	 *         on success or FALSE on error
 	 */
 	public function SelectTable($tableName)
