@@ -2587,6 +2587,11 @@ class MySQL
 	 *                          Y-N, T-F, bit, date, datetime, time, integer,
 	 *                          int, number, double, float
 	 * @return string SQL formatted value of the specified data type on success or FALSE on error
+	 *
+	 * @example echo MySQL::SQLBooleanValue(false, "1", "0", MySQL::SQLVALUE_NUMBER);
+	 * @example echo MySQL::SQLBooleanValue($test, "Jan 1, 2007 ", "2007/06/01", MySQL::SQLVALUE_DATE);
+	 * @example echo MySQL::SQLBooleanValue("ON", "Ya", "Nope");
+	 * @example echo MySQL::SQLBooleanValue(1, '+', '-');
 	 */
 	static public function SQLBooleanValue($value, $trueValue = true, $falseValue = false, $datatype = self::SQLVALUE_TEXT)
 	{
