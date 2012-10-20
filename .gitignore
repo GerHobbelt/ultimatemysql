@@ -1,3 +1,6 @@
 # Editor Backup files
 *.bak
 *~
+
+# sub projects which are not submodules
+phpDocumentor2/
