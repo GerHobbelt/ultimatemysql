@@ -175,8 +175,9 @@
         <html lang="en">
             <head><xsl:apply-templates select="." mode="head"/></head>
             <body>
+				<a name="___" />
                 <xsl:apply-templates select="." mode="header"/>
-                <div id="___" class="container">
+                <div class="container">
                     <noscript>
                         <div class="alert alert-warning">
                             Javascript is disabled; several features are only available

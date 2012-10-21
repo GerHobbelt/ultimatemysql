@@ -60,6 +60,9 @@
             <h2><xsl:apply-templates select="name" /></h2>
             <xsl:apply-templates select="name" mode="signature" />
             <div class="labels">
+                <xsl:if test="docblock/tag[@name='static']">
+                    <span class="label label-info">STATIC</span>
+                </xsl:if>
                 <xsl:if test="docblock/tag[@name='api']">
                     <span class="label label-info">API</span>
                 </xsl:if>
@@ -69,19 +72,14 @@
             </div>
 
             <div class="row collapse">
-                <div>
-                    <xsl:attribute name="class">
-                        <xsl:if test="docblock/tag[@name='example']">span4</xsl:if>
-                        <xsl:if test="not(docblock/tag[@name='example'])">detail-description</xsl:if>
-                    </xsl:attribute>
-
+                <div class="detail-description">
                     <p class="long_description">
                         <xsl:value-of select="docblock/long-description" disable-output-escaping="yes" />
                     </p>
 
-                    <xsl:if test="count(docblock/tag[@name != 'return' and @name != 'api' and @name != 'param' and @name != 'throws' and @name != 'throw']) > 0">
+                    <xsl:if test="count(docblock/tag[@name != 'return' and @name != 'static' and @name != 'example' and @name != 'api' and @name != 'param' and @name != 'throws' and @name != 'throw']) > 0">
                         <table class="table table-bordered">
-                            <xsl:apply-templates select="docblock/tag[@name != 'return' and @name != 'api' and @name != 'param' and @name != 'throws' and @name != 'throw']" mode="tabular" />
+                            <xsl:apply-templates select="docblock/tag[@name != 'return' and @name != 'static' and @name != 'example' and @name != 'api' and @name != 'param' and @name != 'throws' and @name != 'throw']" mode="tabular" />
                         </table>
                     </xsl:if>
 
@@ -103,11 +101,11 @@
                     </xsl:if>
                 </div>
                 <xsl:if test="docblock/tag[@name='example']">
-                    <div class="span4">
+                    <div class="detail-examples">
                         <h3>Examples</h3>
                         <xsl:for-each select="docblock/tag[@name='example']">
                             <pre class="prettyprint linenums">
-                                <xsl:value-of select="."/>
+                                <xsl:value-of select="./@description"/>
                             </pre>
                         </xsl:for-each>
                     </div>
