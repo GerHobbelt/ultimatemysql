@@ -79,9 +79,9 @@
                         <xsl:value-of select="docblock/long-description" disable-output-escaping="yes" />
                     </p>
 
-                    <xsl:if test="count(docblock/tag[@name != 'return' and @name != 'param' and @name != 'throws' and @name != 'throw']) > 0">
+                    <xsl:if test="count(docblock/tag[@name != 'return' and @name != 'api' and @name != 'param' and @name != 'throws' and @name != 'throw']) > 0">
                         <table class="table table-bordered">
-                            <xsl:apply-templates select="docblock/tag[@name != 'return' and @name != 'param' and @name != 'throws' and @name != 'throw']" mode="tabular" />
+                            <xsl:apply-templates select="docblock/tag[@name != 'return' and @name != 'api' and @name != 'param' and @name != 'throws' and @name != 'throw']" mode="tabular" />
                         </table>
                     </xsl:if>
 

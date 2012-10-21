@@ -53,7 +53,7 @@
 			            <xsl:if test="count($methods) > 0">
 			                <li class="nav-header"><i class="icon-custom icon-method"></i> Public API Methods</li>
 			                <xsl:for-each select="$methods">
-			                    <li><a href="classes/{../name}#{name}" title="{docblock/description}"><xsl:value-of select="../name" />.<xsl:value-of select="name" /></a></li>
+			                    <li><a href="classes/{../name}.html#{name}" title="{docblock/description}"><xsl:value-of select="../name" />.<xsl:value-of select="name" /></a></li>
 			                </xsl:for-each>
 			            </xsl:if>	            
                     </ul>
