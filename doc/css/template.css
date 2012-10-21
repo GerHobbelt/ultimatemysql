@@ -16,6 +16,12 @@ a
     color: #55A72F;
 }
 
+/* make notes and warning headers align @ top instead of bottom */
+table.table-bordered tbody th
+{
+	vertical-align: top;
+}
+
 li.l0, li.l1, li.l2, li.l3, li.l5, li.l6, li.l7, li.l8
 {
     list-style-type: decimal;

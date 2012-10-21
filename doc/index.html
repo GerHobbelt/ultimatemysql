@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title>phpDocumentor</title>
+<title>Ultimate MySQL Wrapper Class for PHP 5.x</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="css/template.css" rel="stylesheet" media="all">
@@ -15,16 +15,19 @@
 <body>
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner"><div class="container">
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="index.html">Ultimate MySQL Wrapper Class for PHP 5.x</a><div class="nav-collapse"><ul class="nav">
 <li class="dropdown">
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
-                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu"></ul>
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+</ul>
 </li>
 <li class="dropdown" id="reports-menu">
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">42</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -41,7 +44,7 @@
                             if Javascript is enabled.
                         </div></noscript>
 <div class="hero-unit">
-<h1>phpDocumentor</h1>
+<h1>Ultimate MySQL Wrapper Class for PHP 5.x</h1>
 <h2>Documentation</h2>
 </div>
 <div class="row">
@@ -54,11 +57,98 @@
 <li class="nav-header">Packages</li>
 <li><a href="packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 </ul></div>
+<div class="well"><ul class="nav nav-list">
+<li class="nav-header">Api</li>
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Public API Methods</li>
+<li><a href="classes/MySQL.html#AutoInsertUpdate" title="UPSERT a row">MySQL.AutoInsertUpdate</a></li>
+<li><a href="classes/MySQL.html#BeginningOfSeek" title="Test if the internal pointer is at the start of the record set">MySQL.BeginningOfSeek</a></li>
+<li><a href="classes/MySQL.html#BuildSQLDelete" title="Builds a SQL DELETE statement">MySQL.BuildSQLDelete</a></li>
+<li><a href="classes/MySQL.html#BuildSQLInsert" title="Builds a SQL INSERT statement">MySQL.BuildSQLInsert</a></li>
+<li><a href="classes/MySQL.html#BuildSQLSelect" title="Builds a simple SQL SELECT statement">MySQL.BuildSQLSelect</a></li>
+<li><a href="classes/MySQL.html#BuildSQLUpdate" title="Builds a SQL UPDATE statement">MySQL.BuildSQLUpdate</a></li>
+<li><a href="classes/MySQL.html#BuildSQLValue" title="Construct a value string suitable for incorporation anywhere
+in a SQL query.">MySQL.BuildSQLValue</a></li>
+<li><a href="classes/MySQL.html#BuildSQLWhereClause" title="Builds a SQL WHERE clause from an array.">MySQL.BuildSQLWhereClause</a></li>
+<li><a href="classes/MySQL.html#Close" title="Close current MySQL connection">MySQL.Close</a></li>
+<li><a href="classes/MySQL.html#DeleteRows" title="Delete selected rows.">MySQL.DeleteRows</a></li>
+<li><a href="classes/MySQL.html#EndOfSeek" title="Returns true if the internal pointer is at the end of the records">MySQL.EndOfSeek</a></li>
+<li><a href="classes/MySQL.html#Error" title="Return the last MySQL error as text">MySQL.Error</a></li>
+<li><a href="classes/MySQL.html#ErrorNumber" title="Return the last MySQL error as a number">MySQL.ErrorNumber</a></li>
+<li><a href="classes/MySQL.html#GetBooleanValue" title="Convert any value of any datatype into boolean (true or false)">MySQL.GetBooleanValue</a></li>
+<li><a href="classes/MySQL.html#GetColumnComments" title="Return the comments for fields in a table">MySQL.GetColumnComments</a></li>
+<li><a href="classes/MySQL.html#GetColumnCount" title="Get the number of columns">MySQL.GetColumnCount</a></li>
+<li><a href="classes/MySQL.html#GetColumnDataType" title="Return the data type for a specified column">MySQL.GetColumnDataType</a></li>
+<li><a href="classes/MySQL.html#GetColumnID" title="Return the position of a column">MySQL.GetColumnID</a></li>
+<li><a href="classes/MySQL.html#GetColumnLength" title="Return the field length">MySQL.GetColumnLength</a></li>
+<li><a href="classes/MySQL.html#GetColumnName" title="Return the field name for a specified column number">MySQL.GetColumnName</a></li>
+<li><a href="classes/MySQL.html#GetColumnNames" title="Return the field names in a table or query as an array">MySQL.GetColumnNames</a></li>
+<li><a href="classes/MySQL.html#GetHTML" title="Return the last query as a HTML table">MySQL.GetHTML</a></li>
+<li><a href="classes/MySQL.html#GetJSON" title="Return the last query as a JSON document">MySQL.GetJSON</a></li>
+<li><a href="classes/MySQL.html#GetLastInsertID" title="Return the last autonumber ID field from a previous INSERT query">MySQL.GetLastInsertID</a></li>
+<li><a href="classes/MySQL.html#GetLastSQL" title="Return the last SQL statement executed">MySQL.GetLastSQL</a></li>
+<li><a href="classes/MySQL.html#GetTables" title="Get all table names from the database">MySQL.GetTables</a></li>
+<li><a href="classes/MySQL.html#GetXML" title="Return the last query as an XML Document">MySQL.GetXML</a></li>
+<li><a href="classes/MySQL.html#Dump" title="Dump the entire database as an SQL script">MySQL.Dump</a></li>
+<li><a href="classes/MySQL.html#HasRecords" title="Determines if a query contains any rows">MySQL.HasRecords</a></li>
+<li><a href="classes/MySQL.html#InsertRow" title="Inserts a row into a table in the connected database">MySQL.InsertRow</a></li>
+<li><a href="classes/MySQL.html#IsConnected" title="Determines if a valid connection to the database exists">MySQL.IsConnected</a></li>
+<li><a href="classes/MySQL.html#IsDateStr" title="Determines if a value of any data type is a date PHP can convert">MySQL.IsDateStr</a></li>
+<li><a href="classes/MySQL.html#Kill" title="Stop executing (die/exit) and show last MySQL error message">MySQL.Kill</a></li>
+<li><a href="classes/MySQL.html#MyDyingMessage" title="Get last error message as HTML string">MySQL.MyDyingMessage</a></li>
+<li><a href="classes/MySQL.html#MoveFirst" title="Seeks to the beginning of the records">MySQL.MoveFirst</a></li>
+<li><a href="classes/MySQL.html#MoveLast" title="Seeks to the end of the records">MySQL.MoveLast</a></li>
+<li><a href="classes/MySQL.html#Open" title="Connect to specified MySQL server">MySQL.Open</a></li>
+<li><a href="classes/MySQL.html#Query" title="Executes the given SQL query and returns the records">MySQL.Query</a></li>
+<li><a href="classes/MySQL.html#QueryArray" title="Executes the given SQL query and returns a multi-dimensional array">MySQL.QueryArray</a></li>
+<li><a href="classes/MySQL.html#QueryObjects" title="Executes the given SQL query">MySQL.QueryObjects</a></li>
+<li><a href="classes/MySQL.html#SelectArray" title="Returns a multidimensional array of rows from a table based on a WHERE filter">MySQL.SelectArray</a></li>
+<li><a href="classes/MySQL.html#SelectObjects" title="Returns an array of row (= record) objects from a table based on a WHERE filter">MySQL.SelectObjects</a></li>
+<li><a href="classes/MySQL.html#QuerySingleRow" title="Executes the given SQL query and returns only one (the first) row">MySQL.QuerySingleRow</a></li>
+<li><a href="classes/MySQL.html#SelectSingleRow" title="Returns a single (first) row from a table based on a WHERE filter">MySQL.SelectSingleRow</a></li>
+<li><a href="classes/MySQL.html#QuerySingleRowArray" title="Executes the given SQL query and returns the first row as an array">MySQL.QuerySingleRowArray</a></li>
+<li><a href="classes/MySQL.html#SelectSingleRowArray" title="Returns a single (first) row as an array from a table based on a WHERE filter">MySQL.SelectSingleRowArray</a></li>
+<li><a href="classes/MySQL.html#QuerySingleValue" title="Executes a query and returns a single value.">MySQL.QuerySingleValue</a></li>
+<li><a href="classes/MySQL.html#SelectSingleValue" title="Returns a single value from from the first row SELECTed from a table based on a
+WHERE filter.">MySQL.SelectSingleValue</a></li>
+<li><a href="classes/MySQL.html#QueryTimed" title="Executes the given SQL query, measures it, and saves the total duration
+in microseconds">MySQL.QueryTimed</a></li>
+<li><a href="classes/MySQL.html#Records" title="Returns the records from the last query">MySQL.Records</a></li>
+<li><a href="classes/MySQL.html#RecordsArray" title="Returns all records from the last query as array of arrays">MySQL.RecordsArray</a></li>
+<li><a href="classes/MySQL.html#RecordsObjects" title="Returns all records from the last query as array of objects">MySQL.RecordsObjects</a></li>
+<li><a href="classes/MySQL.html#Release" title="Frees memory used by the query results and returns the function result.">MySQL.Release</a></li>
+<li><a href="classes/MySQL.html#Row" title="Reads the current row and returns contents as a
+PHP object or returns false on error">MySQL.Row</a></li>
+<li><a href="classes/MySQL.html#RowArray" title="Reads the current row and returns contents as an
+array or returns false on error">MySQL.RowArray</a></li>
+<li><a href="classes/MySQL.html#RowCount" title="Returns the last query row count">MySQL.RowCount</a></li>
+<li><a href="classes/MySQL.html#Seek" title="Sets the internal database pointer to the
+specified row number and returns the result">MySQL.Seek</a></li>
+<li><a href="classes/MySQL.html#SeekPosition" title="Returns the current cursor row location">MySQL.SeekPosition</a></li>
+<li><a href="classes/MySQL.html#SelectDatabase" title="Selects a different database and character set">MySQL.SelectDatabase</a></li>
+<li><a href="classes/MySQL.html#CreateDatabase" title="Creates a new database and sets up the root access for the database.">MySQL.CreateDatabase</a></li>
+<li><a href="classes/MySQL.html#SelectRows" title="Gets rows in a table based on a WHERE filter">MySQL.SelectRows</a></li>
+<li><a href="classes/MySQL.html#SelectTable" title="Retrieves all rows in a specified table">MySQL.SelectTable</a></li>
+<li><a href="classes/MySQL.html#SQLBooleanValue" title="Converts a boolean into a formatted TRUE or FALSE value of choice">MySQL.SQLBooleanValue</a></li>
+<li><a href="classes/MySQL.html#SQLFix" title="Returns string suitable for inclusion in a SQL query, i.e.">MySQL.SQLFix</a></li>
+<li><a href="classes/MySQL.html#SQLUnfix" title="Returns MySQL string as normal string">MySQL.SQLUnfix</a></li>
+<li><a href="classes/MySQL.html#SQLValue" title="Formats any value into a string suitable for SQL statements">MySQL.SQLValue</a></li>
+<li><a href="classes/MySQL.html#TimerDuration" title="Returns last measured duration (time between TimerStart and TimerStop)">MySQL.TimerDuration</a></li>
+<li><a href="classes/MySQL.html#TimerStart" title="Starts time measurement (in microseconds)">MySQL.TimerStart</a></li>
+<li><a href="classes/MySQL.html#TimerStop" title="Stops time measurement (in microseconds)">MySQL.TimerStop</a></li>
+<li><a href="classes/MySQL.html#TransactionBegin" title="Starts a transaction">MySQL.TransactionBegin</a></li>
+<li><a href="classes/MySQL.html#TransactionEnd" title="Ends a transaction and commits the queries">MySQL.TransactionEnd</a></li>
+<li><a href="classes/MySQL.html#TransactionRollback" title="Rolls the transaction back">MySQL.TransactionRollback</a></li>
+<li><a href="classes/MySQL.html#TruncateTable" title="Truncates a table removing all data">MySQL.TruncateTable</a></li>
+<li><a href="classes/MySQL.html#UpdateRow" title="Updates rows in a table based on a WHERE filter
+(can be just one or many rows based on the filter)">MySQL.UpdateRow</a></li>
+<li><a href="classes/MySQL.html#GetStatistics" title="Return a few database statistics in an array.">MySQL.GetStatistics</a></li>
+</ul></div>
 </div>
 <div class="span5"><div class="well"><ul class="nav nav-list">
 <li class="nav-header">Reports</li>
 <li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">42</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -68,7 +158,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-10-20T03:06:21+02:00.<br></footer></div>
+            generated on 2012-10-21T22:47:07+02:00.<br></footer></div>
 </div>
 </body>
 </html>
