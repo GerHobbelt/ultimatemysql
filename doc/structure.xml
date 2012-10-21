@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project version="2.0.0a10" title="Ultimate MySQL Wrapper Class for PHP 5.x">
-  <file path="mysql.class.php" hash="b6076c4ab07d294241c69bc30fe81751" package="Ultimate MySQL Wrapper">
+  <file path="mysql.class.php" hash="ab2af6664da1e5095514315a5e2222f7" package="Ultimate MySQL Wrapper">
     <docblock line="2">
       <description><![CDATA[Ultimate MySQL Wrapper Class for PHP 5.x]]></description>
       <long-description><![CDATA[<p>Contributions from
@@ -14,20 +14,20 @@
   Ger Hobbelt</p>
 
 <ul>
-<li>Establish MySQL server connections easily</li>
-<li>Execute SQL queries</li>
-<li>Retrieve query results into objects or arrays</li>
-<li>Retrieve the last inserted ID</li>
-<li>Manage transactions (transaction processing)</li>
-<li>Retrieve the list tables of a database</li>
-<li>Retrieve the list fields of a table (or field comments)</li>
-<li>Retrieve the length or data type of a field</li>
-<li>Measure the time a query takes to execute</li>
-<li>Display query results in an HTML table</li>
-<li>Easy formatting for SQL parameters and values</li>
-<li>Generate SQL Selects, Inserts, Updates, and Deletes</li>
-<li>Error handling with error numbers and text</li>
-<li>And much more!</li>
+<li> Establish MySQL server connections easily
+<li> Execute SQL queries
+<li> Retrieve query results into objects or arrays
+<li> Retrieve the last inserted ID
+<li> Manage transactions (transaction processing)
+<li> Retrieve the list tables of a database
+<li> Retrieve the list fields of a table (or field comments)
+<li> Retrieve the length or data type of a field
+<li> Measure the time a query takes to execute
+<li> Display query results in an HTML table
+<li> Easy formatting for SQL parameters and values
+<li> Generate SQL Selects, Inserts, Updates, and Deletes
+<li> Error handling with error numbers and text
+<li> And much more!
 </ul>
 
 <p>Feb 02, 2007 - Written by Jeff Williams (Initial Release)
@@ -49,16 +49,8 @@ Oct 23, 2007 - Added QueryArray(), QuerySingleRow(), QuerySingleRowArray(),
 Oct 28, 2007 - Small bug fixes
 Nov 28, 2007 - Contribution from Douglas Gintz
 Jul 06, 2009 - GetXML() and GetJSON() contribution from Emre Erkan
-               and ability to use a blank password if needed</p>
-
-<p>Usage:</p>
-
-<pre><code>include("mysql.class.php");
-
-$db = new MySQL();
-$db = new MySQL(true, "database");
-$db = new MySQL(true, "database", "localhost", "username", "password");
-</code></pre>]]></long-description>
+               and ability to use a blank password if needed</p>]]></long-description>
+      <tag line="2" name="example" description="include(&quot;mysql.class.php&quot;);&#13;&#10;$db = new MySQL();&#13;&#10;$db = new MySQL(true, &quot;database&quot;);&#13;&#10;$db = new MySQL(true, &quot;database&quot;, &quot;localhost&quot;, &quot;username&quot;, &quot;password&quot;);"/>
       <tag line="2" name="category" description="Ultimate MySQL Wrapper Class"/>
       <tag line="2" name="package" description="Ultimate MySQL Wrapper"/>
       <tag line="2" name="version" description="2.5.1"/>
@@ -294,7 +286,7 @@ is far more elaborate in a development environment setting to aid problem analys
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="166" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="171" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
         <docblock line="155">
@@ -321,729 +313,752 @@ is far more elaborate in a development environment setting to aid problem analys
           <tag line="155" name="param" description="(Optional) Character set collation" type="string" variable="$collation">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="155" name="example" description="$db = new MySQL();&#13;&#10;$db = new MySQL(true, &quot;database&quot;);&#13;&#10;$db = new MySQL(true, &quot;database&quot;, &quot;localhost&quot;, &quot;username&quot;, &quot;password&quot;);"/>
         </docblock>
-        <argument line="166">
+        <argument line="171">
           <name>$connect</name>
           <default><![CDATA[true]]></default>
           <type/>
         </argument>
-        <argument line="166">
+        <argument line="171">
           <name>$database</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="166">
+        <argument line="171">
           <name>$server</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="167">
+        <argument line="172">
           <name>$username</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="167">
+        <argument line="172">
           <name>$password</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="167">
+        <argument line="172">
           <name>$charset</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="168">
+        <argument line="173">
           <name>$collation</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="187" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="192" package="Default">
         <name>__destruct</name>
         <full_name>__destruct</full_name>
-        <docblock line="184">
+        <docblock line="189">
           <description><![CDATA[Destructor: Closes the connection to the database]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="215" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="220" package="Default">
         <name>AutoInsertUpdate</name>
         <full_name>AutoInsertUpdate</full_name>
-        <docblock line="192">
+        <docblock line="197">
           <description><![CDATA[UPSERT a row]]></description>
           <long-description><![CDATA[<p>Automatically does an INSERT or UPDATE depending on whether a record
 already exists in a table.</p>]]></long-description>
-          <tag line="192" name="api" description=""/>
-          <tag line="192" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="197" name="api" description=""/>
+          <tag line="197" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="192" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array" variable="$valuesArray">
+          <tag line="197" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array" variable="$valuesArray">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="192" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). &lt;br/&gt; This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed." type="array|string" variable="$whereArray">
+          <tag line="197" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). &lt;br/&gt; This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed." type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="192" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
+          <tag line="197" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="215">
+        <argument line="220">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="215">
+        <argument line="220">
           <name>$valuesArray</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="215">
+        <argument line="220">
           <name>$whereArray</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="239" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="250" package="Default">
         <name>BeginningOfSeek</name>
         <full_name>BeginningOfSeek</full_name>
-        <docblock line="231">
+        <docblock line="236">
           <description><![CDATA[Test if the internal pointer is at the start of the record set]]></description>
           <long-description><![CDATA[<p>Returns true if the internal pointer is at the beginning of the record set produced by the last query.</p>]]></long-description>
-          <tag line="231" name="api" description=""/>
-          <tag line="231" name="return" description="TRUE if at the first row or FALSE if not" type="boolean">
+          <tag line="236" name="api" description=""/>
+          <tag line="236" name="return" description="TRUE if at the first row or FALSE if not" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="236" name="example" description="if ($db-&gt;BeginningOfSeek())&#13;&#10;{&#13;&#10;    echo &quot;We are at the beggining of the record set&quot;;&#13;&#10;}"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="269" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="280" package="Default">
         <name>BuildSQLColumns</name>
         <full_name>BuildSQLColumns</full_name>
-        <docblock line="252">
+        <docblock line="263">
           <description><![CDATA[Builds a comma delimited list of columns for use with a SQL query]]></description>
           <long-description><![CDATA[<p>This method can be used to construct a SELECT, FROM or SORT BY section of an SQL query.</p>]]></long-description>
-          <tag line="252" name="param" description="Either an array containing the column names or a string. The latter is used when, for example, constructing 'advanced' queries with SUM(*) or other expressions in the SELECT fieldset section." type="array|string" variable="$columns">
+          <tag line="263" name="param" description="Either an array containing the column names or a string. The latter is used when, for example, constructing 'advanced' queries with SUM(*) or other expressions in the SELECT fieldset section." type="array|string" variable="$columns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="252" name="param" description="(Optional) TRUE to add quotes" type="boolean" variable="$addQuotes">
+          <tag line="263" name="param" description="(Optional) TRUE to add quotes" type="boolean" variable="$addQuotes">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="252" name="param" description="(Optional) TRUE to show column alias" type="boolean" variable="$showAlias">
+          <tag line="263" name="param" description="(Optional) TRUE to show column alias" type="boolean" variable="$showAlias">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="252" name="param" description="(Optional) TRUE when the field list is meant for an ORDER BY clause; fields may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each field." type="boolean" variable="$withSortMarker">
+          <tag line="263" name="param" description="(Optional) TRUE when the field list is meant for an ORDER BY clause; fields may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each field." type="boolean" variable="$withSortMarker">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="252" name="return" description="Returns the constructed SQL column list on success or NULL on failure" type="string">
+          <tag line="263" name="return" description="Returns the constructed SQL column list on success or NULL on failure" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="269">
+        <argument line="280">
           <name>$columns</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="269">
+        <argument line="280">
           <name>$addQuotes</name>
           <default><![CDATA[true]]></default>
           <type/>
         </argument>
-        <argument line="269">
+        <argument line="280">
           <name>$showAlias</name>
           <default><![CDATA[true]]></default>
           <type/>
         </argument>
-        <argument line="269">
+        <argument line="280">
           <name>$withSortMarker</name>
           <default><![CDATA[false]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="354" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="372" package="Default">
         <name>BuildSQLDelete</name>
         <full_name>BuildSQLDelete</full_name>
-        <docblock line="337">
+        <docblock line="348">
           <description><![CDATA[Builds a SQL DELETE statement]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="337" name="api" description=""/>
-          <tag line="337" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="348" name="api" description=""/>
+          <tag line="348" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="337" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). If not specified then all values in the table are deleted. &lt;br/&gt; This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed." type="array|string" variable="$whereArray">
+          <tag line="348" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). If not specified then all values in the table are deleted. &lt;br/&gt; This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed." type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="337" name="return" description="Returns the SQL DELETE statement" type="string">
+          <tag line="348" name="return" description="Returns the SQL DELETE statement" type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="348" name="example" description="// Let's create an array for the example&#13;&#10;// $arrayVariable[&quot;column name&quot;] = formatted SQL value&#13;&#10;$filter[&quot;ID&quot;] = MySQL::SQLValue(7, MySQL::SQLVALUE_NUMBER);&#13;&#10;// Echo out the SQL statement&#13;&#10;echo MySQL::BuildSQLDelete(&quot;MyTable&quot;, $filter);"/>
         </docblock>
-        <argument line="354">
+        <argument line="372">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="354">
+        <argument line="372">
           <name>$whereArray</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="377" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="403" package="Default">
         <name>BuildSQLInsert</name>
         <full_name>BuildSQLInsert</full_name>
-        <docblock line="366">
+        <docblock line="384">
           <description><![CDATA[Builds a SQL INSERT statement]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="366" name="api" description=""/>
-          <tag line="366" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="384" name="api" description=""/>
+          <tag line="384" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="366" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array" variable="$valuesArray">
+          <tag line="384" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array" variable="$valuesArray">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="366" name="return" description="Returns a SQL INSERT statement" type="string">
+          <tag line="384" name="return" description="Returns a SQL INSERT statement" type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="384" name="example" description="// Let's create an array for the example&#13;&#10;// $arrayVariable[&quot;column name&quot;] = formatted SQL value&#13;&#10;$values[&quot;Name&quot;] = MySQL::SQLValue(&quot;Violet&quot;);&#13;&#10;$values[&quot;Age&quot;] = MySQL::SQLValue(777, MySQL::SQLVALUE_NUMBER);&#13;&#10;// Echo out the SQL statement&#13;&#10;echo MySQL::BuildSQLInsert(&quot;MyTable&quot;, $values);"/>
         </docblock>
-        <argument line="377">
+        <argument line="403">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="377">
+        <argument line="403">
           <name>$valuesArray</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="408" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="442" package="Default">
         <name>BuildSQLSelect</name>
         <full_name>BuildSQLSelect</full_name>
-        <docblock line="387">
+        <docblock line="413">
           <description><![CDATA[Builds a simple SQL SELECT statement]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="387" name="api" description=""/>
-          <tag line="387" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="413" name="api" description=""/>
+          <tag line="413" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="387" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
+          <tag line="413" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="387" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
+          <tag line="413" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="387" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
+          <tag line="413" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="387" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
+          <tag line="413" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
             <type by_reference="false">integer</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="387" name="return" description="Returns a SQL SELECT statement" type="string">
+          <tag line="413" name="return" description="Returns a SQL SELECT statement" type="string">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="387" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
+          <tag line="413" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
+          <tag line="413" name="example" description="// Let's create an array for the example&#13;&#10;// $arrayVariable[&quot;column name&quot;] = formatted SQL value&#13;&#10;$values[&quot;Name&quot;] = MySQL::SQLValue(&quot;Violet&quot;);&#13;&#10;$values[&quot;Age&quot;] = MySQL::SQLValue(777, MySQL::SQLVALUE_NUMBER);&#13;&#10;// Echo out the SQL statement&#13;&#10;echo MySQL::BuildSQLSelect(&quot;MyTable&quot;, $values);"/>
         </docblock>
-        <argument line="408">
+        <argument line="442">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="408">
+        <argument line="442">
           <name>$whereArray</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="408">
+        <argument line="442">
           <name>$columns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="409">
+        <argument line="443">
           <name>$sortColumns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="409">
+        <argument line="443">
           <name>$limit</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="468" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="511" package="Default">
         <name>BuildSQLUpdate</name>
         <full_name>BuildSQLUpdate</full_name>
-        <docblock line="447">
+        <docblock line="481">
           <description><![CDATA[Builds a SQL UPDATE statement]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="447" name="api" description=""/>
-          <tag line="447" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="481" name="api" description=""/>
+          <tag line="481" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="447" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array" variable="$valuesArray">
+          <tag line="481" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array" variable="$valuesArray">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="447" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). If not specified then all values in the table are updated. &lt;br/&gt; This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed." type="array|string" variable="$whereArray">
+          <tag line="481" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). If not specified then all values in the table are updated. &lt;br/&gt; This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed." type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="447" name="return" description="Returns a SQL UPDATE statement" type="string">
+          <tag line="481" name="return" description="Returns a SQL UPDATE statement" type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="481" name="example" description="// Let's create two arrays for the example&#13;&#10;// $arrayVariable[&quot;column name&quot;] = formatted SQL value&#13;&#10;$values[&quot;Name&quot;] = MySQL::SQLValue(&quot;Violet&quot;);&#13;&#10;$values[&quot;Age&quot;] = MySQL::SQLValue(777, MySQL::SQLVALUE_NUMBER);&#13;&#10;$filter[&quot;ID&quot;] = MySQL::SQLValue(10, MySQL::SQLVALUE_NUMBER);&#13;&#10;// Echo out some SQL statements&#13;&#10;echo MySQL::BuildSQLUpdate(&quot;Test&quot;, $values, $filter)&quot;;"/>
         </docblock>
-        <argument line="468">
+        <argument line="511">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="468">
+        <argument line="511">
           <name>$valuesArray</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="468">
+        <argument line="511">
           <name>$whereArray</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="510" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="553" package="Default">
         <name>BuildSQLValue</name>
         <full_name>BuildSQLValue</full_name>
-        <docblock line="498">
+        <docblock line="541">
           <description><![CDATA[Construct a value string suitable for incorporation anywhere
 in a SQL query.]]></description>
           <long-description><![CDATA[<p>This methos invokes self::SQLValue() under the hood.</p>]]></long-description>
-          <tag line="498" name="static" description=""/>
-          <tag line="498" name="api" description=""/>
-          <tag line="498" name="param" description="The value to be checked and processed. Usually this would be a string, but any other type which can be cast to a string is fine as well." type="\arbitrary" variable="$value">
+          <tag line="541" name="static" description=""/>
+          <tag line="541" name="api" description=""/>
+          <tag line="541" name="param" description="The value to be checked and processed. Usually this would be a string, but any other type which can be cast to a string is fine as well." type="\arbitrary" variable="$value">
             <type by_reference="false">\arbitrary</type>
           </tag>
-          <tag line="498" name="return" description="Returns a string containing the SQL query ready value." type="string">
+          <tag line="541" name="return" description="Returns a string containing the SQL query ready value." type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="510">
+        <argument line="553">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="533" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="576" package="Default">
         <name>BuildSQLWhereClause</name>
         <full_name>BuildSQLWhereClause</full_name>
-        <docblock line="515">
+        <docblock line="558">
           <description><![CDATA[Builds a SQL WHERE clause from an array.]]></description>
           <long-description><![CDATA[<p>If a key is specified, the key is used at the field name and the value
 as a comparison. If a key is not used, the value is used as the clause.</p>]]></long-description>
-          <tag line="515" name="api" description=""/>
-          <tag line="515" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). &lt;br/&gt; This parameter may alternatively be a string, in which case it is returned verbatim. This is useful when advanced queries are constructed and this method is invoked internally." type="array|string" variable="$whereArray">
+          <tag line="558" name="api" description=""/>
+          <tag line="558" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). &lt;br/&gt; This parameter may alternatively be a string, in which case it is returned verbatim. This is useful when advanced queries are constructed and this method is invoked internally." type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="515" name="return" description="Returns a string containing the SQL WHERE clause" type="string">
+          <tag line="558" name="return" description="Returns a string containing the SQL WHERE clause" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="533">
+        <argument line="576">
           <name>$whereArray</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="580" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="626" package="Default">
         <name>Close</name>
         <full_name>Close</full_name>
-        <docblock line="574">
+        <docblock line="617">
           <description><![CDATA[Close current MySQL connection]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="574" name="api" description=""/>
-          <tag line="574" name="return" description="Returns TRUE on success or FALSE on error" type="object">
+          <tag line="617" name="api" description=""/>
+          <tag line="617" name="return" description="Returns TRUE on success or FALSE on error" type="object">
             <type by_reference="false">object</type>
           </tag>
+          <tag line="617" name="example" description="$db-&gt;Close();"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="622" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="682" package="Default">
         <name>DeleteRows</name>
         <full_name>DeleteRows</full_name>
-        <docblock line="602">
+        <docblock line="648">
           <description><![CDATA[Delete selected rows.]]></description>
           <long-description><![CDATA[<p>Deletes rows in a table based on a WHERE filter
 (can be just one or many rows based on the filter).</p>]]></long-description>
-          <tag line="602" name="api" description=""/>
-          <tag line="602" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="648" name="api" description=""/>
+          <tag line="648" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="602" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). If not specified then all values in the table are deleted. &lt;br/&gt; This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed." type="array|string" variable="$whereArray">
+          <tag line="648" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). If not specified then all values in the table are deleted. &lt;br/&gt; This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed." type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="602" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
+          <tag line="648" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="648" name="example" description="// $arrayVariable[&quot;column name&quot;] = formatted SQL value&#13;&#10;$filter[&quot;ID&quot;] = 7;&#13;&#10;// Execute the delete&#13;&#10;$result = $db-&gt;DeleteRows(&quot;MyTable&quot;, $filter);&#13;&#10;// If we have an error&#13;&#10;if (!$result)&#13;&#10;{&#13;&#10;    // Show the error and kill the script&#13;&#10;    $db-&gt;Kill();&#13;&#10;}"/>
         </docblock>
-        <argument line="622">
+        <argument line="682">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="622">
+        <argument line="682">
           <name>$whereArray</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="644" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="710" package="Default">
         <name>EndOfSeek</name>
         <full_name>EndOfSeek</full_name>
-        <docblock line="638">
+        <docblock line="698">
           <description><![CDATA[Returns true if the internal pointer is at the end of the records]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="638" name="api" description=""/>
-          <tag line="638" name="return" description="TRUE if at the last row or FALSE if not" type="boolean">
+          <tag line="698" name="api" description=""/>
+          <tag line="698" name="return" description="TRUE if at the last row or FALSE if not" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="698" name="example" description="if ($db-&gt;EndOfSeek())&#13;&#10;{&#13;&#10;    echo &quot;We are at the end of the record set&quot;;&#13;&#10;}"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="667" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="741" package="Default">
         <name>Error</name>
         <full_name>Error</full_name>
-        <docblock line="657">
+        <docblock line="723">
           <description><![CDATA[Return the last MySQL error as text]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="657" name="note" description="The returned error description string is appended with the error number itself&#13;&#10;as ' (#&lt;i&gt;error_number&lt;/i&gt;)'."/>
-          <tag line="657" name="api" description=""/>
-          <tag line="657" name="return" description="Error text from last known error" type="string">
+          <tag line="723" name="note" description="The returned error description string is appended with the error number itself&#13;&#10;as ' (#&lt;i&gt;error_number&lt;/i&gt;)'."/>
+          <tag line="723" name="api" description=""/>
+          <tag line="723" name="return" description="Error text from last known error" type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="723" name="example" description="if (!$db-&gt;Query(&quot;SELECT * FROM Table&quot;))&#13;&#10;{&#13;&#10;    echo $db-&gt;Error();   // Shows the error&#13;&#10;}&#13;&#10;if ($db-&gt;Error()) $db-&gt;Kill();"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="697" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="777" package="Default">
         <name>ErrorNumber</name>
         <full_name>ErrorNumber</full_name>
-        <docblock line="691">
+        <docblock line="765">
           <description><![CDATA[Return the last MySQL error as a number]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="691" name="api" description=""/>
-          <tag line="691" name="return" description="Error number from last known error" type="integer">
+          <tag line="765" name="api" description=""/>
+          <tag line="765" name="return" description="Error number from last known error" type="integer">
             <type by_reference="false">integer</type>
           </tag>
+          <tag line="765" name="example" description="if ($db-&gt;ErrorNumber() &lt;&gt; 0)&#13;&#10;{&#13;&#10;    $db-&gt;Kill();   // show the error message&#13;&#10;}"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="724" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="810" package="Default">
         <name>GetBooleanValue</name>
         <full_name>GetBooleanValue</full_name>
-        <docblock line="716">
+        <docblock line="796">
           <description><![CDATA[Convert any value of any datatype into boolean (true or false)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="716" name="static" description=""/>
-          <tag line="716" name="api" description=""/>
-          <tag line="716" name="param" description="Value to analyze for TRUE or FALSE" type="mixed" variable="$value">
+          <tag line="796" name="static" description=""/>
+          <tag line="796" name="api" description=""/>
+          <tag line="796" name="param" description="Value to analyze for TRUE or FALSE" type="mixed" variable="$value">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="716" name="return" description="Returns TRUE or FALSE" type="boolean">
+          <tag line="796" name="return" description="Returns TRUE or FALSE" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="796" name="example" description="echo (MySQL::GetBooleanValue(&quot;Y&quot;) ? &quot;True&quot; : &quot;False&quot;);&#13;&#10;echo (MySQL::GetBooleanValue(&quot;no&quot;) ? &quot;True&quot; : &quot;False&quot;);&#13;&#10;echo (MySQL::GetBooleanValue(&quot;TRUE&quot;) ? &quot;True&quot; : &quot;False&quot;);&#13;&#10;echo (MySQL::GetBooleanValue(1) ? &quot;True&quot; : &quot;False&quot;);"/>
         </docblock>
-        <argument line="724">
+        <argument line="810">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="769" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="862" package="Default">
         <name>GetColumnComments</name>
         <full_name>GetColumnComments</full_name>
-        <docblock line="761">
+        <docblock line="847">
           <description><![CDATA[Return the comments for fields in a table]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="761" name="api" description=""/>
-          <tag line="761" name="param" description="Table name" type="string" variable="$table">
+          <tag line="847" name="api" description=""/>
+          <tag line="847" name="param" description="Table name" type="string" variable="$table">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="761" name="return" description="An array that contains the column comments&#13;&#10;              or FALSE on error." type="array">
+          <tag line="847" name="return" description="An array that contains the column comments&#13;&#10;              or FALSE on error." type="array">
             <type by_reference="false">array</type>
           </tag>
+          <tag line="847" name="example" description="$columns = $db-&gt;GetColumnComments(&quot;MyTable&quot;);&#13;&#10;foreach ($columns as $column =&gt; $comment)&#13;&#10;{&#13;&#10;    echo $column . &quot; = &quot; . $comment . &quot;&lt;br /&gt;\n&quot;;&#13;&#10;}"/>
         </docblock>
-        <argument line="769">
+        <argument line="862">
           <name>$table</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="815" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="911" package="Default">
         <name>GetColumnCount</name>
         <full_name>GetColumnCount</full_name>
-        <docblock line="807">
+        <docblock line="900">
           <description><![CDATA[Get the number of columns]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="807" name="api" description=""/>
-          <tag line="807" name="param" description="(Optional) If a table name is not specified, the column count is returned from the last query" type="string" variable="$table">
+          <tag line="900" name="api" description=""/>
+          <tag line="900" name="param" description="(Optional) If a table name is not specified, the column count is returned from the last query" type="string" variable="$table">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="807" name="return" description="The total count of columns or FALSE on error" type="integer">
+          <tag line="900" name="return" description="The total count of columns or FALSE on error" type="integer">
             <type by_reference="false">integer</type>
           </tag>
+          <tag line="900" name="example" description="echo &quot;Total Columns: &quot; . $db-&gt;GetColumnCount(&quot;MyTable&quot;);"/>
         </docblock>
-        <argument line="815">
+        <argument line="911">
           <name>$table</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="861" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="960" package="Default">
         <name>GetColumnDataType</name>
         <full_name>GetColumnDataType</full_name>
-        <docblock line="851">
+        <docblock line="947">
           <description><![CDATA[Return the data type for a specified column]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="851" name="api" description=""/>
-          <tag line="851" name="param" description="Column name or number (first column is 0)" type="\intege|string" variable="$column">
+          <tag line="947" name="api" description=""/>
+          <tag line="947" name="param" description="Column name or number (first column is 0)" type="\intege|string" variable="$column">
             <type by_reference="false">\intege</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="851" name="param" description="(Optional) If a table name is not specified, the last returned records are used" type="string" variable="$table">
+          <tag line="947" name="param" description="(Optional) If a table name is not specified, the last returned records are used" type="string" variable="$table">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="851" name="return" description="The MySQL data (field) type.  If the column does not&#13;&#10;               exist or no records exist, return FALSE." type="string">
+          <tag line="947" name="return" description="The MySQL data (field) type.  If the column does not&#13;&#10;               exist or no records exist, return FALSE." type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="947" name="example" description="echo &quot;Type: &quot; . $db-&gt;GetColumnDataType(&quot;FirstName&quot;, &quot;Customer&quot;);"/>
         </docblock>
-        <argument line="861">
+        <argument line="960">
           <name>$column</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="861">
+        <argument line="960">
           <name>$table</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="921" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1023" package="Default">
         <name>GetColumnID</name>
         <full_name>GetColumnID</full_name>
-        <docblock line="912">
+        <docblock line="1011">
           <description><![CDATA[Return the position of a column]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="912" name="api" description=""/>
-          <tag line="912" name="param" description="Column name" type="string" variable="$column">
+          <tag line="1011" name="api" description=""/>
+          <tag line="1011" name="param" description="Column name" type="string" variable="$column">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="912" name="param" description="(Optional) If a table name is not specified, the last returned records are used." type="string" variable="$table">
+          <tag line="1011" name="param" description="(Optional) If a table name is not specified, the last returned records are used." type="string" variable="$table">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="912" name="return" description="Column ID or FALSE on error." type="integer">
+          <tag line="1011" name="return" description="Column ID or FALSE on error." type="integer">
             <type by_reference="false">integer</type>
           </tag>
+          <tag line="1011" name="example" description="echo &quot;Column Position: &quot; . $db-&gt;GetColumnID(&quot;FirstName&quot;, &quot;Customer&quot;);"/>
         </docblock>
-        <argument line="921">
+        <argument line="1023">
           <name>$column</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="921">
+        <argument line="1023">
           <name>$table</name>
           <default><![CDATA['']]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="962" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1067" package="Default">
         <name>GetColumnLength</name>
         <full_name>GetColumnLength</full_name>
-        <docblock line="953">
+        <docblock line="1055">
           <description><![CDATA[Return the field length]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="953" name="api" description=""/>
-          <tag line="953" name="param" description="Column name" type="string" variable="$column">
+          <tag line="1055" name="api" description=""/>
+          <tag line="1055" name="param" description="Column name" type="string" variable="$column">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="953" name="param" description="(Optional) If a table name is not specified, the last returned records are used." type="string" variable="$table">
+          <tag line="1055" name="param" description="(Optional) If a table name is not specified, the last returned records are used." type="string" variable="$table">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="953" name="return" description="Field length or FALSE on error." type="integer">
+          <tag line="1055" name="return" description="Field length or FALSE on error." type="integer">
             <type by_reference="false">integer</type>
           </tag>
+          <tag line="1055" name="example" description="echo &quot;Length: &quot; . $db-&gt;GetColumnLength(&quot;FirstName&quot;, &quot;Customer&quot;);"/>
         </docblock>
-        <argument line="962">
+        <argument line="1067">
           <name>$column</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="962">
+        <argument line="1067">
           <name>$table</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1029" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1137" package="Default">
         <name>GetColumnName</name>
         <full_name>GetColumnName</full_name>
-        <docblock line="1018">
+        <docblock line="1123">
           <description><![CDATA[Return the field name for a specified column number]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1018" name="api" description=""/>
-          <tag line="1018" name="param" description="Column position (0 is the first column)" type="string" variable="$columnID">
+          <tag line="1123" name="api" description=""/>
+          <tag line="1123" name="param" description="Column position (0 is the first column)" type="string" variable="$columnID">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1018" name="param" description="(Optional) If a table name is not specified, the last returned records are used." type="string" variable="$table">
+          <tag line="1123" name="param" description="(Optional) If a table name is not specified, the last returned records are used." type="string" variable="$table">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1018" name="return" description="The field name for a specified column number. If&#13;&#10;               the given column index number is invalid (does not exist)&#13;&#10;               or no records exist, return FALSE." type="string">
+          <tag line="1123" name="return" description="The field name for a specified column number. If&#13;&#10;               the given column index number is invalid (does not exist)&#13;&#10;               or no records exist, return FALSE." type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="1123" name="example" description="echo &quot;Column Name: &quot; . $db-&gt;GetColumnName(0);"/>
         </docblock>
-        <argument line="1029">
+        <argument line="1137">
           <name>$columnID</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="1029">
+        <argument line="1137">
           <name>$table</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1082" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1197" package="Default">
         <name>GetColumnNames</name>
         <full_name>GetColumnNames</full_name>
-        <docblock line="1074">
+        <docblock line="1182">
           <description><![CDATA[Return the field names in a table or query as an array]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1074" name="api" description=""/>
-          <tag line="1074" name="param" description="(Optional) If a table name is not specified, the last returned records are used" type="string" variable="$table">
+          <tag line="1182" name="api" description=""/>
+          <tag line="1182" name="param" description="(Optional) If a table name is not specified, the last returned records are used" type="string" variable="$table">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1074" name="return" description="An array that contains the column names or FALSE on error." type="array">
+          <tag line="1182" name="return" description="An array that contains the column names or FALSE on error." type="array">
             <type by_reference="false">array</type>
           </tag>
+          <tag line="1182" name="example" description="$columns = $db-&gt;GetColumnNames(&quot;MyTable&quot;);&#13;&#10;foreach ($columns as $columnName)&#13;&#10;{&#13;&#10;    echo $columnName . &quot;&lt;br /&gt;\n&quot;;&#13;&#10;}"/>
         </docblock>
-        <argument line="1082">
+        <argument line="1197">
           <name>$table</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1139" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1258" package="Default">
         <name>GetHTML</name>
         <full_name>GetHTML</full_name>
-        <docblock line="1128">
+        <docblock line="1243">
           <description><![CDATA[Return the last query as a HTML table]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1128" name="api" description=""/>
-          <tag line="1128" name="param" description="(Optional) TRUE if you want to show the row count, FALSE if you do not want to show the count" type="boolean" variable="$showCount">
+          <tag line="1243" name="api" description=""/>
+          <tag line="1243" name="param" description="(Optional) TRUE if you want to show the row count, FALSE if you do not want to show the count" type="boolean" variable="$showCount">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="1128" name="param" description="(Optional) table tag attributes, e.g. styling" type="string" variable="$styleTable">
+          <tag line="1243" name="param" description="(Optional) table tag attributes, e.g. styling" type="string" variable="$styleTable">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1128" name="param" description="(Optional) header row tag attributes" type="string" variable="$styleHeader">
+          <tag line="1243" name="param" description="(Optional) header row tag attributes" type="string" variable="$styleHeader">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1128" name="param" description="(Optional) cell tag attributes" type="string" variable="$styleData">
+          <tag line="1243" name="param" description="(Optional) cell tag attributes" type="string" variable="$styleData">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1128" name="return" description="HTML containing a table with all records listed or FALSE on error" type="string">
+          <tag line="1243" name="return" description="HTML containing a table with all records listed or FALSE on error" type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="1243" name="example" description="$db-&gt;Query(&quot;SELECT * FROM Customer&quot;);&#13;&#10;echo $db-&gt;GetHTML();"/>
         </docblock>
-        <argument line="1139">
+        <argument line="1258">
           <name>$showCount</name>
           <default><![CDATA[true]]></default>
           <type/>
         </argument>
-        <argument line="1139">
+        <argument line="1258">
           <name>$styleTable</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="1139">
+        <argument line="1258">
           <name>$styleHeader</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="1139">
+        <argument line="1258">
           <name>$styleData</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1216" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1335" package="Default">
         <name>GetJSON</name>
         <full_name>GetJSON</full_name>
-        <docblock line="1210">
+        <docblock line="1329">
           <description><![CDATA[Return the last query as a JSON document]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1210" name="api" description=""/>
-          <tag line="1210" name="return" description="JSON containing all records listed" type="string">
+          <tag line="1329" name="api" description=""/>
+          <tag line="1329" name="return" description="JSON containing all records listed" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1254" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1381" package="Default">
         <name>GetLastInsertID</name>
         <full_name>GetLastInsertID</full_name>
-        <docblock line="1248">
+        <docblock line="1367">
           <description><![CDATA[Return the last autonumber ID field from a previous INSERT query]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1248" name="api" description=""/>
-          <tag line="1248" name="return" description="ID number from previous INSERT query" type="integer">
+          <tag line="1367" name="api" description=""/>
+          <tag line="1367" name="return" description="ID number from previous INSERT query" type="integer">
             <type by_reference="false">integer</type>
           </tag>
+          <tag line="1367" name="example" description="$sql = &quot;INSERT INTO Employee (Name) Values ('Bob')&quot;;&#13;&#10;if (!$db-&gt;Query($sql))&#13;&#10;{&#13;&#10;    $db-&gt;Kill();&#13;&#10;}&#13;&#10;echo &quot;Last ID inserted was: &quot; . $db-&gt;GetLastInsertID();"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1265" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1397" package="Default">
         <name>GetLastSQL</name>
         <full_name>GetLastSQL</full_name>
-        <docblock line="1259">
+        <docblock line="1386">
           <description><![CDATA[Return the last SQL statement executed]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1259" name="api" description=""/>
-          <tag line="1259" name="return" description="Current SQL query string" type="string">
+          <tag line="1386" name="api" description=""/>
+          <tag line="1386" name="return" description="Current SQL query string" type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="1386" name="example" description="$sql = &quot;INSERT INTO Employee (Name) Values ('Bob')&quot;;&#13;&#10;if (!$db-&gt;Query($sql)) $db-&gt;Kill();&#13;&#10;echo $db-&gt;GetLastSQL();"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1281" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1420" package="Default">
         <name>GetTables</name>
         <full_name>GetTables</full_name>
-        <docblock line="1270">
+        <docblock line="1402">
           <description><![CDATA[Get all table names from the database]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1270" name="api" description=""/>
-          <tag line="1270" name="param" description="[Optional] Comma separated list of acceptable table names: no other table will be listed in the results. Alternatively, when no filter is specified, all tables are listed. This is the default behaviour of this method." type="string" variable="$filter">
+          <tag line="1402" name="api" description=""/>
+          <tag line="1402" name="param" description="[Optional] Comma separated list of acceptable table names: no other table will be listed in the results. Alternatively, when no filter is specified, all tables are listed. This is the default behaviour of this method." type="string" variable="$filter">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1270" name="return" description="An array that contains the table names. If the database&#13;&#10;              does not contain any tables, the returned value is FALSE." type="array">
+          <tag line="1402" name="return" description="An array that contains the table names. If the database&#13;&#10;              does not contain any tables, the returned value is FALSE." type="array">
             <type by_reference="false">array</type>
           </tag>
+          <tag line="1402" name="example" description="$tables = $db-&gt;GetTables();&#13;&#10;foreach ($tables as $table)&#13;&#10;{&#13;&#10;    echo $table . &quot;&lt;br /&gt;\n&quot;;&#13;&#10;}"/>
         </docblock>
-        <argument line="1281">
+        <argument line="1420">
           <name>$filter</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1330" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1469" package="Default">
         <name>GetXML</name>
         <full_name>GetXML</full_name>
-        <docblock line="1324">
+        <docblock line="1463">
           <description><![CDATA[Return the last query as an XML Document]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1324" name="api" description=""/>
-          <tag line="1324" name="return" description="XML containing all records listed" type="string">
+          <tag line="1463" name="api" description=""/>
+          <tag line="1463" name="return" description="XML containing all records listed" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1426" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1565" package="Default">
         <name>Dump</name>
         <full_name>Dump</full_name>
-        <docblock line="1396">
+        <docblock line="1535">
           <description><![CDATA[Dump the entire database as an SQL script]]></description>
           <long-description><![CDATA[<p>Produces a SQL script representing the dump of the entire database (when no
 (optional, comma-separated set of) tables has been specified as a method
@@ -1051,1363 +1066,1387 @@ argument) or just the specified (comma separated set of) tables.
 You may choose to have either the database/table structure or the records
 dumped. Or both, for a full-fledged database/table dump which can serve as
 a db/table backup/restore script later on.</p>]]></long-description>
-          <tag line="1396" name="api" description=""/>
-          <tag line="1396" name="param" description="[Optional] Comma separated list of tables. When none are specified, the entire database is assumed (this is the default)." type="string" variable="$tables">
+          <tag line="1535" name="api" description=""/>
+          <tag line="1535" name="param" description="[Optional] Comma separated list of tables. When none are specified, the entire database is assumed (this is the default)." type="string" variable="$tables">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1396" name="param" description="[Optional] Include SQL comments in the generated script (default: TRUE)." type="boolean" variable="$with_sql_comments">
+          <tag line="1535" name="param" description="[Optional] Include SQL comments in the generated script (default: TRUE)." type="boolean" variable="$with_sql_comments">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="1396" name="param" description="[Optional] Whether to include the table structure creation (and tear-down) SQL statements in the generated script (default: TRUE)." type="boolean" variable="$with_structure">
+          <tag line="1535" name="param" description="[Optional] Whether to include the table structure creation (and tear-down) SQL statements in the generated script (default: TRUE)." type="boolean" variable="$with_structure">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="1396" name="param" description="[Optional] Whether to include the table rows (data) in the generated script (default: TRUE)." type="boolean" variable="$with_data">
+          <tag line="1535" name="param" description="[Optional] Whether to include the table rows (data) in the generated script (default: TRUE)." type="boolean" variable="$with_data">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="1396" name="param" description="[Optional] Whether to include the apropriate DROP TABLE and/or TRUNCATE TABLE statements in the generated script (default: TRUE)." type="boolean" variable="$with_drops_and_truncates">
+          <tag line="1535" name="param" description="[Optional] Whether to include the apropriate DROP TABLE and/or TRUNCATE TABLE statements in the generated script (default: TRUE)." type="boolean" variable="$with_drops_and_truncates">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="1396" name="param" description="[Optional] Whether to include the apropriate ALTER DATABASE statement in the generated script to set the default database charset and collation (default: TRUE)." type="boolean" variable="$alter_database">
+          <tag line="1535" name="param" description="[Optional] Whether to include the apropriate ALTER DATABASE statement in the generated script to set the default database charset and collation (default: TRUE)." type="boolean" variable="$alter_database">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="1396" name="return" description="the generated SQL script, boolean FALSE when a query error occurred." type="string">
+          <tag line="1535" name="return" description="the generated SQL script, boolean FALSE when a query error occurred." type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="1426">
+        <argument line="1565">
           <name>$tables</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="1426">
+        <argument line="1565">
           <name>$with_sql_comments</name>
           <default><![CDATA[true]]></default>
           <type/>
         </argument>
-        <argument line="1426">
+        <argument line="1565">
           <name>$with_structure</name>
           <default><![CDATA[true]]></default>
           <type/>
         </argument>
-        <argument line="1426">
+        <argument line="1565">
           <name>$with_data</name>
           <default><![CDATA[true]]></default>
           <type/>
         </argument>
-        <argument line="1426">
+        <argument line="1565">
           <name>$with_drops_and_truncates</name>
           <default><![CDATA[true]]></default>
           <type/>
         </argument>
-        <argument line="1426">
+        <argument line="1565">
           <name>$alter_database</name>
           <default><![CDATA[true]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1678" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1817" package="Default">
         <name>HasRecords</name>
         <full_name>HasRecords</full_name>
-        <docblock line="1670">
+        <docblock line="1809">
           <description><![CDATA[Determines if a query contains any rows]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1670" name="api" description=""/>
-          <tag line="1670" name="param" description="[Optional] If specified, the query is first executed Otherwise, the last query is used for comparison" type="string" variable="$sql">
+          <tag line="1809" name="api" description=""/>
+          <tag line="1809" name="param" description="[Optional] If specified, the query is first executed Otherwise, the last query is used for comparison" type="string" variable="$sql">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1670" name="return" description="TRUE if records exist, FALSE if not or query error" type="boolean">
+          <tag line="1809" name="return" description="TRUE if records exist, FALSE if not or query error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="1678">
+        <argument line="1817">
           <name>$sql</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1698" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1857" package="Default">
         <name>InsertRow</name>
         <full_name>InsertRow</full_name>
-        <docblock line="1687">
+        <docblock line="1826">
           <description><![CDATA[Inserts a row into a table in the connected database]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1687" name="api" description=""/>
-          <tag line="1687" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="1826" name="api" description=""/>
+          <tag line="1826" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1687" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array" variable="$valuesArray">
+          <tag line="1826" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array" variable="$valuesArray">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="1687" name="return" description="Returns last insert ID on success or FALSE on failure" type="integer">
+          <tag line="1826" name="return" description="Returns last insert ID on success or FALSE on failure" type="integer">
             <type by_reference="false">integer</type>
           </tag>
+          <tag line="1826" name="example" description="// $arrayVariable[&quot;column name&quot;] = formatted SQL value&#13;&#10;$values[&quot;Name&quot;] = MySQL::SQLValue(&quot;Violet&quot;);&#13;&#10;$values[&quot;Age&quot;]  = MySQL::SQLValue(777, MySQL::SQLVALUE_NUMBER);&#13;&#10;// Execute the insert&#13;&#10;$result = $db-&gt;InsertRow(&quot;MyTable&quot;, $values);&#13;&#10;// If we have an error&#13;&#10;if (!$result)&#13;&#10;{&#13;&#10;    // Show the error and kill the script&#13;&#10;    $db-&gt;Kill();&#13;&#10;}&#13;&#10;else&#13;&#10;{&#13;&#10;    // No error, show the new record's ID&#13;&#10;    echo &quot;The new record's ID is: &quot; . $result;&#13;&#10;}"/>
         </docblock>
-        <argument line="1698">
+        <argument line="1857">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="1698">
+        <argument line="1857">
           <name>$valuesArray</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1727" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1886" package="Default">
         <name>IsConnected</name>
         <full_name>IsConnected</full_name>
-        <docblock line="1721">
+        <docblock line="1880">
           <description><![CDATA[Determines if a valid connection to the database exists]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1721" name="api" description=""/>
-          <tag line="1721" name="return" description="TRUE idf connectect or FALSE if not connected" type="boolean">
+          <tag line="1880" name="api" description=""/>
+          <tag line="1880" name="return" description="TRUE idf connectect or FALSE if not connected" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="1740" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="1905" package="Default">
         <name>IsDateStr</name>
         <full_name>IsDateStr</full_name>
-        <docblock line="1732">
+        <docblock line="1891">
           <description><![CDATA[Determines if a value of any data type is a date PHP can convert]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1732" name="static" description=""/>
-          <tag line="1732" name="api" description=""/>
-          <tag line="1732" name="param" description="" type="string" variable="$value">
+          <tag line="1891" name="static" description=""/>
+          <tag line="1891" name="api" description=""/>
+          <tag line="1891" name="param" description="" type="string" variable="$value">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1732" name="return" description="Returns TRUE if value is date or FALSE if not date" type="boolean">
+          <tag line="1891" name="return" description="Returns TRUE if value is date or FALSE if not date" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="1891" name="example" description="if (MySQL::IsDate(&quot;January 1, 2000&quot;))&#13;&#10;{&#13;&#10;    echo &quot;valid date&quot;;&#13;&#10;}"/>
         </docblock>
-        <argument line="1740">
+        <argument line="1905">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1762" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1931" package="Default">
         <name>Kill</name>
         <full_name>Kill</full_name>
-        <docblock line="1753">
+        <docblock line="1918">
           <description><![CDATA[Stop executing (die/exit) and show last MySQL error message]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1753" name="api" description=""/>
-          <tag line="1753" name="param" description="The message to display on exit" type="string" variable="$message">
+          <tag line="1918" name="api" description=""/>
+          <tag line="1918" name="param" description="The message to display on exit" type="string" variable="$message">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1753" name="param" description="(Optional) Whether the message should be shown as-is (FALSE) or followed by the last error message/description (TRUE) (Default: TRUE)" type="boolean" variable="$prepend_message">
+          <tag line="1918" name="param" description="(Optional) Whether the message should be shown as-is (FALSE) or followed by the last error message/description (TRUE) (Default: TRUE)" type="boolean" variable="$prepend_message">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="1918" name="example" description="// Stop executing the script and show the last error&#13;&#10;$db-&gt;Kill();"/>
         </docblock>
-        <argument line="1762">
+        <argument line="1931">
           <name>$message</name>
           <default><![CDATA['']]></default>
           <type/>
         </argument>
-        <argument line="1762">
+        <argument line="1931">
           <name>$prepend_message</name>
           <default><![CDATA[true]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1782" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1951" package="Default">
         <name>MyDyingMessage</name>
         <full_name>MyDyingMessage</full_name>
-        <docblock line="1767">
+        <docblock line="1936">
           <description><![CDATA[Get last error message as HTML string]]></description>
           <long-description><![CDATA[<p>Return the error message ready for throwing back out to the client side
 while dying, a.k.a. Kill() without the death nor the echo'ing.</p>]]></long-description>
-          <tag line="1767" name="api" description=""/>
-          <tag line="1767" name="param" description="The message to display on exit" type="string" variable="$message">
+          <tag line="1936" name="api" description=""/>
+          <tag line="1936" name="param" description="The message to display on exit" type="string" variable="$message">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1767" name="param" description="(Optional) Whether the message should be shown as-is (FALSE) or followed by the last error message/description (TRUE) (Default: TRUE)" type="boolean" variable="$prepend_message">
+          <tag line="1936" name="param" description="(Optional) Whether the message should be shown as-is (FALSE) or followed by the last error message/description (TRUE) (Default: TRUE)" type="boolean" variable="$prepend_message">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="1767" name="return" description="Return the error message as a HTML string; when the&#13;&#10;        $this-&gt;InDevelopmentEnvironment configuration member has been&#13;&#10;        set, the offending query is included for enhanced diagnostics." type="string">
+          <tag line="1936" name="return" description="Return the error message as a HTML string; when the&#13;&#10;        $this-&gt;InDevelopmentEnvironment configuration member has been&#13;&#10;        set, the offending query is included for enhanced diagnostics." type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="1782">
+        <argument line="1951">
           <name>$message</name>
           <default><![CDATA['']]></default>
           <type/>
         </argument>
-        <argument line="1782">
+        <argument line="1951">
           <name>$prepend_message</name>
           <default><![CDATA[true]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1809" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1986" package="Default">
         <name>MoveFirst</name>
         <full_name>MoveFirst</full_name>
-        <docblock line="1803">
+        <docblock line="1972">
           <description><![CDATA[Seeks to the beginning of the records]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1803" name="api" description=""/>
-          <tag line="1803" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
+          <tag line="1972" name="api" description=""/>
+          <tag line="1972" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="1972" name="example" description="$db-&gt;MoveFirst();&#13;&#10;while (!$db-&gt;EndOfSeek())&#13;&#10;{&#13;&#10;    $row = $db-&gt;Row();&#13;&#10;    echo $row-&gt;ColumnName1 . &quot; &quot; . $row-&gt;ColumnName2 . &quot;\n&quot;;&#13;&#10;}"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1829" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2009" package="Default">
         <name>MoveLast</name>
         <full_name>MoveLast</full_name>
-        <docblock line="1823">
+        <docblock line="2000">
           <description><![CDATA[Seeks to the end of the records]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1823" name="api" description=""/>
-          <tag line="1823" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
+          <tag line="2000" name="api" description=""/>
+          <tag line="2000" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="2000" name="example" description="$db-&gt;MoveLast();"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1856" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2042" package="Default">
         <name>Open</name>
         <full_name>Open</full_name>
-        <docblock line="1843">
+        <docblock line="2023">
           <description><![CDATA[Connect to specified MySQL server]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1843" name="api" description=""/>
-          <tag line="1843" name="param" description="(Optional) Database name" type="string" variable="$database">
+          <tag line="2023" name="api" description=""/>
+          <tag line="2023" name="param" description="(Optional) Database name" type="string" variable="$database">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1843" name="param" description="(Optional) Host address" type="string" variable="$server">
+          <tag line="2023" name="param" description="(Optional) Host address" type="string" variable="$server">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1843" name="param" description="(Optional) User name" type="string" variable="$username">
+          <tag line="2023" name="param" description="(Optional) User name" type="string" variable="$username">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1843" name="param" description="(Optional) Password" type="string" variable="$password">
+          <tag line="2023" name="param" description="(Optional) Password" type="string" variable="$password">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1843" name="param" description="(Optional) Character set" type="string" variable="$charset">
+          <tag line="2023" name="param" description="(Optional) Character set" type="string" variable="$charset">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1843" name="param" description="(Optional) Character set collation" type="string" variable="$collation">
+          <tag line="2023" name="param" description="(Optional) Character set collation" type="string" variable="$collation">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1843" name="param" description="(Optional) Persistant connection" type="boolean" variable="$pcon">
+          <tag line="2023" name="param" description="(Optional) Persistant connection" type="boolean" variable="$pcon">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="1843" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
+          <tag line="2023" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="2023" name="example" description="if (!$db-&gt;Open(&quot;MyDatabase&quot;, &quot;localhost&quot;, &quot;user&quot;, &quot;password&quot;))&#13;&#10;{&#13;&#10;    $db-&gt;Kill();&#13;&#10;}"/>
         </docblock>
-        <argument line="1856">
+        <argument line="2042">
           <name>$database</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="1856">
+        <argument line="2042">
           <name>$server</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="1856">
+        <argument line="2042">
           <name>$username</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="1857">
+        <argument line="2043">
           <name>$password</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="1857">
+        <argument line="2043">
           <name>$charset</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="1857">
+        <argument line="2043">
           <name>$collation</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="1857">
+        <argument line="2043">
           <name>$pcon</name>
           <default><![CDATA[false]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1919" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2108" package="Default">
         <name>Query</name>
         <full_name>Query</full_name>
-        <docblock line="1909">
+        <docblock line="2095">
           <description><![CDATA[Executes the given SQL query and returns the records]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1909" name="api" description=""/>
-          <tag line="1909" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
+          <tag line="2095" name="api" description=""/>
+          <tag line="2095" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1909" name="return" description="PHP 'mysql result' resource object containing the records&#13;&#10;               on SELECT, SHOW, DESCRIBE or EXPLAIN queries and returns;&#13;&#10;               TRUE or FALSE for all others i.e. UPDATE, DELETE, DROP&#13;&#10;               AND FALSE on all errors (setting the local Error message)" type="object">
+          <tag line="2095" name="return" description="PHP 'mysql result' resource object containing the records&#13;&#10;               on SELECT, SHOW, DESCRIBE or EXPLAIN queries and returns;&#13;&#10;               TRUE or FALSE for all others i.e. UPDATE, DELETE, DROP&#13;&#10;               AND FALSE on all errors (setting the local Error message)." type="object">
             <type by_reference="false">object</type>
           </tag>
+          <tag line="2095" name="example" description="if (!$db-&gt;Query(&quot;SELECT * FROM Table&quot;)) echo $db-&gt;Kill();"/>
         </docblock>
-        <argument line="1919">
+        <argument line="2108">
           <name>$sql</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="1980" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2169" package="Default">
         <name>QueryArray</name>
         <full_name>QueryArray</full_name>
-        <docblock line="1970">
+        <docblock line="2159">
           <description><![CDATA[Executes the given SQL query and returns a multi-dimensional array]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="1970" name="api" description=""/>
-          <tag line="1970" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
+          <tag line="2159" name="api" description=""/>
+          <tag line="2159" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1970" name="param" description="(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH" type="integer" variable="$resultType">
+          <tag line="2159" name="param" description="(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH" type="integer" variable="$resultType">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="1970" name="return" description="A multi-dimensional array containing all the data&#13;&#10;              returned from the query or FALSE on all errors" type="array">
+          <tag line="2159" name="return" description="A multi-dimensional array containing all the data&#13;&#10;              returned from the query or FALSE on all errors" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="1980">
+        <argument line="2169">
           <name>$sql</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="1980">
+        <argument line="2169">
           <name>$resultType</name>
           <default><![CDATA[MYSQL_ASSOC]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2007" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2196" package="Default">
         <name>QueryObjects</name>
         <full_name>QueryObjects</full_name>
-        <docblock line="1996">
+        <docblock line="2185">
           <description><![CDATA[Executes the given SQL query]]></description>
           <long-description><![CDATA[<p>Executes the given SQL query and returns an array of objects, where
 each record is an object with the columns serving as object member variables.</p>]]></long-description>
-          <tag line="1996" name="api" description=""/>
-          <tag line="1996" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
+          <tag line="2185" name="api" description=""/>
+          <tag line="2185" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="1996" name="return" description="An array of record objects containing all the data&#13;&#10;              returned from the query or FALSE on all errors" type="array">
+          <tag line="2185" name="return" description="An array of record objects containing all the data&#13;&#10;              returned from the query or FALSE on all errors" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="2007">
+        <argument line="2196">
           <name>$sql</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2048" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2237" package="Default">
         <name>SelectArray</name>
         <full_name>SelectArray</full_name>
-        <docblock line="2024">
+        <docblock line="2213">
           <description><![CDATA[Returns a multidimensional array of rows from a table based on a WHERE filter]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2024" name="api" description=""/>
-          <tag line="2024" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="2213" name="api" description=""/>
+          <tag line="2213" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2024" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
+          <tag line="2213" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2024" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
+          <tag line="2213" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2024" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
+          <tag line="2213" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2024" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
+          <tag line="2213" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
             <type by_reference="false">integer</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2024" name="param" description="(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH" type="integer" variable="$resultType">
+          <tag line="2213" name="param" description="(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH" type="integer" variable="$resultType">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="2024" name="return" description="A multi-dimensional array containing all the data&#13;&#10;              returned from the query or FALSE on all errors" type="array">
+          <tag line="2213" name="return" description="A multi-dimensional array containing all the data&#13;&#10;              returned from the query or FALSE on all errors" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="2024" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
+          <tag line="2213" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
         </docblock>
-        <argument line="2048">
+        <argument line="2237">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="2048">
+        <argument line="2237">
           <name>$whereArray</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2048">
+        <argument line="2237">
           <name>$columns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2049">
+        <argument line="2238">
           <name>$sortColumns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2049">
+        <argument line="2238">
           <name>$limit</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2049">
+        <argument line="2238">
           <name>$resultType</name>
           <default><![CDATA[MYSQL_ASSOC]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2087" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2276" package="Default">
         <name>SelectObjects</name>
         <full_name>SelectObjects</full_name>
-        <docblock line="2065">
+        <docblock line="2254">
           <description><![CDATA[Returns an array of row (= record) objects from a table based on a WHERE filter]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2065" name="api" description=""/>
-          <tag line="2065" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="2254" name="api" description=""/>
+          <tag line="2254" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2065" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
+          <tag line="2254" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2065" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
+          <tag line="2254" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2065" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
+          <tag line="2254" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2065" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
+          <tag line="2254" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
             <type by_reference="false">integer</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2065" name="return" description="An array of record objects containing all the data&#13;&#10;              returned from the query or FALSE on all errors" type="array">
+          <tag line="2254" name="return" description="An array of record objects containing all the data&#13;&#10;              returned from the query or FALSE on all errors" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="2065" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
+          <tag line="2254" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
         </docblock>
-        <argument line="2087">
+        <argument line="2276">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="2087">
+        <argument line="2276">
           <name>$whereArray</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2087">
+        <argument line="2276">
           <name>$columns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2088">
+        <argument line="2277">
           <name>$sortColumns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2088">
+        <argument line="2277">
           <name>$limit</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2112" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2301" package="Default">
         <name>QuerySingleRow</name>
         <full_name>QuerySingleRow</full_name>
-        <docblock line="2104">
+        <docblock line="2293">
           <description><![CDATA[Executes the given SQL query and returns only one (the first) row]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2104" name="api" description=""/>
-          <tag line="2104" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
+          <tag line="2293" name="api" description=""/>
+          <tag line="2293" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2104" name="return" description="PHP resource object containing the first row or&#13;&#10;               FALSE if no row is returned from the query" type="object">
+          <tag line="2293" name="return" description="PHP resource object containing the first row or&#13;&#10;               FALSE if no row is returned from the query" type="object">
             <type by_reference="false">object</type>
           </tag>
         </docblock>
-        <argument line="2112">
+        <argument line="2301">
           <name>$sql</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2150" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2339" package="Default">
         <name>SelectSingleRow</name>
         <full_name>SelectSingleRow</full_name>
-        <docblock line="2128">
+        <docblock line="2317">
           <description><![CDATA[Returns a single (first) row from a table based on a WHERE filter]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2128" name="api" description=""/>
-          <tag line="2128" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="2317" name="api" description=""/>
+          <tag line="2317" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2128" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
+          <tag line="2317" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2128" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
+          <tag line="2317" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2128" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
+          <tag line="2317" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2128" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
+          <tag line="2317" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
             <type by_reference="false">integer</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2128" name="return" description="PHP resource object containing the first row or&#13;&#10;               FALSE if no row is returned from the query" type="object">
+          <tag line="2317" name="return" description="PHP resource object containing the first row or&#13;&#10;               FALSE if no row is returned from the query" type="object">
             <type by_reference="false">object</type>
           </tag>
-          <tag line="2128" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
+          <tag line="2317" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
         </docblock>
-        <argument line="2150">
+        <argument line="2339">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="2150">
+        <argument line="2339">
           <name>$whereArray</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2150">
+        <argument line="2339">
           <name>$columns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2151">
+        <argument line="2340">
           <name>$sortColumns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2151">
+        <argument line="2340">
           <name>$limit</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2177" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2366" package="Default">
         <name>QuerySingleRowArray</name>
         <full_name>QuerySingleRowArray</full_name>
-        <docblock line="2167">
+        <docblock line="2356">
           <description><![CDATA[Executes the given SQL query and returns the first row as an array]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2167" name="api" description=""/>
-          <tag line="2167" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
+          <tag line="2356" name="api" description=""/>
+          <tag line="2356" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2167" name="param" description="(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH" type="integer" variable="$resultType">
+          <tag line="2356" name="param" description="(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH" type="integer" variable="$resultType">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="2167" name="return" description="An array containing the first row or FALSE if no row&#13;&#10;              is returned from the query" type="array">
+          <tag line="2356" name="return" description="An array containing the first row or FALSE if no row&#13;&#10;              is returned from the query" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="2177">
+        <argument line="2366">
           <name>$sql</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="2177">
+        <argument line="2366">
           <name>$resultType</name>
           <default><![CDATA[MYSQL_ASSOC]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2217" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2406" package="Default">
         <name>SelectSingleRowArray</name>
         <full_name>SelectSingleRowArray</full_name>
-        <docblock line="2193">
+        <docblock line="2382">
           <description><![CDATA[Returns a single (first) row as an array from a table based on a WHERE filter]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2193" name="api" description=""/>
-          <tag line="2193" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="2382" name="api" description=""/>
+          <tag line="2382" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2193" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
+          <tag line="2382" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2193" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
+          <tag line="2382" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2193" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
+          <tag line="2382" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2193" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
+          <tag line="2382" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
             <type by_reference="false">integer</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2193" name="param" description="(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH" type="integer" variable="$resultType">
+          <tag line="2382" name="param" description="(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH" type="integer" variable="$resultType">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="2193" name="return" description="An array containing the first row or FALSE if no row&#13;&#10;              is returned from the query" type="array">
+          <tag line="2382" name="return" description="An array containing the first row or FALSE if no row&#13;&#10;              is returned from the query" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="2193" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
+          <tag line="2382" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
         </docblock>
-        <argument line="2217">
+        <argument line="2406">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="2217">
+        <argument line="2406">
           <name>$whereArray</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2217">
+        <argument line="2406">
           <name>$columns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2218">
+        <argument line="2407">
           <name>$sortColumns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2218">
+        <argument line="2407">
           <name>$limit</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2218">
+        <argument line="2407">
           <name>$resultType</name>
           <default><![CDATA[MYSQL_ASSOC]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2242" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2431" package="Default">
         <name>QuerySingleValue</name>
         <full_name>QuerySingleValue</full_name>
-        <docblock line="2234">
+        <docblock line="2423">
           <description><![CDATA[Executes a query and returns a single value.]]></description>
           <long-description><![CDATA[<p>If more than one row
 is returned, only the first value in the first column is returned.</p>]]></long-description>
-          <tag line="2234" name="api" description=""/>
-          <tag line="2234" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
+          <tag line="2423" name="api" description=""/>
+          <tag line="2423" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2234" name="return" description="The value returned or FALSE if no value" type="mixed">
+          <tag line="2423" name="return" description="The value returned or FALSE if no value" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="2242">
+        <argument line="2431">
           <name>$sql</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2280" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2469" package="Default">
         <name>SelectSingleValue</name>
         <full_name>SelectSingleValue</full_name>
-        <docblock line="2258">
+        <docblock line="2447">
           <description><![CDATA[Returns a single value from from the first row SELECTed from a table based on a
 WHERE filter.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2258" name="api" description=""/>
-          <tag line="2258" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="2447" name="api" description=""/>
+          <tag line="2447" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2258" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
+          <tag line="2447" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2258" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
+          <tag line="2447" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2258" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
+          <tag line="2447" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2258" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
+          <tag line="2447" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
             <type by_reference="false">integer</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2258" name="return" description="The value returned or FALSE if no value" type="mixed">
+          <tag line="2447" name="return" description="The value returned or FALSE if no value" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="2258" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
+          <tag line="2447" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
         </docblock>
-        <argument line="2280">
+        <argument line="2469">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="2280">
+        <argument line="2469">
           <name>$whereArray</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2280">
+        <argument line="2469">
           <name>$columns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2281">
+        <argument line="2470">
           <name>$sortColumns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2281">
+        <argument line="2470">
           <name>$limit</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2308" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2501" package="Default">
         <name>QueryTimed</name>
         <full_name>QueryTimed</full_name>
-        <docblock line="2298">
+        <docblock line="2487">
           <description><![CDATA[Executes the given SQL query, measures it, and saves the total duration
 in microseconds]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2298" name="api" description=""/>
-          <tag line="2298" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
+          <tag line="2487" name="api" description=""/>
+          <tag line="2487" name="param" description="The query string should not end with a semicolon" type="string" variable="$sql">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2298" name="return" description="PHP 'mysql result' resource object containing the records&#13;&#10;               on SELECT, SHOW, DESCRIBE or EXPLAIN queries and returns&#13;&#10;               TRUE or FALSE for all others i.e. UPDATE, DELETE, DROP" type="object">
+          <tag line="2487" name="return" description="PHP 'mysql result' resource object containing the records&#13;&#10;               on SELECT, SHOW, DESCRIBE or EXPLAIN queries and returns&#13;&#10;               TRUE or FALSE for all others i.e. UPDATE, DELETE, DROP." type="object">
             <type by_reference="false">object</type>
           </tag>
+          <tag line="2487" name="example" description="$db-&gt;QueryTimed(&quot;SELECT * FROM MyTable&quot;);&#13;&#10;echo &quot;Query took &quot; . $db-&gt;TimerDuration() . &quot; microseconds&quot;;"/>
         </docblock>
-        <argument line="2308">
+        <argument line="2501">
           <name>$sql</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2323" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2519" package="Default">
         <name>Records</name>
         <full_name>Records</full_name>
-        <docblock line="2316">
+        <docblock line="2509">
           <description><![CDATA[Returns the records from the last query]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2316" name="api" description=""/>
-          <tag line="2316" name="return" description="PHP 'mysql result' resource object containing the records&#13;&#10;               for the last query executed" type="object">
+          <tag line="2509" name="api" description=""/>
+          <tag line="2509" name="return" description="PHP 'mysql result' resource object containing the records&#13;&#10;               for the last query executed" type="object">
             <type by_reference="false">object</type>
           </tag>
+          <tag line="2509" name="example" description="$records = $db-&gt;Records();"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2340" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2539" package="Default">
         <name>RecordsArray</name>
         <full_name>RecordsArray</full_name>
-        <docblock line="2328">
+        <docblock line="2524">
           <description><![CDATA[Returns all records from the last query as array of arrays]]></description>
           <long-description><![CDATA[<p>Returns all records from the last query and returns the contents as an array of records
 where each record is presented as an array of columns (fields).</p>]]></long-description>
-          <tag line="2328" name="api" description=""/>
-          <tag line="2328" name="param" description="(Optional) The type of array representing one record Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH" type="integer" variable="$resultType">
+          <tag line="2524" name="api" description=""/>
+          <tag line="2524" name="param" description="(Optional) The type of array representing one record Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH. (Default: MYSQL_ASSOC)" type="integer" variable="$resultType">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="2328" name="return" description="Records in array form or FALSE on error. May return an&#13;&#10;        EMPTY array when no records are available." type="array">
+          <tag line="2524" name="return" description="Records in array form or FALSE on error. May return an&#13;&#10;        EMPTY array when no records are available." type="array">
             <type by_reference="false">array</type>
           </tag>
+          <tag line="2524" name="example" description="$myArray = $db-&gt;RecordsArray(MYSQL_ASSOC);"/>
         </docblock>
-        <argument line="2340">
+        <argument line="2539">
           <name>$resultType</name>
           <default><![CDATA[MYSQL_ASSOC]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2378" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2577" package="Default">
         <name>RecordsObjects</name>
         <full_name>RecordsObjects</full_name>
-        <docblock line="2368">
+        <docblock line="2567">
           <description><![CDATA[Returns all records from the last query as array of objects]]></description>
           <long-description><![CDATA[<p>Returns all records from the last query and returns the contents as an array of record objects
 (where each record is an object with each column as an attribute (data member variable)).</p>]]></long-description>
-          <tag line="2368" name="api" description=""/>
-          <tag line="2368" name="return" description="Records in object form or FALSE on error. May return an&#13;&#10;        EMPTY array when no records are available." type="array">
+          <tag line="2567" name="api" description=""/>
+          <tag line="2567" name="return" description="Records in object form or FALSE on error. May return an&#13;&#10;        EMPTY array when no records are available." type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2417" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2619" package="Default">
         <name>Release</name>
         <full_name>Release</full_name>
-        <docblock line="2406">
-          <description><![CDATA[Frees memory used by the query results and returns the function result.]]></description>
+        <docblock line="2605">
+          <description><![CDATA[Frees memory used by the query results and returns the query execution result.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2406" name="warning" description="It is an (non-fatal) error to Release() a query result&#13;&#10;         more than once."/>
-          <tag line="2406" name="api" description=""/>
-          <tag line="2406" name="param" description="(Optional) the result originally returned by any previous SQL query." type="resource" variable="$result">
+          <tag line="2605" name="warning" description="It is an (non-fatal) error to Release() a query result&#13;&#10;         more than once."/>
+          <tag line="2605" name="api" description=""/>
+          <tag line="2605" name="param" description="(Optional) the result originally returned by any previous SQL query." type="resource" variable="$result">
             <type by_reference="false">resource</type>
           </tag>
-          <tag line="2406" name="return" description="Returns TRUE on success or FALSE on failure" type="boolean">
+          <tag line="2605" name="return" description="Returns TRUE on success or FALSE on failure" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="2605" name="example" description="$db-&gt;Release();"/>
         </docblock>
-        <argument line="2417">
+        <argument line="2619">
           <name>$result</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="2441" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="2643" package="Default">
         <name>ResetError</name>
         <full_name>ResetError</full_name>
-        <docblock line="2436">
+        <docblock line="2638">
           <description><![CDATA[Clears the internal variables from any error information]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2436" name="api" description=""/>
+          <tag line="2638" name="api" description=""/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2455" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2664" package="Default">
         <name>Row</name>
         <full_name>Row</full_name>
-        <docblock line="2447">
-          <description><![CDATA[Reads the current row and returns contents as a
-PHP object or returns false on error]]></description>
+        <docblock line="2649">
+          <description><![CDATA[Reads the current row and returns contents as a PHP object]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2447" name="api" description=""/>
-          <tag line="2447" name="param" description="(Optional) Use to specify a row" type="integer" variable="$optional_row_number">
+          <tag line="2649" name="api" description=""/>
+          <tag line="2649" name="param" description="(Optional) Use to specify a row" type="integer" variable="$optional_row_number">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="2447" name="return" description="PHP object or FALSE on error" type="object">
+          <tag line="2649" name="return" description="PHP object or FALSE on error" type="object">
             <type by_reference="false">object</type>
           </tag>
+          <tag line="2649" name="example" description="$db-&gt;MoveFirst();&#13;&#10;while (!$db-&gt;EndOfSeek())&#13;&#10;{&#13;&#10;    $row = $db-&gt;Row();&#13;&#10;    echo $row-&gt;ColumnName1 . &quot; &quot; . $row-&gt;ColumnName2 . &quot;\n&quot;;&#13;&#10;}"/>
         </docblock>
-        <argument line="2455">
+        <argument line="2664">
           <name>$optional_row_number</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2506" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2720" package="Default">
         <name>RowArray</name>
         <full_name>RowArray</full_name>
-        <docblock line="2496">
-          <description><![CDATA[Reads the current row and returns contents as an
-array or returns false on error]]></description>
+        <docblock line="2705">
+          <description><![CDATA[Reads the current row and returns contents as an array]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2496" name="api" description=""/>
-          <tag line="2496" name="param" description="(Optional) Use to specify a row" type="integer" variable="$optional_row_number">
+          <tag line="2705" name="api" description=""/>
+          <tag line="2705" name="param" description="(Optional) Use to specify a row" type="integer" variable="$optional_row_number">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="2496" name="param" description="(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH" type="integer" variable="$resultType">
+          <tag line="2705" name="param" description="(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH" type="integer" variable="$resultType">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="2496" name="return" description="Array that corresponds to fetched row or FALSE if no rows" type="array">
+          <tag line="2705" name="return" description="Array that corresponds to the fetched row or FALSE on error or when no rows are available." type="array">
             <type by_reference="false">array</type>
           </tag>
+          <tag line="2705" name="example" description="for ($index = 0; $index &lt; $db-&gt;RowCount(); $index++)&#13;&#10;{&#13;&#10;    $val = $db-&gt;RowArray($index);&#13;&#10;}"/>
         </docblock>
-        <argument line="2506">
+        <argument line="2720">
           <name>$optional_row_number</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2506">
+        <argument line="2720">
           <name>$resultType</name>
           <default><![CDATA[MYSQL_ASSOC]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2553" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2771" package="Default">
         <name>RowCount</name>
         <full_name>RowCount</full_name>
-        <docblock line="2547">
+        <docblock line="2761">
           <description><![CDATA[Returns the last query row count]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2547" name="api" description=""/>
-          <tag line="2547" name="return" description="Row count or FALSE on error" type="integer">
+          <tag line="2761" name="api" description=""/>
+          <tag line="2761" name="return" description="Row count or FALSE on error" type="integer">
             <type by_reference="false">integer</type>
           </tag>
+          <tag line="2761" name="example" description="$db-&gt;Query(&quot;SELECT * FROM Customer&quot;);&#13;&#10;echo &quot;Row Count: &quot; . $db-&gt;RowCount();"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2586" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2807" package="Default">
         <name>Seek</name>
         <full_name>Seek</full_name>
-        <docblock line="2578">
+        <docblock line="2796">
           <description><![CDATA[Sets the internal database pointer to the
 specified row number and returns the result]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2578" name="api" description=""/>
-          <tag line="2578" name="param" description="Row number" type="integer" variable="$row_number">
+          <tag line="2796" name="api" description=""/>
+          <tag line="2796" name="param" description="Row number" type="integer" variable="$row_number">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="2578" name="return" description="Fetched row as PHP object on success or FALSE on error" type="object">
+          <tag line="2796" name="return" description="Fetched row as PHP object on success or FALSE on error" type="object">
             <type by_reference="false">object</type>
           </tag>
+          <tag line="2796" name="example" description="$db-&gt;Seek(0);   // Move to the first record"/>
         </docblock>
-        <argument line="2586">
+        <argument line="2807">
           <name>$row_number</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2629" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2853" package="Default">
         <name>SeekPosition</name>
         <full_name>SeekPosition</full_name>
-        <docblock line="2623">
+        <docblock line="2844">
           <description><![CDATA[Returns the current cursor row location]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2623" name="api" description=""/>
-          <tag line="2623" name="return" description="Current row number" type="integer">
+          <tag line="2844" name="api" description=""/>
+          <tag line="2844" name="return" description="Current row number" type="integer">
             <type by_reference="false">integer</type>
           </tag>
+          <tag line="2844" name="example" description="echo &quot;Current Row Cursor : &quot; . $db-&gt;GetSeekPosition();"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2642" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2869" package="Default">
         <name>SelectDatabase</name>
         <full_name>SelectDatabase</full_name>
-        <docblock line="2634">
+        <docblock line="2858">
           <description><![CDATA[Selects a different database and character set]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2634" name="api" description=""/>
-          <tag line="2634" name="param" description="Database name" type="string" variable="$database">
+          <tag line="2858" name="api" description=""/>
+          <tag line="2858" name="param" description="Database name" type="string" variable="$database">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2634" name="param" description="(Optional) Character set (i.e. utf8)" type="string" variable="$charset">
+          <tag line="2858" name="param" description="(Optional) Character set, e.g. 'utf8'. (Default: NULL)" type="string" variable="$charset">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2634" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
+          <tag line="2858" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="2858" name="example" description="$db-&gt;SelectDatabase(&quot;DatabaseName&quot;);"/>
         </docblock>
-        <argument line="2642">
+        <argument line="2869">
           <name>$database</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="2642">
+        <argument line="2869">
           <name>$charset</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2682" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2909" package="Default">
         <name>CreateDatabase</name>
         <full_name>CreateDatabase</full_name>
-        <docblock line="2670">
+        <docblock line="2897">
           <description><![CDATA[Creates a new database and sets up the root access for the database.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2670" name="api" description=""/>
-          <tag line="2670" name="param" description="Database name" type="string" variable="$database">
+          <tag line="2897" name="api" description=""/>
+          <tag line="2897" name="param" description="Database name" type="string" variable="$database">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2670" name="param" description="(Optional) Character set (i.e. utf8)" type="string" variable="$charset">
+          <tag line="2897" name="param" description="(Optional) Character set (i.e. utf8)" type="string" variable="$charset">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2670" name="param" description="(Optional) Character set collation (i.e. utf8_unicode_ci)" type="string" variable="$collation">
+          <tag line="2897" name="param" description="(Optional) Character set collation (i.e. utf8_unicode_ci)" type="string" variable="$collation">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2670" name="param" description="(Optional) Database admin user name" type="string" variable="$admin_user">
+          <tag line="2897" name="param" description="(Optional) Database admin user name" type="string" variable="$admin_user">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2670" name="param" description="(Optional) Database admin password" type="string" variable="$admin_pass">
+          <tag line="2897" name="param" description="(Optional) Database admin password" type="string" variable="$admin_pass">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2670" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
+          <tag line="2897" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="2682">
+        <argument line="2909">
           <name>$database</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="2682">
+        <argument line="2909">
           <name>$charset</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2682">
+        <argument line="2909">
           <name>$collation</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2682">
+        <argument line="2909">
           <name>$admin_user</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2682">
+        <argument line="2909">
           <name>$admin_pass</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2746" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2988" package="Default">
         <name>SelectRows</name>
         <full_name>SelectRows</full_name>
-        <docblock line="2725">
+        <docblock line="2952">
           <description><![CDATA[Gets rows in a table based on a WHERE filter]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2725" name="api" description=""/>
-          <tag line="2725" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="2952" name="api" description=""/>
+          <tag line="2952" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2725" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
+          <tag line="2952" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2725" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
+          <tag line="2952" name="param" description="(Optional) The column or list of columns to select" type="array|string" variable="$columns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2725" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
+          <tag line="2952" name="param" description="(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column." type="array|string" variable="$sortColumns">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2725" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
+          <tag line="2952" name="param" description="(Optional) The limit of rows to return" type="integer|string" variable="$limit">
             <type by_reference="false">integer</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2725" name="return" description="Returns records on success or FALSE on error" type="boolean">
+          <tag line="2952" name="return" description="Returns records on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="2725" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
+          <tag line="2952" name="note" description="Any of the parameters $whereArray, $columns, $sortColumns or $limit&#13;&#10;      may alternatively be a string, in which case these are used verbatim&#13;&#10;      in the query. This is useful when advanced queries are constructed."/>
+          <tag line="2952" name="example" description="// $arrayVariable[&quot;column name&quot;] = formatted SQL value&#13;&#10;$filter[&quot;Color&quot;] = MySQL::SQLValue(&quot;Violet&quot;);&#13;&#10;$filter[&quot;Age&quot;]   = MySQL::SQLValue(777, MySQL::SQLVALUE_NUMBER);&#13;&#10;// Execute the select&#13;&#10;$result = $db-&gt;SelectRows(&quot;MyTable&quot;, $filter);&#13;&#10;// If we have an error&#13;&#10;if (!$result)&#13;&#10;{&#13;&#10;    // Show the error and kill the script&#13;&#10;    $db-&gt;Kill();&#13;&#10;}"/>
         </docblock>
-        <argument line="2746">
+        <argument line="2988">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="2746">
+        <argument line="2988">
           <name>$whereArray</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2746">
+        <argument line="2988">
           <name>$columns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2747">
+        <argument line="2989">
           <name>$sortColumns</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="2747">
+        <argument line="2989">
           <name>$limit</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="2777" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3019" package="Default">
         <name>SelectTable</name>
         <full_name>SelectTable</full_name>
-        <docblock line="2768">
+        <docblock line="3010">
           <description><![CDATA[Retrieves all rows in a specified table]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2768" name="api" description=""/>
-          <tag line="2768" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="3010" name="api" description=""/>
+          <tag line="3010" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2768" name="return" description="Returns an array of records&#13;&#10;        (each an object where the columns are individual object member variables)&#13;&#10;        on success or FALSE on error" type="boolean">
+          <tag line="3010" name="return" description="Returns an array of records&#13;&#10;        (each an object where the columns are individual object member variables)&#13;&#10;        on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="2777">
+        <argument line="3019">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="2789" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="3031" package="Default">
         <name>SetError</name>
         <full_name>SetError</full_name>
-        <docblock line="2782">
+        <docblock line="3024">
           <description><![CDATA[Sets the local variables with the first error information]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2782" name="api" description=""/>
-          <tag line="2782" name="param" description="The error description" type="string" variable="$errorMessage">
+          <tag line="3024" name="api" description=""/>
+          <tag line="3024" name="param" description="The error description" type="string" variable="$errorMessage">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2782" name="param" description="The error number" type="integer" variable="$errorNumber">
+          <tag line="3024" name="param" description="The error number" type="integer" variable="$errorNumber">
             <type by_reference="false">integer</type>
           </tag>
         </docblock>
-        <argument line="2789">
+        <argument line="3031">
           <name>$errorMessage</name>
           <default><![CDATA['']]></default>
           <type/>
         </argument>
-        <argument line="2789">
+        <argument line="3031">
           <name>$errorNumber</name>
           <default><![CDATA[0]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="2861" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="3104" package="Default">
         <name>SQLBooleanValue</name>
         <full_name>SQLBooleanValue</full_name>
-        <docblock line="2842">
+        <docblock line="3084">
           <description><![CDATA[Converts a boolean into a formatted TRUE or FALSE value of choice]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2842" name="static" description=""/>
-          <tag line="2842" name="api" description=""/>
-          <tag line="2842" name="param" description="value to analyze for TRUE or FALSE" type="mixed" variable="$value">
+          <tag line="3084" name="static" description=""/>
+          <tag line="3084" name="api" description=""/>
+          <tag line="3084" name="param" description="value to analyze for TRUE or FALSE" type="mixed" variable="$value">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="2842" name="param" description="value to use if TRUE" type="mixed" variable="$trueValue">
+          <tag line="3084" name="param" description="value to use if TRUE" type="mixed" variable="$trueValue">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="2842" name="param" description="value to use if FALSE" type="mixed" variable="$falseValue">
+          <tag line="3084" name="param" description="value to use if FALSE" type="mixed" variable="$falseValue">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="2842" name="param" description="Use SQLVALUE constants or the strings: string, text, varchar, char, boolean, bool, Y-N, T-F, bit, date, datetime, time, integer, int, number, double, float" type="string" variable="$datatype">
+          <tag line="3084" name="param" description="Use SQLVALUE constants or the strings: string, text, varchar, char, boolean, bool, Y-N, T-F, bit, date, datetime, time, integer, int, number, double, float" type="string" variable="$datatype">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2842" name="return" description="SQL formatted value of the specified data type on success or FALSE on error" type="string">
+          <tag line="3084" name="return" description="SQL formatted value of the specified data type on success or FALSE on error" type="string">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2842" name="example" description="echo MySQL::SQLBooleanValue(false, &quot;1&quot;, &quot;0&quot;, MySQL::SQLVALUE_NUMBER);"/>
-          <tag line="2842" name="example" description="echo MySQL::SQLBooleanValue($test, &quot;Jan 1, 2007 &quot;, &quot;2007/06/01&quot;, MySQL::SQLVALUE_DATE);"/>
-          <tag line="2842" name="example" description="echo MySQL::SQLBooleanValue(&quot;ON&quot;, &quot;Ya&quot;, &quot;Nope&quot;);"/>
-          <tag line="2842" name="example" description="echo MySQL::SQLBooleanValue(1, '+', '-');"/>
+          <tag line="3084" name="example" description="echo MySQL::SQLBooleanValue(false, &quot;1&quot;, &quot;0&quot;, MySQL::SQLVALUE_NUMBER);&#13;&#10;echo MySQL::SQLBooleanValue($test, &quot;Jan 1, 2007 &quot;, &quot;2007/06/01&quot;, MySQL::SQLVALUE_DATE);&#13;&#10;echo MySQL::SQLBooleanValue(&quot;ON&quot;, &quot;Ya&quot;, &quot;Nope&quot;);&#13;&#10;echo MySQL::SQLBooleanValue(1, '+', '-');"/>
         </docblock>
-        <argument line="2861">
+        <argument line="3104">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="2861">
+        <argument line="3104">
           <name>$trueValue</name>
           <default><![CDATA[true]]></default>
           <type/>
         </argument>
-        <argument line="2861">
+        <argument line="3104">
           <name>$falseValue</name>
           <default><![CDATA[false]]></default>
           <type/>
         </argument>
-        <argument line="2861">
+        <argument line="3104">
           <name>$datatype</name>
           <default><![CDATA[self::SQLVALUE_TEXT]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="2882" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="3132" package="Default">
         <name>SQLFix</name>
         <full_name>SQLFix</full_name>
-        <docblock line="2874">
-          <description><![CDATA[Returns string suitable for inclusion in a SQL query, i.e.]]></description>
-          <long-description><![CDATA[<p>properly escaped/filtered</p>]]></long-description>
-          <tag line="2874" name="static" description=""/>
-          <tag line="2874" name="api" description=""/>
-          <tag line="2874" name="param" description="" type="string" variable="$value">
+        <docblock line="3117">
+          <description><![CDATA[Returns string suitable for inclusion in a SQL query]]></description>
+          <long-description><![CDATA[<p>The returned string representing the $value will be properly escaped
+and filtered to use as part of a constructed SQL query.</p>]]></long-description>
+          <tag line="3117" name="static" description=""/>
+          <tag line="3117" name="api" description=""/>
+          <tag line="3117" name="param" description="" type="string" variable="$value">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2874" name="return" description="SQL formatted value" type="string">
+          <tag line="3117" name="return" description="SQL formatted value" type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="3117" name="example" description="$value = MySQL::SQLFix(&quot;\hello\ /world/&quot;);&#13;&#10;echo $value . &quot;\n&quot; . MySQL::SQLUnfix($value);"/>
         </docblock>
-        <argument line="2882">
+        <argument line="3132">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="2900" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="3154" package="Default">
         <name>SQLUnfix</name>
         <full_name>SQLUnfix</full_name>
-        <docblock line="2887">
+        <docblock line="3137">
           <description><![CDATA[Returns MySQL string as normal string]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2887" name="static" description=""/>
-          <tag line="2887" name="api" description=""/>
-          <tag line="2887" name="param" description="" type="string" variable="$value">
+          <tag line="3137" name="static" description=""/>
+          <tag line="3137" name="api" description=""/>
+          <tag line="3137" name="param" description="" type="string" variable="$value">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2887" name="return" description="" type="string">
+          <tag line="3137" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2887" name="warning" description="Do NOT use on columns returned by a database query: such data has already&#13;&#10;         been adequately processed by MySQL itself.&#13;&#10;         The only probable place where the SQLUnfix() method MAY be useful is when&#13;&#10;         DIRECTLY accessing strings produced by the SQLValue() method."/>
+          <tag line="3137" name="warning" description="Do NOT use on columns returned by a database query: such data has already&#13;&#10;         been adequately processed by MySQL itself.&#13;&#10;         The only probable place where the SQLUnfix() method MAY be useful is when&#13;&#10;         DIRECTLY accessing strings produced by the SQLValue() method."/>
+          <tag line="3137" name="example" description="$value = MySQL::SQLFix(&quot;\hello\ /world/&quot;);&#13;&#10;echo $value . &quot;\n&quot; . MySQL::SQLUnfix($value);"/>
         </docblock>
-        <argument line="2900">
+        <argument line="3154">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="2921" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="3180" package="Default">
         <name>SQLValue</name>
         <full_name>SQLValue</full_name>
-        <docblock line="2905">
+        <docblock line="3159">
           <description><![CDATA[Formats any value into a string suitable for SQL statements]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="2905" name="note" description="Also supports data types returned from the gettype function."/>
-          <tag line="2905" name="static" description=""/>
-          <tag line="2905" name="api" description=""/>
-          <tag line="2905" name="param" description="Any value of any type to be formatted to SQL" type="mixed" variable="$value">
+          <tag line="3159" name="note" description="Also supports data types returned from the gettype function."/>
+          <tag line="3159" name="static" description=""/>
+          <tag line="3159" name="api" description=""/>
+          <tag line="3159" name="param" description="Any value of any type to be formatted to SQL" type="mixed" variable="$value">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="2905" name="param" description="Use SQLVALUE constants or the strings: 'string', 'text', 'varchar', 'char', 'boolean', 'bool', 'Y-N', 'T-F', 'bit', 'date', 'datetime', 'time', 'integer', 'int', 'number', 'double', 'float'" type="string" variable="$datatype">
+          <tag line="3159" name="param" description="Use SQLVALUE constants or the strings: 'string', 'text', 'varchar', 'char', 'boolean', 'bool', 'Y-N', 'T-F', 'bit', 'date', 'datetime', 'time', 'integer', 'int', 'number', 'double', 'float'" type="string" variable="$datatype">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="2905" name="return" description="The properly quoted and escaped/filtered value as a string&#13;&#10;               which can be safely included in a generated SQL query." type="string">
+          <tag line="3159" name="return" description="The properly quoted and escaped/filtered value as a string&#13;&#10;               which can be safely included in a generated SQL query." type="string">
             <type by_reference="false">string</type>
           </tag>
+          <tag line="3159" name="example" description="echo MySQL::SQLValue(&quot;it's a string&quot;, &quot;text&quot;);&#13;&#10;$sql = &quot;SELECT * FROM Table WHERE Field1 = &quot; . MySQL::SQLValue(&quot;123&quot;, MySQL::SQLVALUE_NUMBER);&#13;&#10;$sql = &quot;UPDATE Table SET Field1 = &quot; . MySQL::SQLValue(&quot;July 4, 2007&quot;, MySQL::SQLVALUE_DATE);"/>
         </docblock>
-        <argument line="2921">
+        <argument line="3180">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="2921">
+        <argument line="3180">
           <name>$datatype</name>
           <default><![CDATA[self::SQLVALUE_TEXT]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3089" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3354" package="Default">
         <name>TimerDuration</name>
         <full_name>TimerDuration</full_name>
-        <docblock line="3082">
+        <docblock line="3341">
           <description><![CDATA[Returns last measured duration (time between TimerStart and TimerStop)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="3082" name="api" description=""/>
-          <tag line="3082" name="param" description="(Optional) The number of decimal places to show" type="integer" variable="$decimals">
+          <tag line="3341" name="api" description=""/>
+          <tag line="3341" name="param" description="(Optional) The number of decimal places to show (Default: 4)" type="integer" variable="$decimals">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="3082" name="return" description="Microseconds elapsed" type="Float">
+          <tag line="3341" name="return" description="Microseconds elapsed" type="Float">
             <type by_reference="false">Float</type>
           </tag>
+          <tag line="3341" name="example" description="$db-&gt;TimerStart();&#13;&#10;// Do something or run some queries&#13;&#10;$db-&gt;TimerStop();&#13;&#10;echo $db-&gt;TimerDuration(2) . &quot; microseconds&quot;;"/>
         </docblock>
-        <argument line="3089">
+        <argument line="3354">
           <name>$decimals</name>
           <default><![CDATA[4]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3099" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3370" package="Default">
         <name>TimerStart</name>
         <full_name>TimerStart</full_name>
-        <docblock line="3094">
+        <docblock line="3359">
           <description><![CDATA[Starts time measurement (in microseconds)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="3094" name="api" description=""/>
+          <tag line="3359" name="api" description=""/>
+          <tag line="3359" name="example" description="$db-&gt;TimerStart();&#13;&#10;// Do something or run some queries&#13;&#10;$db-&gt;TimerStop();&#13;&#10;echo $db-&gt;TimerDuration() . &quot; microseconds&quot;;"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3111" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3388" package="Default">
         <name>TimerStop</name>
         <full_name>TimerStop</full_name>
-        <docblock line="3106">
+        <docblock line="3377">
           <description><![CDATA[Stops time measurement (in microseconds)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="3106" name="api" description=""/>
+          <tag line="3377" name="api" description=""/>
+          <tag line="3377" name="example" description="$db-&gt;TimerStart();&#13;&#10;// Do something or run some queries&#13;&#10;$db-&gt;TimerStop();&#13;&#10;echo $db-&gt;TimerDuration() . &quot; microseconds&quot;;"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3125" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3416" package="Default">
         <name>TransactionBegin</name>
         <full_name>TransactionBegin</full_name>
-        <docblock line="3119">
+        <docblock line="3396">
           <description><![CDATA[Starts a transaction]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="3119" name="api" description=""/>
-          <tag line="3119" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
+          <tag line="3396" name="api" description=""/>
+          <tag line="3396" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="3396" name="example" description="$sql = &quot;INSERT INTO MyTable (Field1, Field2) Values ('abc', 123)&quot;;&#13;&#10;$db-&gt;TransactionBegin();&#13;&#10;if ($db-&gt;Query($sql))&#13;&#10;{&#13;&#10;    $db-&gt;TransactionEnd();&#13;&#10;    echo &quot;Last ID inserted was: &quot; . $db-&gt;GetLastInsertID();&#13;&#10;}&#13;&#10;else&#13;&#10;{&#13;&#10;    $db-&gt;TransactionRollback();&#13;&#10;    echo &quot;Query Failed&quot;;&#13;&#10;}"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3162" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3467" package="Default">
         <name>TransactionEnd</name>
         <full_name>TransactionEnd</full_name>
-        <docblock line="3156">
+        <docblock line="3447">
           <description><![CDATA[Ends a transaction and commits the queries]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="3156" name="api" description=""/>
-          <tag line="3156" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
+          <tag line="3447" name="api" description=""/>
+          <tag line="3447" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="3447" name="example" description="$sql = &quot;INSERT INTO MyTable (Field1, Field2) Values ('abc', 123)&quot;;&#13;&#10;$db-&gt;TransactionBegin();&#13;&#10;if ($db-&gt;Query($sql))&#13;&#10;{&#13;&#10;    $db-&gt;TransactionEnd();&#13;&#10;    echo &quot;Last ID inserted was: &quot; . $db-&gt;GetLastInsertID();&#13;&#10;}&#13;&#10;else&#13;&#10;{&#13;&#10;    $db-&gt;TransactionRollback();&#13;&#10;    echo &quot;Query Failed&quot;;&#13;&#10;}"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3200" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3519" package="Default">
         <name>TransactionRollback</name>
         <full_name>TransactionRollback</full_name>
-        <docblock line="3194">
+        <docblock line="3499">
           <description><![CDATA[Rolls the transaction back]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="3194" name="api" description=""/>
-          <tag line="3194" name="return" description="Returns TRUE on success or FALSE on failure" type="boolean">
+          <tag line="3499" name="api" description=""/>
+          <tag line="3499" name="return" description="Returns TRUE on success or FALSE on failure" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="3499" name="example" description="$sql = &quot;INSERT INTO MyTable (Field1, Field2) Values ('abc', 123)&quot;;&#13;&#10;$db-&gt;TransactionBegin();&#13;&#10;if ($db-&gt;Query($sql))&#13;&#10;{&#13;&#10;    $db-&gt;TransactionEnd();&#13;&#10;    echo &quot;Last ID inserted was: &quot; . $db-&gt;GetLastInsertID();&#13;&#10;}&#13;&#10;else&#13;&#10;{&#13;&#10;    $db-&gt;TransactionRollback();&#13;&#10;    echo &quot;Query Failed&quot;;&#13;&#10;}"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3231" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3550" package="Default">
         <name>TruncateTable</name>
         <full_name>TruncateTable</full_name>
-        <docblock line="3224">
+        <docblock line="3543">
           <description><![CDATA[Truncates a table removing all data]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="3224" name="api" description=""/>
-          <tag line="3224" name="param" description="The name of the table" type="string" variable="$tableName">
+          <tag line="3543" name="api" description=""/>
+          <tag line="3543" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="3224" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
+          <tag line="3543" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="3231">
+        <argument line="3550">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3267" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3597" package="Default">
         <name>UpdateRow</name>
         <full_name>UpdateRow</full_name>
-        <docblock line="3245">
-          <description><![CDATA[Updates rows in a table based on a WHERE filter
-(can be just one or many rows based on the filter)]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="3245" name="api" description=""/>
-          <tag line="3245" name="param" description="The name of the table" type="string" variable="$tableName">
+        <docblock line="3564">
+          <description><![CDATA[Update selected rows]]></description>
+          <long-description><![CDATA[<p>Updates rows in a table based on a WHERE filter
+(can be just one or many rows based on the filter).</p>]]></long-description>
+          <tag line="3564" name="api" description=""/>
+          <tag line="3564" name="param" description="The name of the table" type="string" variable="$tableName">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="3245" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array" variable="$valuesArray">
+          <tag line="3564" name="param" description="An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)" type="array" variable="$valuesArray">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="3245" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). If not specified then all values in the table are updated. &lt;br/&gt; This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed." type="array|string" variable="$whereArray">
+          <tag line="3564" name="param" description="(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). If not specified then all values in the table are updated. &lt;br/&gt; This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed." type="array|string" variable="$whereArray">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="3245" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
+          <tag line="3564" name="return" description="Returns TRUE on success or FALSE on error" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
+          <tag line="3564" name="example" description="// Create an array that holds the update information&#13;&#10;// $arrayVariable[&quot;column name&quot;] = formatted SQL value&#13;&#10;$update[&quot;Name&quot;] = MySQL::SQLValue(&quot;Bob&quot;);&#13;&#10;$update[&quot;Age&quot;]  = MySQL::SQLValue(25, MySQL::SQLVALUE_NUMBER);&#13;&#10;// Execute the update where the ID is 1&#13;&#10;if (!$db-&gt;UpdateRows(&quot;test&quot;, $values, array(&quot;id&quot; =&gt; 1))) $db-&gt;Kill();"/>
         </docblock>
-        <argument line="3267">
+        <argument line="3597">
           <name>$tableName</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="3267">
+        <argument line="3597">
           <name>$valuesArray</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="3267">
+        <argument line="3597">
           <name>$whereArray</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3289" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="3619" package="Default">
         <name>GetStatistics</name>
         <full_name>GetStatistics</full_name>
-        <docblock line="3283">
+        <docblock line="3613">
           <description><![CDATA[Return a few database statistics in an array.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="3283" name="api" description=""/>
-          <tag line="3283" name="return" description="Returns an array of statistics values on success or FALSE on error." type="array">
+          <tag line="3613" name="api" description=""/>
+          <tag line="3613" name="return" description="Returns an array of statistics values on success or FALSE on error." type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>

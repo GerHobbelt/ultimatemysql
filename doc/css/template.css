@@ -256,6 +256,11 @@ div.detail-description
     padding-left: 30px;
 }
 
+div.detail-examples
+{
+    padding-left: 30px;
+}
+
 body.invert
 {
     background: white;
@@ -431,6 +436,11 @@ div.element div.subelement.response
 div.labels
 {
     text-align: right;
+}
+
+.label
+{
+	margin-left: 3px;
 }
 
 .nav-list .nav-header

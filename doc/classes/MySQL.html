@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
+<a name="___"></a><div class="navbar navbar-fixed-top">
 <div class="navbar-inner"><div class="container">
 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Ultimate MySQL Wrapper Class for PHP 5.x</a><div class="nav-collapse"><ul class="nav">
 <li class="dropdown">
@@ -38,7 +38,7 @@
 </div></div>
 <div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
 </div>
-<div id="___" class="container">
+<div class="container">
 <noscript><div class="alert alert-warning">
                             Javascript is disabled; several features are only available
                             if Javascript is enabled.
@@ -104,16 +104,12 @@ in microseconds</span><pre>QueryTimed()</pre></a></li>
 <li class="method public "><a href="#Records" title="Records :: Returns the records from the last query"><span class="description">Returns the records from the last query</span><pre>Records()</pre></a></li>
 <li class="method public "><a href="#RecordsArray" title="RecordsArray :: Returns all records from the last query as array of arrays"><span class="description">Returns all records from the last query as array of arrays</span><pre>RecordsArray()</pre></a></li>
 <li class="method public "><a href="#RecordsObjects" title="RecordsObjects :: Returns all records from the last query as array of objects"><span class="description">Returns all records from the last query as array of objects</span><pre>RecordsObjects()</pre></a></li>
-<li class="method public "><a href="#Release" title="Release :: Frees memory used by the query results and returns the function result."><span class="description">Frees memory used by the query results and returns the function result.</span><pre>Release()</pre></a></li>
-<li class="method public "><a href="#Row" title="Row :: Reads the current row and returns contents as a
-PHP object or returns false on error"><span class="description">Reads the current row and returns contents as a
-PHP object or returns false on error</span><pre>Row()</pre></a></li>
-<li class="method public "><a href="#RowArray" title="RowArray :: Reads the current row and returns contents as an
-array or returns false on error"><span class="description">Reads the current row and returns contents as an
-array or returns false on error</span><pre>RowArray()</pre></a></li>
+<li class="method public "><a href="#Release" title="Release :: Frees memory used by the query results and returns the query execution result."><span class="description">Frees memory used by the query results and returns the query execution result.</span><pre>Release()</pre></a></li>
+<li class="method public "><a href="#Row" title="Row :: Reads the current row and returns contents as a PHP object"><span class="description">Reads the current row and returns contents as a PHP object</span><pre>Row()</pre></a></li>
+<li class="method public "><a href="#RowArray" title="RowArray :: Reads the current row and returns contents as an array"><span class="description">Reads the current row and returns contents as an array</span><pre>RowArray()</pre></a></li>
 <li class="method public "><a href="#RowCount" title="RowCount :: Returns the last query row count"><span class="description">Returns the last query row count</span><pre>RowCount()</pre></a></li>
 <li class="method public "><a href="#SQLBooleanValue" title="SQLBooleanValue :: Converts a boolean into a formatted TRUE or FALSE value of choice"><span class="description">Converts a boolean into a formatted TRUE or FALSE value of choice</span><pre>SQLBooleanValue()</pre></a></li>
-<li class="method public "><a href="#SQLFix" title="SQLFix :: Returns string suitable for inclusion in a SQL query, i.e."><span class="description">Returns string suitable for inclusion in a SQL query, i.e.</span><pre>SQLFix()</pre></a></li>
+<li class="method public "><a href="#SQLFix" title="SQLFix :: Returns string suitable for inclusion in a SQL query"><span class="description">Returns string suitable for inclusion in a SQL query</span><pre>SQLFix()</pre></a></li>
 <li class="method public "><a href="#SQLUnfix" title="SQLUnfix :: Returns MySQL string as normal string"><span class="description">Returns MySQL string as normal string</span><pre>SQLUnfix()</pre></a></li>
 <li class="method public "><a href="#SQLValue" title="SQLValue :: Formats any value into a string suitable for SQL statements"><span class="description">Formats any value into a string suitable for SQL statements</span><pre>SQLValue()</pre></a></li>
 <li class="method public "><a href="#Seek" title="Seek :: Sets the internal database pointer to the
@@ -137,9 +133,7 @@ WHERE filter.</span><pre>SelectSingleValue()</pre></a></li>
 <li class="method public "><a href="#TransactionEnd" title="TransactionEnd :: Ends a transaction and commits the queries"><span class="description">Ends a transaction and commits the queries</span><pre>TransactionEnd()</pre></a></li>
 <li class="method public "><a href="#TransactionRollback" title="TransactionRollback :: Rolls the transaction back"><span class="description">Rolls the transaction back</span><pre>TransactionRollback()</pre></a></li>
 <li class="method public "><a href="#TruncateTable" title="TruncateTable :: Truncates a table removing all data"><span class="description">Truncates a table removing all data</span><pre>TruncateTable()</pre></a></li>
-<li class="method public "><a href="#UpdateRow" title="UpdateRow :: Updates rows in a table based on a WHERE filter
-(can be just one or many rows based on the filter)"><span class="description">Updates rows in a table based on a WHERE filter
-(can be just one or many rows based on the filter)</span><pre>UpdateRow()</pre></a></li>
+<li class="method public "><a href="#UpdateRow" title="UpdateRow :: Update selected rows"><span class="description">Update selected rows</span><pre>UpdateRow()</pre></a></li>
 <li class="method public "><a href="#__construct" title="__construct :: Constructor: Opens the connection to the database"><span class="description">Constructor: Opens the connection to the database</span><pre>__construct()</pre></a></li>
 <li class="method public "><a href="#__destruct" title="__destruct :: Destructor: Closes the connection to the database"><span class="description">Destructor: Closes the connection to the database</span><pre>__destruct()</pre></a></li>
 <li class="nav-header private">» Private</li>
@@ -227,18 +221,28 @@ already exists in a table.</p></p>
 <h2>Test if the internal pointer is at the start of the record set</h2>
 <pre>BeginningOfSeek() : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"><p>Returns true if the internal pointer is at the beginning of the record set produced by the last query.</p></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>TRUE if at the first row or FALSE if not</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">if ($db-&gt;BeginningOfSeek())
+{
+    echo "We are at the beggining of the record set";
+}</pre>
+</div>
+</div>
 </div>
 <a name="BuildSQLDelete" id="BuildSQLDelete"></a><div class="element clickable method public BuildSQLDelete" data-toggle="collapse" data-target=".BuildSQLDelete .collapse">
 <h2>Builds a SQL DELETE statement</h2>
 <pre>BuildSQLDelete(string $tableName, array | string $whereArray) : string</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -251,13 +255,23 @@ already exists in a table.</p></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code>Returns the SQL DELETE statement</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">// Let's create an array for the example
+// $arrayVariable["column name"] = formatted SQL value
+$filter["ID"] = MySQL::SQLValue(7, MySQL::SQLVALUE_NUMBER);
+// Echo out the SQL statement
+echo MySQL::BuildSQLDelete("MyTable", $filter);</pre>
+</div>
+</div>
 </div>
 <a name="BuildSQLInsert" id="BuildSQLInsert"></a><div class="element clickable method public BuildSQLInsert" data-toggle="collapse" data-target=".BuildSQLInsert .collapse">
 <h2>Builds a SQL INSERT statement</h2>
 <pre>BuildSQLInsert(string $tableName, array $valuesArray) : string</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -270,13 +284,24 @@ already exists in a table.</p></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code>Returns a SQL INSERT statement</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">// Let's create an array for the example
+// $arrayVariable["column name"] = formatted SQL value
+$values["Name"] = MySQL::SQLValue("Violet");
+$values["Age"] = MySQL::SQLValue(777, MySQL::SQLVALUE_NUMBER);
+// Echo out the SQL statement
+echo MySQL::BuildSQLInsert("MyTable", $values);</pre>
+</div>
+</div>
 </div>
 <a name="BuildSQLSelect" id="BuildSQLSelect"></a><div class="element clickable method public BuildSQLSelect" data-toggle="collapse" data-target=".BuildSQLSelect .collapse">
 <h2>Builds a simple SQL SELECT statement</h2>
 <pre>BuildSQLSelect(string $tableName, array | string $whereArray, array | string $columns, array | string $sortColumns, integer | string $limit) : string</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <table class="table table-bordered"><tr>
 <th>note</th>
@@ -307,13 +332,24 @@ already exists in a table.</p></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code>Returns a SQL SELECT statement</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">// Let's create an array for the example
+// $arrayVariable["column name"] = formatted SQL value
+$values["Name"] = MySQL::SQLValue("Violet");
+$values["Age"] = MySQL::SQLValue(777, MySQL::SQLVALUE_NUMBER);
+// Echo out the SQL statement
+echo MySQL::BuildSQLSelect("MyTable", $values);</pre>
+</div>
+</div>
 </div>
 <a name="BuildSQLUpdate" id="BuildSQLUpdate"></a><div class="element clickable method public BuildSQLUpdate" data-toggle="collapse" data-target=".BuildSQLUpdate .collapse">
 <h2>Builds a SQL UPDATE statement</h2>
 <pre>BuildSQLUpdate(string $tableName, array $valuesArray, array | string $whereArray) : string</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -330,19 +366,28 @@ already exists in a table.</p></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code>Returns a SQL UPDATE statement</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">// Let's create two arrays for the example
+// $arrayVariable["column name"] = formatted SQL value
+$values["Name"] = MySQL::SQLValue("Violet");
+$values["Age"] = MySQL::SQLValue(777, MySQL::SQLVALUE_NUMBER);
+$filter["ID"] = MySQL::SQLValue(10, MySQL::SQLVALUE_NUMBER);
+// Echo out some SQL statements
+echo MySQL::BuildSQLUpdate("Test", $values, $filter)";</pre>
+</div>
+</div>
 </div>
 <a name="BuildSQLValue" id="BuildSQLValue"></a><div class="element clickable method public BuildSQLValue" data-toggle="collapse" data-target=".BuildSQLValue .collapse">
 <h2>Construct a value string suitable for incorporation anywhere
 in a SQL query.</h2>
 <pre>BuildSQLValue(\arbitrary $value) : string</pre>
-<div class="labels"><span class="label label-info">API</span></div>
+<div class="labels">
+<span class="label label-info">STATIC</span><span class="label label-info">API</span>
+</div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"><p>This methos invokes self::SQLValue() under the hood.</p></p>
-<table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
-</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$value</h4>
@@ -373,12 +418,18 @@ as a comparison. If a key is not used, the value is used as the clause.</p></p>
 <h2>Close current MySQL connection</h2>
 <pre>Close() : object</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>object</code>Returns TRUE on success or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;Close();</pre>
+</div>
+</div>
 </div>
 <a name="CreateDatabase" id="CreateDatabase"></a><div class="element clickable method public CreateDatabase" data-toggle="collapse" data-target=".CreateDatabase .collapse">
 <h2>Creates a new database and sets up the root access for the database.</h2>
@@ -415,7 +466,8 @@ as a comparison. If a key is not used, the value is used as the clause.</p></p>
 <h2>Delete selected rows.</h2>
 <pre>DeleteRows(string $tableName, array | string $whereArray) : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"><p>Deletes rows in a table based on a WHERE filter
 (can be just one or many rows based on the filter).</p></p>
 <h3>Parameters</h3>
@@ -429,7 +481,21 @@ as a comparison. If a key is not used, the value is used as the clause.</p></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns TRUE on success or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">// $arrayVariable["column name"] = formatted SQL value
+$filter["ID"] = 7;
+// Execute the delete
+$result = $db-&gt;DeleteRows("MyTable", $filter);
+// If we have an error
+if (!$result)
+{
+    // Show the error and kill the script
+    $db-&gt;Kill();
+}</pre>
+</div>
+</div>
 </div>
 <a name="Dump" id="Dump"></a><div class="element clickable method public Dump" data-toggle="collapse" data-target=".Dump .collapse">
 <h2>Dump the entire database as an SQL script</h2>
@@ -476,18 +542,28 @@ a db/table backup/restore script later on.</p></p>
 <h2>Returns true if the internal pointer is at the end of the records</h2>
 <pre>EndOfSeek() : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>TRUE if at the last row or FALSE if not</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">if ($db-&gt;EndOfSeek())
+{
+    echo "We are at the end of the record set";
+}</pre>
+</div>
+</div>
 </div>
 <a name="Error" id="Error"></a><div class="element clickable method public Error" data-toggle="collapse" data-target=".Error .collapse">
 <h2>Return the last MySQL error as text</h2>
 <pre>Error() : string</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <table class="table table-bordered"><tr>
 <th>note</th>
@@ -497,29 +573,46 @@ as ' (#<i>error_number</i>)'.</td>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code>Error text from last known error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">if (!$db-&gt;Query("SELECT * FROM Table"))
+{
+    echo $db-&gt;Error();   // Shows the error
+}
+if ($db-&gt;Error()) $db-&gt;Kill();</pre>
+</div>
+</div>
 </div>
 <a name="ErrorNumber" id="ErrorNumber"></a><div class="element clickable method public ErrorNumber" data-toggle="collapse" data-target=".ErrorNumber .collapse">
 <h2>Return the last MySQL error as a number</h2>
 <pre>ErrorNumber() : integer</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>integer</code>Error number from last known error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">if ($db-&gt;ErrorNumber() &lt;&gt; 0)
+{
+    $db-&gt;Kill();   // show the error message
+}</pre>
+</div>
+</div>
 </div>
 <a name="GetBooleanValue" id="GetBooleanValue"></a><div class="element clickable method public GetBooleanValue" data-toggle="collapse" data-target=".GetBooleanValue .collapse">
 <h2>Convert any value of any datatype into boolean (true or false)</h2>
 <pre>GetBooleanValue(mixed $value) : boolean</pre>
-<div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="labels">
+<span class="label label-info">STATIC</span><span class="label label-info">API</span>
+</div>
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
-</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$value</h4>
@@ -527,13 +620,22 @@ as ' (#<i>error_number</i>)'.</td>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns TRUE or FALSE</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">echo (MySQL::GetBooleanValue("Y") ? "True" : "False");
+echo (MySQL::GetBooleanValue("no") ? "True" : "False");
+echo (MySQL::GetBooleanValue("TRUE") ? "True" : "False");
+echo (MySQL::GetBooleanValue(1) ? "True" : "False");</pre>
+</div>
+</div>
 </div>
 <a name="GetColumnComments" id="GetColumnComments"></a><div class="element clickable method public GetColumnComments" data-toggle="collapse" data-target=".GetColumnComments .collapse">
 <h2>Return the comments for fields in a table</h2>
 <pre>GetColumnComments(string $table) : array</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -543,13 +645,23 @@ as ' (#<i>error_number</i>)'.</td>
 <div class="subelement response">
 <code>array</code>An array that contains the column comments
               or FALSE on error.</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$columns = $db-&gt;GetColumnComments("MyTable");
+foreach ($columns as $column =&gt; $comment)
+{
+    echo $column . " = " . $comment . "&lt;br /&gt;\n";
+}</pre>
+</div>
+</div>
 </div>
 <a name="GetColumnCount" id="GetColumnCount"></a><div class="element clickable method public GetColumnCount" data-toggle="collapse" data-target=".GetColumnCount .collapse">
 <h2>Get the number of columns</h2>
 <pre>GetColumnCount(string $table) : integer</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -559,13 +671,19 @@ as ' (#<i>error_number</i>)'.</td>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>integer</code>The total count of columns or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">echo "Total Columns: " . $db-&gt;GetColumnCount("MyTable");</pre>
+</div>
+</div>
 </div>
 <a name="GetColumnDataType" id="GetColumnDataType"></a><div class="element clickable method public GetColumnDataType" data-toggle="collapse" data-target=".GetColumnDataType .collapse">
 <h2>Return the data type for a specified column</h2>
 <pre>GetColumnDataType(\intege | string $column, string $table) : string</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -580,13 +698,19 @@ as ' (#<i>error_number</i>)'.</td>
 <div class="subelement response">
 <code>string</code>The MySQL data (field) type.  If the column does not
                exist or no records exist, return FALSE.</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">echo "Type: " . $db-&gt;GetColumnDataType("FirstName", "Customer");</pre>
+</div>
+</div>
 </div>
 <a name="GetColumnID" id="GetColumnID"></a><div class="element clickable method public GetColumnID" data-toggle="collapse" data-target=".GetColumnID .collapse">
 <h2>Return the position of a column</h2>
 <pre>GetColumnID(string $column, string $table) : integer</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -599,13 +723,19 @@ as ' (#<i>error_number</i>)'.</td>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>integer</code>Column ID or FALSE on error.</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">echo "Column Position: " . $db-&gt;GetColumnID("FirstName", "Customer");</pre>
+</div>
+</div>
 </div>
 <a name="GetColumnLength" id="GetColumnLength"></a><div class="element clickable method public GetColumnLength" data-toggle="collapse" data-target=".GetColumnLength .collapse">
 <h2>Return the field length</h2>
 <pre>GetColumnLength(string $column, string $table) : integer</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -618,13 +748,19 @@ as ' (#<i>error_number</i>)'.</td>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>integer</code>Field length or FALSE on error.</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">echo "Length: " . $db-&gt;GetColumnLength("FirstName", "Customer");</pre>
+</div>
+</div>
 </div>
 <a name="GetColumnName" id="GetColumnName"></a><div class="element clickable method public GetColumnName" data-toggle="collapse" data-target=".GetColumnName .collapse">
 <h2>Return the field name for a specified column number</h2>
 <pre>GetColumnName(string $columnID, string $table) : string</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -640,13 +776,19 @@ as ' (#<i>error_number</i>)'.</td>
 <code>string</code>The field name for a specified column number. If
                the given column index number is invalid (does not exist)
                or no records exist, return FALSE.</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">echo "Column Name: " . $db-&gt;GetColumnName(0);</pre>
+</div>
+</div>
 </div>
 <a name="GetColumnNames" id="GetColumnNames"></a><div class="element clickable method public GetColumnNames" data-toggle="collapse" data-target=".GetColumnNames .collapse">
 <h2>Return the field names in a table or query as an array</h2>
 <pre>GetColumnNames(string $table) : array</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -656,13 +798,23 @@ as ' (#<i>error_number</i>)'.</td>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>array</code>An array that contains the column names or FALSE on error.</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$columns = $db-&gt;GetColumnNames("MyTable");
+foreach ($columns as $columnName)
+{
+    echo $columnName . "&lt;br /&gt;\n";
+}</pre>
+</div>
+</div>
 </div>
 <a name="GetHTML" id="GetHTML"></a><div class="element clickable method public GetHTML" data-toggle="collapse" data-target=".GetHTML .collapse">
 <h2>Return the last query as a HTML table</h2>
 <pre>GetHTML(boolean $showCount, string $styleTable, string $styleHeader, string $styleData) : string</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -684,7 +836,13 @@ as ' (#<i>error_number</i>)'.</td>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code>HTML containing a table with all records listed or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;Query("SELECT * FROM Customer");
+echo $db-&gt;GetHTML();</pre>
+</div>
+</div>
 </div>
 <a name="GetJSON" id="GetJSON"></a><div class="element clickable method public GetJSON" data-toggle="collapse" data-target=".GetJSON .collapse">
 <h2>Return the last query as a JSON document</h2>
@@ -701,23 +859,42 @@ as ' (#<i>error_number</i>)'.</td>
 <h2>Return the last autonumber ID field from a previous INSERT query</h2>
 <pre>GetLastInsertID() : integer</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>integer</code>ID number from previous INSERT query</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$sql = "INSERT INTO Employee (Name) Values ('Bob')";
+if (!$db-&gt;Query($sql))
+{
+    $db-&gt;Kill();
+}
+echo "Last ID inserted was: " . $db-&gt;GetLastInsertID();</pre>
+</div>
+</div>
 </div>
 <a name="GetLastSQL" id="GetLastSQL"></a><div class="element clickable method public GetLastSQL" data-toggle="collapse" data-target=".GetLastSQL .collapse">
 <h2>Return the last SQL statement executed</h2>
 <pre>GetLastSQL() : string</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code>Current SQL query string</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$sql = "INSERT INTO Employee (Name) Values ('Bob')";
+if (!$db-&gt;Query($sql)) $db-&gt;Kill();
+echo $db-&gt;GetLastSQL();</pre>
+</div>
+</div>
 </div>
 <a name="GetStatistics" id="GetStatistics"></a><div class="element clickable method public GetStatistics" data-toggle="collapse" data-target=".GetStatistics .collapse">
 <h2>Return a few database statistics in an array.</h2>
@@ -734,7 +911,8 @@ as ' (#<i>error_number</i>)'.</td>
 <h2>Get all table names from the database</h2>
 <pre>GetTables(string $filter) : array</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -745,7 +923,16 @@ as ' (#<i>error_number</i>)'.</td>
 <div class="subelement response">
 <code>array</code>An array that contains the table names. If the database
               does not contain any tables, the returned value is FALSE.</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$tables = $db-&gt;GetTables();
+foreach ($tables as $table)
+{
+    echo $table . "&lt;br /&gt;\n";
+}</pre>
+</div>
+</div>
 </div>
 <a name="GetXML" id="GetXML"></a><div class="element clickable method public GetXML" data-toggle="collapse" data-target=".GetXML .collapse">
 <h2>Return the last query as an XML Document</h2>
@@ -778,7 +965,8 @@ as ' (#<i>error_number</i>)'.</td>
 <h2>Inserts a row into a table in the connected database</h2>
 <pre>InsertRow(string $tableName, array $valuesArray) : integer</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -791,7 +979,27 @@ as ' (#<i>error_number</i>)'.</td>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>integer</code>Returns last insert ID on success or FALSE on failure</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">// $arrayVariable["column name"] = formatted SQL value
+$values["Name"] = MySQL::SQLValue("Violet");
+$values["Age"]  = MySQL::SQLValue(777, MySQL::SQLVALUE_NUMBER);
+// Execute the insert
+$result = $db-&gt;InsertRow("MyTable", $values);
+// If we have an error
+if (!$result)
+{
+    // Show the error and kill the script
+    $db-&gt;Kill();
+}
+else
+{
+    // No error, show the new record's ID
+    echo "The new record's ID is: " . $result;
+}</pre>
+</div>
+</div>
 </div>
 <a name="IsConnected" id="IsConnected"></a><div class="element clickable method public IsConnected" data-toggle="collapse" data-target=".IsConnected .collapse">
 <h2>Determines if a valid connection to the database exists</h2>
@@ -807,13 +1015,12 @@ as ' (#<i>error_number</i>)'.</td>
 <a name="IsDateStr" id="IsDateStr"></a><div class="element clickable method public IsDateStr" data-toggle="collapse" data-target=".IsDateStr .collapse">
 <h2>Determines if a value of any data type is a date PHP can convert</h2>
 <pre>IsDateStr(string $value) : boolean</pre>
-<div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="labels">
+<span class="label label-info">STATIC</span><span class="label label-info">API</span>
+</div>
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
-</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$value</h4>
@@ -822,13 +1029,22 @@ as ' (#<i>error_number</i>)'.</td>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns TRUE if value is date or FALSE if not date</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">if (MySQL::IsDate("January 1, 2000"))
+{
+    echo "valid date";
+}</pre>
+</div>
+</div>
 </div>
 <a name="Kill" id="Kill"></a><div class="element clickable method public Kill" data-toggle="collapse" data-target=".Kill .collapse">
 <h2>Stop executing (die/exit) and show last MySQL error message</h2>
 <pre>Kill(string $message, boolean $prepend_message) </pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -838,29 +1054,52 @@ as ' (#<i>error_number</i>)'.</td>
 <h4>$prepend_message</h4>
 <code>boolean</code><p>(Optional) Whether the message should be shown as-is (FALSE) or followed by the last error message/description (TRUE) (Default: TRUE)</p>
 </div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">// Stop executing the script and show the last error
+$db-&gt;Kill();</pre>
+</div>
+</div>
 </div>
 <a name="MoveFirst" id="MoveFirst"></a><div class="element clickable method public MoveFirst" data-toggle="collapse" data-target=".MoveFirst .collapse">
 <h2>Seeks to the beginning of the records</h2>
 <pre>MoveFirst() : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns TRUE on success or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;MoveFirst();
+while (!$db-&gt;EndOfSeek())
+{
+    $row = $db-&gt;Row();
+    echo $row-&gt;ColumnName1 . " " . $row-&gt;ColumnName2 . "\n";
+}</pre>
+</div>
+</div>
 </div>
 <a name="MoveLast" id="MoveLast"></a><div class="element clickable method public MoveLast" data-toggle="collapse" data-target=".MoveLast .collapse">
 <h2>Seeks to the end of the records</h2>
 <pre>MoveLast() : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns TRUE on success or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;MoveLast();</pre>
+</div>
+</div>
 </div>
 <a name="MyDyingMessage" id="MyDyingMessage"></a><div class="element clickable method public MyDyingMessage" data-toggle="collapse" data-target=".MyDyingMessage .collapse">
 <h2>Get last error message as HTML string</h2>
@@ -888,7 +1127,8 @@ while dying, a.k.a. Kill() without the death nor the echo'ing.</p></p>
 <h2>Connect to specified MySQL server</h2>
 <pre>Open(string $database, string $server, string $username, string $password, string $charset, string $collation, boolean $pcon) : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -922,13 +1162,22 @@ while dying, a.k.a. Kill() without the death nor the echo'ing.</p></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns TRUE on success or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">if (!$db-&gt;Open("MyDatabase", "localhost", "user", "password"))
+{
+    $db-&gt;Kill();
+}</pre>
+</div>
+</div>
 </div>
 <a name="Query" id="Query"></a><div class="element clickable method public Query" data-toggle="collapse" data-target=".Query .collapse">
 <h2>Executes the given SQL query and returns the records</h2>
 <pre>Query(string $sql) : object</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -939,8 +1188,13 @@ while dying, a.k.a. Kill() without the death nor the echo'ing.</p></p>
 <code>object</code>PHP 'mysql result' resource object containing the records
                on SELECT, SHOW, DESCRIBE or EXPLAIN queries and returns;
                TRUE or FALSE for all others i.e. UPDATE, DELETE, DROP
-               AND FALSE on all errors (setting the local Error message)</div>
-</div></div>
+               AND FALSE on all errors (setting the local Error message).</div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">if (!$db-&gt;Query("SELECT * FROM Table")) echo $db-&gt;Kill();</pre>
+</div>
+</div>
 </div>
 <a name="QueryArray" id="QueryArray"></a><div class="element clickable method public QueryArray" data-toggle="collapse" data-target=".QueryArray .collapse">
 <h2>Executes the given SQL query and returns a multi-dimensional array</h2>
@@ -1036,7 +1290,8 @@ is returned, only the first value in the first column is returned.</p></p>
 in microseconds</h2>
 <pre>QueryTimed(string $sql) : object</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -1046,38 +1301,56 @@ in microseconds</h2>
 <div class="subelement response">
 <code>object</code>PHP 'mysql result' resource object containing the records
                on SELECT, SHOW, DESCRIBE or EXPLAIN queries and returns
-               TRUE or FALSE for all others i.e. UPDATE, DELETE, DROP</div>
-</div></div>
+               TRUE or FALSE for all others i.e. UPDATE, DELETE, DROP.</div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;QueryTimed("SELECT * FROM MyTable");
+echo "Query took " . $db-&gt;TimerDuration() . " microseconds";</pre>
+</div>
+</div>
 </div>
 <a name="Records" id="Records"></a><div class="element clickable method public Records" data-toggle="collapse" data-target=".Records .collapse">
 <h2>Returns the records from the last query</h2>
 <pre>Records() : object</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>object</code>PHP 'mysql result' resource object containing the records
                for the last query executed</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$records = $db-&gt;Records();</pre>
+</div>
+</div>
 </div>
 <a name="RecordsArray" id="RecordsArray"></a><div class="element clickable method public RecordsArray" data-toggle="collapse" data-target=".RecordsArray .collapse">
 <h2>Returns all records from the last query as array of arrays</h2>
 <pre>RecordsArray(integer $resultType) : array</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"><p>Returns all records from the last query and returns the contents as an array of records
 where each record is presented as an array of columns (fields).</p></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$resultType</h4>
-<code>integer</code><p>(Optional) The type of array representing one record Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH</p>
+<code>integer</code><p>(Optional) The type of array representing one record Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH. (Default: MYSQL_ASSOC)</p>
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>array</code>Records in array form or FALSE on error. May return an
         EMPTY array when no records are available.</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$myArray = $db-&gt;RecordsArray(MYSQL_ASSOC);</pre>
+</div>
+</div>
 </div>
 <a name="RecordsObjects" id="RecordsObjects"></a><div class="element clickable method public RecordsObjects" data-toggle="collapse" data-target=".RecordsObjects .collapse">
 <h2>Returns all records from the last query as array of objects</h2>
@@ -1093,10 +1366,11 @@ where each record is presented as an array of columns (fields).</p></p>
 </div></div>
 </div>
 <a name="Release" id="Release"></a><div class="element clickable method public Release" data-toggle="collapse" data-target=".Release .collapse">
-<h2>Frees memory used by the query results and returns the function result.</h2>
+<h2>Frees memory used by the query results and returns the query execution result.</h2>
 <pre>Release(resource $result) : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <table class="table table-bordered"><tr>
 <th>warning</th>
@@ -1111,14 +1385,19 @@ where each record is presented as an array of columns (fields).</p></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns TRUE on success or FALSE on failure</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;Release();</pre>
+</div>
+</div>
 </div>
 <a name="Row" id="Row"></a><div class="element clickable method public Row" data-toggle="collapse" data-target=".Row .collapse">
-<h2>Reads the current row and returns contents as a
-PHP object or returns false on error</h2>
+<h2>Reads the current row and returns contents as a PHP object</h2>
 <pre>Row(integer $optional_row_number) : object</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -1128,14 +1407,24 @@ PHP object or returns false on error</h2>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>object</code>PHP object or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;MoveFirst();
+while (!$db-&gt;EndOfSeek())
+{
+    $row = $db-&gt;Row();
+    echo $row-&gt;ColumnName1 . " " . $row-&gt;ColumnName2 . "\n";
+}</pre>
+</div>
+</div>
 </div>
 <a name="RowArray" id="RowArray"></a><div class="element clickable method public RowArray" data-toggle="collapse" data-target=".RowArray .collapse">
-<h2>Reads the current row and returns contents as an
-array or returns false on error</h2>
+<h2>Reads the current row and returns contents as an array</h2>
 <pre>RowArray(integer $optional_row_number, integer $resultType) : array</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -1148,49 +1437,44 @@ array or returns false on error</h2>
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>array</code>Array that corresponds to fetched row or FALSE if no rows</div>
-</div></div>
+<code>array</code>Array that corresponds to the fetched row or FALSE on error or when no rows are available.</div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">for ($index = 0; $index &lt; $db-&gt;RowCount(); $index++)
+{
+    $val = $db-&gt;RowArray($index);
+}</pre>
+</div>
+</div>
 </div>
 <a name="RowCount" id="RowCount"></a><div class="element clickable method public RowCount" data-toggle="collapse" data-target=".RowCount .collapse">
 <h2>Returns the last query row count</h2>
 <pre>RowCount() : integer</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>integer</code>Row count or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;Query("SELECT * FROM Customer");
+echo "Row Count: " . $db-&gt;RowCount();</pre>
+</div>
+</div>
 </div>
 <a name="SQLBooleanValue" id="SQLBooleanValue"></a><div class="element clickable method public SQLBooleanValue" data-toggle="collapse" data-target=".SQLBooleanValue .collapse">
 <h2>Converts a boolean into a formatted TRUE or FALSE value of choice</h2>
 <pre>SQLBooleanValue(mixed $value, mixed $trueValue, mixed $falseValue, string $datatype) : string</pre>
-<div class="labels"><span class="label label-info">API</span></div>
+<div class="labels">
+<span class="label label-info">STATIC</span><span class="label label-info">API</span>
+</div>
 <div class="row collapse">
-<div class="span4">
+<div class="detail-description">
 <p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
-<th>static</th>
-<td></td>
-</tr>
-<tr>
-<th>example</th>
-<td>echo MySQL::SQLBooleanValue(false, "1", "0", MySQL::SQLVALUE_NUMBER);</td>
-</tr>
-<tr>
-<th>example</th>
-<td>echo MySQL::SQLBooleanValue($test, "Jan 1, 2007 ", "2007/06/01", MySQL::SQLVALUE_DATE);</td>
-</tr>
-<tr>
-<th>example</th>
-<td>echo MySQL::SQLBooleanValue("ON", "Ya", "Nope");</td>
-</tr>
-<tr>
-<th>example</th>
-<td>echo MySQL::SQLBooleanValue(1, '+', '-');</td>
-</tr>
-</table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$value</h4>
@@ -1209,25 +1493,25 @@ array or returns false on error</h2>
 <div class="subelement response">
 <code>string</code>SQL formatted value of the specified data type on success or FALSE on error</div>
 </div>
-<div class="span4">
+<div class="detail-examples">
 <h3>Examples</h3>
-<pre class="prettyprint linenums"></pre>
-<pre class="prettyprint linenums"></pre>
-<pre class="prettyprint linenums"></pre>
-<pre class="prettyprint linenums"></pre>
+<pre class="prettyprint linenums">echo MySQL::SQLBooleanValue(false, "1", "0", MySQL::SQLVALUE_NUMBER);
+echo MySQL::SQLBooleanValue($test, "Jan 1, 2007 ", "2007/06/01", MySQL::SQLVALUE_DATE);
+echo MySQL::SQLBooleanValue("ON", "Ya", "Nope");
+echo MySQL::SQLBooleanValue(1, '+', '-');</pre>
 </div>
 </div>
 </div>
 <a name="SQLFix" id="SQLFix"></a><div class="element clickable method public SQLFix" data-toggle="collapse" data-target=".SQLFix .collapse">
-<h2>Returns string suitable for inclusion in a SQL query, i.e.</h2>
+<h2>Returns string suitable for inclusion in a SQL query</h2>
 <pre>SQLFix(string $value) : string</pre>
-<div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"><p>properly escaped/filtered</p></p>
-<table class="table table-bordered"><tr>
-<th>static</th>
-<td></td>
-</tr></table>
+<div class="labels">
+<span class="label label-info">STATIC</span><span class="label label-info">API</span>
+</div>
+<div class="row collapse">
+<div class="detail-description">
+<p class="long_description"><p>The returned string representing the $value will be properly escaped
+and filtered to use as part of a constructed SQL query.</p></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$value</h4>
@@ -1236,27 +1520,30 @@ array or returns false on error</h2>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code>SQL formatted value</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$value = MySQL::SQLFix("\hello\ /world/");
+echo $value . "\n" . MySQL::SQLUnfix($value);</pre>
+</div>
+</div>
 </div>
 <a name="SQLUnfix" id="SQLUnfix"></a><div class="element clickable method public SQLUnfix" data-toggle="collapse" data-target=".SQLUnfix .collapse">
 <h2>Returns MySQL string as normal string</h2>
 <pre>SQLUnfix(string $value) : string</pre>
-<div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="labels">
+<span class="label label-info">STATIC</span><span class="label label-info">API</span>
+</div>
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
-<th>static</th>
-<td></td>
-</tr>
-<tr>
+<table class="table table-bordered"><tr>
 <th>warning</th>
 <td>Do NOT use on columns returned by a database query: such data has already
          been adequately processed by MySQL itself.
          The only probable place where the SQLUnfix() method MAY be useful is when
          DIRECTLY accessing strings produced by the SQLValue() method.</td>
-</tr>
-</table>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$value</h4>
@@ -1264,24 +1551,27 @@ array or returns false on error</h2>
 </div>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$value = MySQL::SQLFix("\hello\ /world/");
+echo $value . "\n" . MySQL::SQLUnfix($value);</pre>
+</div>
+</div>
 </div>
 <a name="SQLValue" id="SQLValue"></a><div class="element clickable method public SQLValue" data-toggle="collapse" data-target=".SQLValue .collapse">
 <h2>Formats any value into a string suitable for SQL statements</h2>
 <pre>SQLValue(mixed $value, string $datatype) : string</pre>
-<div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="labels">
+<span class="label label-info">STATIC</span><span class="label label-info">API</span>
+</div>
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
-<table class="table table-bordered">
-<tr>
+<table class="table table-bordered"><tr>
 <th>note</th>
 <td>Also supports data types returned from the gettype function.</td>
-</tr>
-<tr>
-<th>static</th>
-<td></td>
-</tr>
-</table>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$value</h4>
@@ -1294,14 +1584,22 @@ array or returns false on error</h2>
 <div class="subelement response">
 <code>string</code>The properly quoted and escaped/filtered value as a string
                which can be safely included in a generated SQL query.</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">echo MySQL::SQLValue("it's a string", "text");
+$sql = "SELECT * FROM Table WHERE Field1 = " . MySQL::SQLValue("123", MySQL::SQLVALUE_NUMBER);
+$sql = "UPDATE Table SET Field1 = " . MySQL::SQLValue("July 4, 2007", MySQL::SQLVALUE_DATE);</pre>
+</div>
+</div>
 </div>
 <a name="Seek" id="Seek"></a><div class="element clickable method public Seek" data-toggle="collapse" data-target=".Seek .collapse">
 <h2>Sets the internal database pointer to the
 specified row number and returns the result</h2>
 <pre>Seek(integer $row_number) : object</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -1310,18 +1608,29 @@ specified row number and returns the result</h2>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>object</code>Fetched row as PHP object on success or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;Seek(0);   // Move to the first record</pre>
+</div>
+</div>
 </div>
 <a name="SeekPosition" id="SeekPosition"></a><div class="element clickable method public SeekPosition" data-toggle="collapse" data-target=".SeekPosition .collapse">
 <h2>Returns the current cursor row location</h2>
 <pre>SeekPosition() : integer</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>integer</code>Current row number</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">echo "Current Row Cursor : " . $db-&gt;GetSeekPosition();</pre>
+</div>
+</div>
 </div>
 <a name="SelectArray" id="SelectArray"></a><div class="element clickable method public SelectArray" data-toggle="collapse" data-target=".SelectArray .collapse">
 <h2>Returns a multidimensional array of rows from a table based on a WHERE filter</h2>
@@ -1369,7 +1678,8 @@ specified row number and returns the result</h2>
 <h2>Selects a different database and character set</h2>
 <pre>SelectDatabase(string $database, string $charset) : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -1377,12 +1687,17 @@ specified row number and returns the result</h2>
 <code>string</code><p>Database name</p></div>
 <div class="subelement argument">
 <h4>$charset</h4>
-<code>string</code><p>(Optional) Character set (i.e. utf8)</p>
+<code>string</code><p>(Optional) Character set, e.g. 'utf8'. (Default: NULL)</p>
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns TRUE on success or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;SelectDatabase("DatabaseName");</pre>
+</div>
+</div>
 </div>
 <a name="SelectObjects" id="SelectObjects"></a><div class="element clickable method public SelectObjects" data-toggle="collapse" data-target=".SelectObjects .collapse">
 <h2>Returns an array of row (= record) objects from a table based on a WHERE filter</h2>
@@ -1426,7 +1741,8 @@ specified row number and returns the result</h2>
 <h2>Gets rows in a table based on a WHERE filter</h2>
 <pre>SelectRows(string $tableName, array | string $whereArray, array | string $columns, array | string $sortColumns, integer | string $limit) : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <table class="table table-bordered"><tr>
 <th>note</th>
@@ -1457,7 +1773,22 @@ specified row number and returns the result</h2>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns records on success or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">// $arrayVariable["column name"] = formatted SQL value
+$filter["Color"] = MySQL::SQLValue("Violet");
+$filter["Age"]   = MySQL::SQLValue(777, MySQL::SQLVALUE_NUMBER);
+// Execute the select
+$result = $db-&gt;SelectRows("MyTable", $filter);
+// If we have an error
+if (!$result)
+{
+    // Show the error and kill the script
+    $db-&gt;Kill();
+}</pre>
+</div>
+</div>
 </div>
 <a name="SelectSingleRow" id="SelectSingleRow"></a><div class="element clickable method public SelectSingleRow" data-toggle="collapse" data-target=".SelectSingleRow .collapse">
 <h2>Returns a single (first) row from a table based on a WHERE filter</h2>
@@ -1598,62 +1929,140 @@ WHERE filter.</h2>
 <h2>Returns last measured duration (time between TimerStart and TimerStop)</h2>
 <pre>TimerDuration(integer $decimals) : Float</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$decimals</h4>
-<code>integer</code><p>(Optional) The number of decimal places to show</p>
+<code>integer</code><p>(Optional) The number of decimal places to show (Default: 4)</p>
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>Float</code>Microseconds elapsed</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;TimerStart();
+// Do something or run some queries
+$db-&gt;TimerStop();
+echo $db-&gt;TimerDuration(2) . " microseconds";</pre>
+</div>
+</div>
 </div>
 <a name="TimerStart" id="TimerStart"></a><div class="element clickable method public TimerStart" data-toggle="collapse" data-target=".TimerStart .collapse">
 <h2>Starts time measurement (in microseconds)</h2>
 <pre>TimerStart() </pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse">
+<div class="detail-description"><p class="long_description"></p></div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;TimerStart();
+// Do something or run some queries
+$db-&gt;TimerStop();
+echo $db-&gt;TimerDuration() . " microseconds";</pre>
+</div>
+</div>
 </div>
 <a name="TimerStop" id="TimerStop"></a><div class="element clickable method public TimerStop" data-toggle="collapse" data-target=".TimerStop .collapse">
 <h2>Stops time measurement (in microseconds)</h2>
 <pre>TimerStop() </pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse">
+<div class="detail-description"><p class="long_description"></p></div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db-&gt;TimerStart();
+// Do something or run some queries
+$db-&gt;TimerStop();
+echo $db-&gt;TimerDuration() . " microseconds";</pre>
+</div>
+</div>
 </div>
 <a name="TransactionBegin" id="TransactionBegin"></a><div class="element clickable method public TransactionBegin" data-toggle="collapse" data-target=".TransactionBegin .collapse">
 <h2>Starts a transaction</h2>
 <pre>TransactionBegin() : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns TRUE on success or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$sql = "INSERT INTO MyTable (Field1, Field2) Values ('abc', 123)";
+$db-&gt;TransactionBegin();
+if ($db-&gt;Query($sql))
+{
+    $db-&gt;TransactionEnd();
+    echo "Last ID inserted was: " . $db-&gt;GetLastInsertID();
+}
+else
+{
+    $db-&gt;TransactionRollback();
+    echo "Query Failed";
+}</pre>
+</div>
+</div>
 </div>
 <a name="TransactionEnd" id="TransactionEnd"></a><div class="element clickable method public TransactionEnd" data-toggle="collapse" data-target=".TransactionEnd .collapse">
 <h2>Ends a transaction and commits the queries</h2>
 <pre>TransactionEnd() : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns TRUE on success or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$sql = "INSERT INTO MyTable (Field1, Field2) Values ('abc', 123)";
+$db-&gt;TransactionBegin();
+if ($db-&gt;Query($sql))
+{
+    $db-&gt;TransactionEnd();
+    echo "Last ID inserted was: " . $db-&gt;GetLastInsertID();
+}
+else
+{
+    $db-&gt;TransactionRollback();
+    echo "Query Failed";
+}</pre>
+</div>
+</div>
 </div>
 <a name="TransactionRollback" id="TransactionRollback"></a><div class="element clickable method public TransactionRollback" data-toggle="collapse" data-target=".TransactionRollback .collapse">
 <h2>Rolls the transaction back</h2>
 <pre>TransactionRollback() : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns TRUE on success or FALSE on failure</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$sql = "INSERT INTO MyTable (Field1, Field2) Values ('abc', 123)";
+$db-&gt;TransactionBegin();
+if ($db-&gt;Query($sql))
+{
+    $db-&gt;TransactionEnd();
+    echo "Last ID inserted was: " . $db-&gt;GetLastInsertID();
+}
+else
+{
+    $db-&gt;TransactionRollback();
+    echo "Query Failed";
+}</pre>
+</div>
+</div>
 </div>
 <a name="TruncateTable" id="TruncateTable"></a><div class="element clickable method public TruncateTable" data-toggle="collapse" data-target=".TruncateTable .collapse">
 <h2>Truncates a table removing all data</h2>
@@ -1671,12 +2080,13 @@ WHERE filter.</h2>
 </div></div>
 </div>
 <a name="UpdateRow" id="UpdateRow"></a><div class="element clickable method public UpdateRow" data-toggle="collapse" data-target=".UpdateRow .collapse">
-<h2>Updates rows in a table based on a WHERE filter
-(can be just one or many rows based on the filter)</h2>
+<h2>Update selected rows</h2>
 <pre>UpdateRow(string $tableName, array $valuesArray, array | string $whereArray) : boolean</pre>
 <div class="labels"><span class="label label-info">API</span></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="row collapse">
+<div class="detail-description">
+<p class="long_description"><p>Updates rows in a table based on a WHERE filter
+(can be just one or many rows based on the filter).</p></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$tableName</h4>
@@ -1692,13 +2102,24 @@ WHERE filter.</h2>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>boolean</code>Returns TRUE on success or FALSE on error</div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">// Create an array that holds the update information
+// $arrayVariable["column name"] = formatted SQL value
+$update["Name"] = MySQL::SQLValue("Bob");
+$update["Age"]  = MySQL::SQLValue(25, MySQL::SQLVALUE_NUMBER);
+// Execute the update where the ID is 1
+if (!$db-&gt;UpdateRows("test", $values, array("id" =&gt; 1))) $db-&gt;Kill();</pre>
+</div>
+</div>
 </div>
 <a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
 <h2>Constructor: Opens the connection to the database</h2>
 <pre>__construct(boolean $connect, string $database, string $server, string $username, string $password, string $charset, string $collation) </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -1729,7 +2150,14 @@ WHERE filter.</h2>
 <h4>$collation</h4>
 <code>string</code><p>(Optional) Character set collation</p>
 </div>
-</div></div>
+</div>
+<div class="detail-examples">
+<h3>Examples</h3>
+<pre class="prettyprint linenums">$db = new MySQL();
+$db = new MySQL(true, "database");
+$db = new MySQL(true, "database", "localhost", "username", "password");</pre>
+</div>
+</div>
 </div>
 <a name="__destruct" id="__destruct"></a><div class="element clickable method public __destruct" data-toggle="collapse" data-target=".__destruct .collapse">
 <h2>Destructor: Closes the connection to the database</h2>
@@ -1990,7 +2418,7 @@ is far more elaborate in a development environment setting to aid problem analys
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-10-21T22:47:08+02:00.<br></footer></div>
+            generated on 2012-10-22T00:27:52+02:00.<br></footer></div>
 </div>
 </body>
 </html>
