@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <phpdocumentor>
+  <title>Ultimate MySQL Wrapper Class for PHP 5.x</title>
   <parser>
     <default-package-name>UltimateMySqlClass</default-package-name>
     <target>doc</target>
@@ -9,8 +10,6 @@
     </markers>
     <extensions>
       <extension>php</extension>
-      <extension>php3</extension>
-      <extension>phtml</extension>
     </extensions>
     <visibility></visibility>
   </parser>
