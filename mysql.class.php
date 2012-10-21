@@ -1,14 +1,7 @@
 <?php
-
-/* make sure no-one can run anything here if they didn't arrive through 'proper channels' */
-if (!defined('COMPACTCMS_CODE')) { die('Illegal entry point!'); } /*MARKER*/
-
 /**
- * Ultimate MySQL Wrapper Class
+ * Ultimate MySQL Wrapper Class for PHP 5.x
  *
- * @version 2.5.1
- * @author Jeff L. Williams
- * @link http://www.phpclasses.org/ultimatemysql
  *
  * Contributions from
  *   Frank P. Walentynowicz
@@ -19,20 +12,91 @@ if (!defined('COMPACTCMS_CODE')) { die('Illegal entry point!'); } /*MARKER*/
  *   Vincent van Daal
  *   Xander Groesbeek   (SQLValue:int quoting; QueryArray tweak)
  *   Ger Hobbelt
+ *
+ *
+ * - Establish MySQL server connections easily
+ * - Execute SQL queries
+ * - Retrieve query results into objects or arrays
+ * - Retrieve the last inserted ID
+ * - Manage transactions (transaction processing)
+ * - Retrieve the list tables of a database
+ * - Retrieve the list fields of a table (or field comments)
+ * - Retrieve the length or data type of a field
+ * - Measure the time a query takes to execute
+ * - Display query results in an HTML table
+ * - Easy formatting for SQL parameters and values
+ * - Generate SQL Selects, Inserts, Updates, and Deletes
+ * - Error handling with error numbers and text
+ * - And much more!
+ * 
+ * Feb 02, 2007 - Written by Jeff Williams (Initial Release)
+ * Feb 11, 2007 - Contributions from Frank P. Walentynowicz
+ * Feb 21, 2007 - Contribution from Larry Wakeman
+ * Feb 21, 2007 - Bug Fixes and PHPDoc
+ * Mar 09, 2007 - Contribution from Nicola Abbiuso
+ * Mar 22, 2007 - Added array types to RecordsArray and RowArray
+ * Jul 01, 2007 - Class name change, constructor values, static methods, fixe
+ * Jul 16, 2007 - Bug fix, removed test, major improvements in error handling
+ * Aug 11, 2007 - Added InsertRow() and UpdateRows() methods
+ * Aug 19, 2007 - Added BuildSQL static functions, DeleteRows(), SelectRows(),
+ *                IsConnected(), and ability to throw Exceptions on errors
+ * Sep 07, 2007 - Enhancements to SQL SELECT (column aliases, sorting, limits)
+ * Sep 09, 2007 - Updated SelectRows(), UpdateRows() and added SelectTable(),
+ *                TruncateTable() and SQLVALUE constants for SQLValue()
+ * Oct 23, 2007 - Added QueryArray(), QuerySingleRow(), QuerySingleRowArray(),
+ *                QuerySingleValue(), HasRecords(), AutoInsertUpdate()
+ * Oct 28, 2007 - Small bug fixes
+ * Nov 28, 2007 - Contribution from Douglas Gintz
+ * Jul 06, 2009 - GetXML() and GetJSON() contribution from Emre Erkan
+ *                and ability to use a blank password if needed
+ * 
+ * Usage:
+ * 
+ *     include("mysql.class.php");
+ * 
+ *     $db = new MySQL(); 
+ *     $db = new MySQL(true, "database"); 
+ *     $db = new MySQL(true, "database", "localhost", "username", "password");
+ *  
+ * 
+ * @category  Ultimate MySQL Wrapper Class
+ * @package Ultimate MySQL Wrapper
+ * @version 2.5.1
+ * @author Jeff L. Williams
+ * @copyright 2007-2012 Jeff L. Williams
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT
+ * @link      http://www.phpclasses.org/ultimatemysql            Ultimate MySQL
  */
 
+
+/* make sure no-one can run anything here if they didn't arrive through 'proper channels' */
+if (!defined('COMPACTCMS_CODE')) { die('Illegal entry point!'); } /*MARKER*/
+
+
+/**
+ * Ultimate MySQL Wrapper Class
+ */
 class MySQL
 {
 	// SET THESE VALUES TO MATCH YOUR DATA CONNECTION
-	private $db_host             = 'localhost';         // server name
-	private $db_user             = '';                  // user name
-	private $db_pass             = '';                  // password
-	private $db_dbname           = '';                  // database name
-	private $db_charset          = 'utf8';              // optional character set (i.e. utf8)
-	private $db_charsetcollation = 'utf8_unicode_ci';   // optional character set collation (i.e. utf8_unicode_ci)
-	private $db_pcon             = false;              // use persistent connection?
+	
+	/** server name */
+	private $db_host             = 'localhost';         
+	/** user name */
+	private $db_user             = '';                  
+	/** password */
+	private $db_pass             = '';                  
+	/** database name */
+	private $db_dbname           = '';                  
+	/** optional character set (i.e. utf8) */
+	private $db_charset          = 'utf8';              
+	/** optional character set collation (i.e. utf8_unicode_ci) */
+	private $db_charsetcollation = 'utf8_unicode_ci';  
+	/** use persistent connection? */
+	private $db_pcon             = false;              
 
 	// constants for SQLValue function
+	
 	const SQLVALUE_BIT      = 'bit';
 	const SQLVALUE_BOOLEAN  = 'boolean';
 	const SQLVALUE_DATE     = 'date';
@@ -45,24 +109,48 @@ class MySQL
 	const SQLVALUE_Y_N      = 'y-n';
 
 	// class-internal variables - do not change
-	private $active_row     = -1;       // current row
-	private $error_desc     = '';       // last mysql error string
-	private $error_number   = 0;        // last mysql error number
-	private $in_transaction = false;    // used for transactions
-	private $last_insert_id;            // last id of record inserted
-	private $last_result;               // last mysql query result
-	private $last_sql       = '';       // last mysql query
-	private $mysql_link     = 0;        // mysql link resource
-	private $time_diff      = 0;        // holds the difference in time
-	private $time_start     = 0;        // start time for the timer
-	private $query_count    = 0;        // tracks the number of queries executed through this instance
+	
+	/** current row */
+	private $active_row     = -1;       
+	/** last mysql error string */
+	private $error_desc     = '';       
+	/** last mysql error number */
+	private $error_number   = 0;        
+	/** used for transactions */
+	private $in_transaction = false;    
+	/** last id of record inserted */
+	private $last_insert_id;            
+	/** last mysql query result */
+	private $last_result;               
+	/** last mysql query */
+	private $last_sql       = '';       
+	/** mysql link resource */
+	private $mysql_link     = 0;        
+	/** holds the difference in time */
+	private $time_diff      = 0;        
+	/** start time for the timer */
+	private $time_start     = 0;        
+	/** tracks the number of queries executed through this instance */
+	private $query_count    = 0;        
 
 	/**
 	 * Determines if an error throws an exception
 	 *
+	 * @api
 	 * @var boolean Set to true to throw error exceptions
 	 */
 	public $ThrowExceptions = false;
+
+	/**
+	 * Provide minimal or extended error information
+	 * 
+	 * Determines if the code is running in a development or production environment: error diagnostics information
+	 * is far more elaborate in a development environment setting to aid problem analysis and resolution.
+	 *
+	 * @api
+	 * @var boolean Set to false to enable production environment behaviour (reduced info available for errors)
+	 */
+	public $InDevelopmentEnvironment = true;
 
 	/**
 	 * Constructor: Opens the connection to the database
@@ -95,7 +183,6 @@ class MySQL
 
 	/**
 	 * Destructor: Closes the connection to the database
-	 *
 	 */
 	public function __destruct()
 	{
@@ -103,18 +190,26 @@ class MySQL
 	}
 
 	/**
-	 * Automatically does an INSERT or UPDATE depending if an existing record
-	 * exists in a table
+	 * UPSERT a row
+	 * 
+	 * Automatically does an INSERT or UPDATE depending on whether a record
+	 * already exists in a table.
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
 	 * @param array $valuesArray An associative array containing the column
 	 *                            names as keys and values as data. The values
 	 *                            must be SQL ready (i.e. quotes around
-	 *                            strings, formatted dates, ect)
-	 * @param array $whereArray An associative array containing the column
+	 *                            strings, formatted dates, etc.)
+	 * @param array|string $whereArray An associative array containing the column
 	 *                           names as keys and values as data. The values
 	 *                           must be SQL ready (i.e. quotes around strings,
-	 *                           formatted dates, ect).
+	 *                           formatted dates, etc.).
+	 *                           <br/>
+	 *                           This parameter may alternatively be a string, in
+	 *                           which case it is used verbatim for the WHERE 
+	 *                           clause of the query. This is useful when
+	 *                           advanced queries are constructed.
 	 * @return boolean Returns TRUE on success or FALSE on error
 	 */
 	public function AutoInsertUpdate($tableName, $valuesArray, $whereArray)
@@ -134,8 +229,11 @@ class MySQL
 	}
 
 	/**
-	 * Returns true if the internal pointer is at the beginning of the records
+	 * Test if the internal pointer is at the start of the record set
 	 *
+	 * Returns true if the internal pointer is at the beginning of the record set produced by the last query.
+	 *
+	 * @api
 	 * @return boolean TRUE if at the first row or FALSE if not
 	 */
 	public function BeginningOfSeek()
@@ -152,16 +250,21 @@ class MySQL
 	}
 
 	/**
-	 * Builds a comma delimited list of columns for use with SQL
+	 * Builds a comma delimited list of columns for use with a SQL query
 	 *
-	 * @param array $valuesArray An array containing the column names.
+	 * This method can be used to construct a SELECT, FROM or SORT BY section of an SQL query.
+	 *
+	 * @param array|string $columns Either an array containing the column names
+	 *                       or a string. The latter is used when, for example,
+	 *                       constructing 'advanced' queries with SUM(*) 
+	 *                       or other expressions in the SELECT fieldset section.
 	 * @param boolean $addQuotes (Optional) TRUE to add quotes
 	 * @param boolean $showAlias (Optional) TRUE to show column alias
 	 * @param boolean $withSortMarker (Optional) TRUE when the field list is meant
 	 *                  for an ORDER BY clause; fields may be prefixed by a
 	 *                  plus(+) or minus(-) to indicate sort order.
 	 *                  Default is ASCending for each field.
-	 * @return string Returns the SQL column list on success or NULL on failure
+	 * @return string Returns the constructed SQL column list on success or NULL on failure
 	 */
 	private function BuildSQLColumns($columns, $addQuotes = true, $showAlias = true, $withSortMarker = false)
 	{
@@ -234,12 +337,18 @@ class MySQL
 	/**
 	 * Builds a SQL DELETE statement
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
-	 * @param array $whereArray (Optional) An associative array containing the
+	 * @param array|string $whereArray (Optional) An associative array containing the
 	 *                           column names as keys and values as data. The
 	 *                           values must be SQL ready (i.e. quotes around
-	 *                           strings, formatted dates, ect). If not specified
+	 *                           strings, formatted dates, etc.). If not specified
 	 *                           then all values in the table are deleted.
+	 *                           <br/>
+	 *                           This parameter may alternatively be a string, in
+	 *                           which case it is used verbatim for the WHERE 
+	 *                           clause of the query. This is useful when
+	 *                           advanced queries are constructed.
 	 * @return string Returns the SQL DELETE statement
 	 */
 	public function BuildSQLDelete($tableName, $whereArray = null)
@@ -257,11 +366,12 @@ class MySQL
 	/**
 	 * Builds a SQL INSERT statement
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
 	 * @param array $valuesArray An associative array containing the column
 	 *                            names as keys and values as data. The values
 	 *                            must be SQL ready (i.e. quotes around
-	 *                            strings, formatted dates, ect)
+	 *                            strings, formatted dates, etc.)
 	 * @return string Returns a SQL INSERT statement
 	 */
 	public function BuildSQLInsert($tableName, $valuesArray)
@@ -277,17 +387,23 @@ class MySQL
 	/**
 	 * Builds a simple SQL SELECT statement
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
-	 * @param array $whereArray (Optional) An associative array containing the
+	 * @param array|string $whereArray (Optional) An associative array containing the
 	 *                          column names as keys and values as data. The
 	 *                          values must be SQL ready (i.e. quotes around
-	 *                          strings, formatted dates, ect)
-	 * @param array/string $columns (Optional) The column or list of columns to select
-	 * @param array/string $sortColumns (Optional) Column or list of columns to sort by
-	 * @param boolean $sortAscending (Optional) TRUE for ascending; FALSE for descending
-	 *                               This only works if $sortColumns are specified
-	 * @param integer/string $limit (Optional) The limit of rows to return
+	 *                          strings, formatted dates, etc.)
+	 * @param array|string $columns (Optional) The column or list of columns to select
+	 * @param array|string $sortColumns (Optional) Column or list of columns to sort by.
+	 *                          Column names may be prefixed by a plus(+) or minus(-) 
+	 *                          to indicate sort order.
+	 *                          Default is ASCending for each column.	 
+	 * @param integer|string $limit (Optional) The limit of rows to return
 	 * @return string Returns a SQL SELECT statement
+	 *
+	 * @note Any of the parameters $whereArray, $columns, $sortColumns or $limit
+	 *       may alternatively be a string, in which case these are used verbatim 
+	 *       in the query. This is useful when advanced queries are constructed.
 	 */
 	public function BuildSQLSelect($tableName, $whereArray = null, $columns = null,
 										  $sortColumns = null, $limit = null)
@@ -331,16 +447,22 @@ class MySQL
 	/**
 	 * Builds a SQL UPDATE statement
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
 	 * @param array $valuesArray An associative array containing the column
 	 *                            names as keys and values as data. The values
 	 *                            must be SQL ready (i.e. quotes around
-	 *                            strings, formatted dates, ect)
-	 * @param array $whereArray (Optional) An associative array containing the
+	 *                            strings, formatted dates, etc.)
+	 * @param array|string $whereArray (Optional) An associative array containing the
 	 *                           column names as keys and values as data. The
 	 *                           values must be SQL ready (i.e. quotes around
-	 *                           strings, formatted dates, ect). If not specified
+	 *                           strings, formatted dates, etc.). If not specified
 	 *                           then all values in the table are updated.
+	 *                           <br/>
+	 *                           This parameter may alternatively be a string, in
+	 *                           which case it is used verbatim for the WHERE 
+	 *                           clause of the query. This is useful when
+	 *                           advanced queries are constructed.
 	 * @return string Returns a SQL UPDATE statement
 	 */
 	public function BuildSQLUpdate($tableName, $valuesArray, $whereArray = null)
@@ -374,9 +496,11 @@ class MySQL
 	}
 
 	/**
-	 * [STATIC] Construct a value string suitable for incorporation anywhere
+	 * Construct a value string suitable for incorporation anywhere
 	 * in a SQL query. This methos invokes self::SQLValue() under the hood.
 	 *
+	 * @static
+	 * @api
 	 * @param arbitrary $value The value to be checked and processed.
 	 *                         Usually this would be a string, but any other
 	 *                         type which can be cast to a string is fine
@@ -390,13 +514,20 @@ class MySQL
 
 	/**
 	 * Builds a SQL WHERE clause from an array.
+	 *
 	 * If a key is specified, the key is used at the field name and the value
 	 * as a comparison. If a key is not used, the value is used as the clause.
 	 *
-	 * @param array $whereArray An associative array containing the column
+	 * @api
+	 * @param array|string $whereArray An associative array containing the column
 	 *                           names as keys and values as data. The values
 	 *                           must be SQL ready (i.e. quotes around
-	 *                           strings, formatted dates, ect)
+	 *                           strings, formatted dates, etc.).
+	 *                           <br/>
+	 *                           This parameter may alternatively be a string, in
+	 *                           which case it is returned verbatim. This is useful
+	 *                           when advanced queries are constructed and this 
+	 *                           method is invoked internally.
 	 * @return string Returns a string containing the SQL WHERE clause
 	 */
 	public function BuildSQLWhereClause($whereArray)
@@ -443,6 +574,7 @@ class MySQL
 	/**
 	 * Close current MySQL connection
 	 *
+	 * @api
 	 * @return object Returns TRUE on success or FALSE on error
 	 */
 	public function Close()
@@ -468,15 +600,23 @@ class MySQL
 	}
 
 	/**
-	 * Deletes rows in a table based on a WHERE filter
-	 * (can be just one or many rows based on the filter)
+	 * Delete selected rows.
 	 *
+	 * Deletes rows in a table based on a WHERE filter
+	 * (can be just one or many rows based on the filter).
+	 *
+	 * @api
 	 * @param string $tableName The name of the table
-	 * @param array $whereArray (Optional) An associative array containing the
+	 * @param array|string $whereArray (Optional) An associative array containing the
 	 *                          column names as keys and values as data. The
 	 *                          values must be SQL ready (i.e. quotes around
-	 *                          strings, formatted dates, ect). If not specified
+	 *                          strings, formatted dates, etc.). If not specified
 	 *                          then all values in the table are deleted.
+	 *                           <br/>
+	 *                           This parameter may alternatively be a string, in
+	 *                           which case it is used verbatim for the WHERE 
+	 *                           clause of the query. This is useful when
+	 *                           advanced queries are constructed.
 	 * @return boolean Returns TRUE on success or FALSE on error
 	 */
 	public function DeleteRows($tableName, $whereArray = null)
@@ -498,6 +638,7 @@ class MySQL
 	/**
 	 * Returns true if the internal pointer is at the end of the records
 	 *
+	 * @api
 	 * @return boolean TRUE if at the last row or FALSE if not
 	 */
 	public function EndOfSeek()
@@ -514,8 +655,13 @@ class MySQL
 	}
 
 	/**
-	 * Returns the last MySQL error as text
+	 * Return the last MySQL error as text
 	 *
+	 * @note 
+	 * The returned error description string is appended with the error number itself 
+	 * as ' (#<i>error_number</i>)'.
+	 *
+	 * @api
 	 * @return string Error text from last known error
 	 */
 	public function Error()
@@ -543,8 +689,9 @@ class MySQL
 	}
 
 	/**
-	 * Returns the last MySQL error as a number
+	 * Return the last MySQL error as a number
 	 *
+	 * @api
 	 * @return integer Error number from last known error
 	 */
 	public function ErrorNumber()
@@ -567,8 +714,10 @@ class MySQL
 	}
 
 	/**
-	 * [STATIC] Converts any value of any datatype into boolean (true or false)
+	 * Convert any value of any datatype into boolean (true or false)
 	 *
+	 * @static
+	 * @api
 	 * @param mixed $value Value to analyze for TRUE or FALSE
 	 * @return boolean Returns TRUE or FALSE
 	 */
@@ -610,11 +759,12 @@ class MySQL
 	}
 
 	/**
-	 * Returns the comments for fields in a table into an
-	 * array or NULL if the table has not got any fields
+	 * Return the comments for fields in a table
 	 *
+	 * @api
 	 * @param string $table Table name
 	 * @return array An array that contains the column comments
+	 *               or FALSE on error.
 	 */
 	public function GetColumnComments($table)
 	{
@@ -635,7 +785,7 @@ class MySQL
 		{
 			// Get the column names
 			$columnNames = $this->GetColumnNames($table);
-			if ($this->ErrorNumber())
+			if (!$columnNames)
 			{
 				return false;
 			}
@@ -655,11 +805,12 @@ class MySQL
 	}
 
 	/**
-	 * This function returns the number of columns or returns FALSE on error
+	 * Get the number of columns
 	 *
+	 * @api
 	 * @param string $table (Optional) If a table name is not specified, the
 	 *                      column count is returned from the last query
-	 * @return integer The total count of columns
+	 * @return integer The total count of columns or FALSE on error
 	 */
 	public function GetColumnCount($table = null)
 	{
@@ -698,13 +849,14 @@ class MySQL
 	}
 
 	/**
-	 * This function returns the data type for a specified column. If
-	 * the column does not exists or no records exist, it returns FALSE
+	 * Return the data type for a specified column
 	 *
-	 * @param string $column Column name or number (first column is 0)
+	 * @api
+	 * @param intege|string $column Column name or number (first column is 0)
 	 * @param string $table (Optional) If a table name is not specified, the
 	 *                      last returned records are used
-	 * @return string MySQL data (field) type
+	 * @return string The MySQL data (field) type.  If the column does not 
+	 *                exist or no records exist, return FALSE.
 	 */
 	public function GetColumnDataType($column, $table = null)
 	{
@@ -758,12 +910,13 @@ class MySQL
 	}
 
 	/**
-	 * This function returns the position of a column
+	 * Return the position of a column
 	 *
+	 * @api
 	 * @param string $column Column name
 	 * @param string $table (Optional) If a table name is not specified, the
 	 *                      last returned records are used.
-	 * @return integer Column ID
+	 * @return integer Column ID or FALSE on error.
 	 */
 	public function GetColumnID($column, $table = '')
 	{
@@ -798,12 +951,13 @@ class MySQL
 	}
 
 	/**
-	 * This function returns the field length or returns FALSE on error
+	 * Return the field length
 	 *
+	 * @api
 	 * @param string $column Column name
 	 * @param string $table (Optional) If a table name is not specified, the
 	 *                      last returned records are used.
-	 * @return integer Field length
+	 * @return integer Field length or FALSE on error.
 	 */
 	public function GetColumnLength($column, $table = null)
 	{
@@ -862,13 +1016,15 @@ class MySQL
 	}
 
 	/**
-	 * This function returns the name for a specified column number. If
-	 * the index does not exists or no records exist, it returns FALSE
+	 * Return the field name for a specified column number
 	 *
+	 * @api
 	 * @param string $columnID Column position (0 is the first column)
 	 * @param string $table (Optional) If a table name is not specified, the
 	 *                      last returned records are used.
-	 * @return string Field Name
+	 * @return string The field name for a specified column number. If
+	 *                the given column index number is invalid (does not exist)
+	 *                or no records exist, return FALSE.
 	 */
 	public function GetColumnName($columnID, $table = null)
 	{
@@ -916,11 +1072,12 @@ class MySQL
 	}
 
 	/**
-	 * Returns the field names in a table or query in an array
+	 * Return the field names in a table or query as an array
 	 *
+	 * @api
 	 * @param string $table (Optional) If a table name is not specified, the
 	 *                      last returned records are used
-	 * @return array An array that contains the column names
+	 * @return array An array that contains the column names or FALSE on error.
 	 */
 	public function GetColumnNames($table = null)
 	{
@@ -969,14 +1126,15 @@ class MySQL
 	}
 
 	/**
-	 * This function returns the last query as an HTML table
+	 * Return the last query as a HTML table
 	 *
+	 * @api
 	 * @param boolean $showCount (Optional) TRUE if you want to show the row count,
 	 *                           FALSE if you do not want to show the count
 	 * @param string $styleTable (Optional) table tag attributes, e.g. styling
 	 * @param string $styleHeader (Optional) header row tag attributes
 	 * @param string $styleData (Optional) cell tag attributes
-	 * @return string HTML containing a table with all records listed
+	 * @return string HTML containing a table with all records listed or FALSE on error
 	 */
 	public function GetHTML($showCount = true, $styleTable = null, $styleHeader = null, $styleData = null)
 	{
@@ -1050,8 +1208,9 @@ class MySQL
 	}
 
 	/**
-	 * Returns the last query as a JSON document
+	 * Return the last query as a JSON document
 	 *
+	 * @api
 	 * @return string JSON containing all records listed
 	 */
 	public function GetJSON()
@@ -1087,8 +1246,9 @@ class MySQL
 	}
 
 	/**
-	 * Returns the last autonumber ID field from a previous INSERT query
+	 * Return the last autonumber ID field from a previous INSERT query
 	 *
+	 * @api
 	 * @return  integer ID number from previous INSERT query
 	 */
 	public function GetLastInsertID()
@@ -1097,8 +1257,9 @@ class MySQL
 	}
 
 	/**
-	 * Returns the last SQL statement executed
+	 * Return the last SQL statement executed
 	 *
+	 * @api
 	 * @return string Current SQL query string
 	 */
 	public function GetLastSQL()
@@ -1107,15 +1268,15 @@ class MySQL
 	}
 
 	/**
-	 * This function returns table names from the database
-	 * into an array. If the database does not contains
-	 * any tables, the returned value is FALSE
+	 * Get all table names from the database
 	 *
+	 * @api
 	 * @param string $filter [Optional] Comma separated list of acceptable table
 	 *                       names: no other table will be listed in the results.
 	 *                       Alternatively, when no filter is specified, all tables
 	 *                       are listed. This is the default behaviour of this method.
-	 * @return array An array that contains the table names
+	 * @return array An array that contains the table names. If the database 
+	 *               does not contain any tables, the returned value is FALSE.
 	 */
 	public function GetTables($filter = null)
 	{
@@ -1161,8 +1322,9 @@ class MySQL
 	}
 
 	/**
-	 * Returns the last query as an XML Document
+	 * Return the last query as an XML Document
 	 *
+	 * @api
 	 * @return string XML containing all records listed
 	 */
 	public function GetXML()
@@ -1232,6 +1394,8 @@ class MySQL
 
 
 	/**
+	 * Dump the entire database as an SQL script
+	 *
 	 * Produces a SQL script representing the dump of the entire database (when no
 	 * (optional, comma-separated set of) tables has been specified as a method
 	 * argument) or just the specified (comma separated set of) tables.
@@ -1239,16 +1403,27 @@ class MySQL
 	 * dumped. Or both, for a full-fledged database/table dump which can serve as
 	 * a db/table backup/restore script later on.
 	 *
+	 * @api
 	 * @param string $tables [Optional] Comma separated list of tables. When none
-	 *                       are specified, the entire database is assumed (this is the default).
-	 * @param boolean $with_sql_comments [Optional] Include SQL comments in the generated script (default: TRUE).
-	 * @param boolean $with_structure [Optional] Whether to include the table structure creation (and tear-down) SQL statements in the generated script (default: TRUE).
-	 * @param boolean $with_data [Optional] Whether to include the table rows (data) in the generated script (default: TRUE).
-	 * @param boolean $with_drops_and_truncates [Optional] Whether to include the apropriate DROP TABLE and/or TRUNCATE TABLE statements in the generated script (default: TRUE).
+	 *                       are specified, the entire database is assumed (this 
+	 *                       is the default).
+	 * @param boolean $with_sql_comments [Optional] Include SQL comments in the 
+	 *                       generated script (default: TRUE).
+	 * @param boolean $with_structure [Optional] Whether to include the table 
+	 *                       structure creation (and tear-down) SQL statements in 
+	 *                       the generated script (default: TRUE).
+	 * @param boolean $with_data [Optional] Whether to include the table rows (data) 
+	 *                       in the generated script (default: TRUE).
+	 * @param boolean $with_drops_and_truncates [Optional] Whether to include the 
+	 *                       apropriate DROP TABLE and/or TRUNCATE TABLE statements 
+	 *                       in the generated script (default: TRUE).
+	 * @param boolean $alter_database [Optional] Whether to include the apropriate 
+	 *                       ALTER DATABASE statement in the generated script to 
+	 *                       set the default database charset and collation (default: TRUE).
 	 *
 	 * @return string the generated SQL script, boolean FALSE when a query error occurred.
 	 */
-	public function Dump($tables = null, $with_sql_comments = true, $with_structure = true, $with_data = true, $with_drops_and_truncates = true, $create_database = false)
+	public function Dump($tables = null, $with_sql_comments = true, $with_structure = true, $with_data = true, $with_drops_and_truncates = true, $alter_database = true)
 	{
 		$this->ResetError();
 		if (!$this->IsConnected())
@@ -1327,7 +1502,7 @@ class MySQL
 			$result = 'ALTER DATABASE `' . self::SQLFix($this->db_dbname) . '` DEFAULT CHARACTER SET `' . self::SQLFix($charset) . '` COLLATE `' . self::SQLFix($collation) . '`;';
 			$tv .= $result . "\r\n" . "\r\n" . "\r\n";
 
-			if ($with_structure && !$create_database)
+			if ($with_structure && $alter_database)
 			{
 				$value .= $tv;
 			}
@@ -1495,6 +1670,7 @@ class MySQL
 	/**
 	 * Determines if a query contains any rows
 	 *
+	 * @api
 	 * @param string $sql [Optional] If specified, the query is first executed
 	 *                    Otherwise, the last query is used for comparison
 	 * @return boolean TRUE if records exist, FALSE if not or query error
@@ -1511,11 +1687,12 @@ class MySQL
 	/**
 	 * Inserts a row into a table in the connected database
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
 	 * @param array $valuesArray An associative array containing the column
 	 *                            names as keys and values as data. The values
 	 *                            must be SQL ready (i.e. quotes around
-	 *                            strings, formatted dates, ect)
+	 *                            strings, formatted dates, etc.)
 	 * @return integer Returns last insert ID on success or FALSE on failure
 	 */
 	public function InsertRow($tableName, $valuesArray)
@@ -1544,6 +1721,7 @@ class MySQL
 	/**
 	 * Determines if a valid connection to the database exists
 	 *
+	 * @api
 	 * @return boolean TRUE idf connectect or FALSE if not connected
 	 */
 	public function IsConnected()
@@ -1552,8 +1730,10 @@ class MySQL
 	}
 
 	/**
-	 * [STATIC] Determines if a value of any data type is a date PHP can convert
+	 * Determines if a value of any data type is a date PHP can convert
 	 *
+	 * @static
+	 * @api
 	 * @param string $value
 	 * @return boolean Returns TRUE if value is date or FALSE if not date
 	 */
@@ -1572,6 +1752,12 @@ class MySQL
 
 	/**
 	 * Stop executing (die/exit) and show last MySQL error message
+	 * 
+	 * @api
+	 * @param string $message The message to display on exit
+	 * @param boolean $prepend_message (Optional) Whether the message should
+	 *                       be shown as-is (FALSE) or followed by the last 
+	 *                       error message/description (TRUE) (Default: TRUE)
 	 */
 	public function Kill($message = '', $prepend_message = true)
 	{
@@ -1579,12 +1765,22 @@ class MySQL
 	}
 
 	/**
-	 * Return the error message ready for throwing back out to the client side while dying, a.k.a. Kill() without the death nor the echo'ing.
+	 * Get last error message as HTML string 
+	 *
+	 * Return the error message ready for throwing back out to the client side 
+	 * while dying, a.k.a. Kill() without the death nor the echo'ing.
+	 * 
+	 * @api
+	 * @param string $message The message to display on exit
+	 * @param boolean $prepend_message (Optional) Whether the message should 
+	 *                       be shown as-is (FALSE) or followed by the last 
+	 *                       error message/description (TRUE) (Default: TRUE)
+	 * @return string Return the error message as a HTML string; when the 
+	 *         $this->InDevelopmentEnvironment configuration member has been 
+	 *         set, the offending query is included for enhanced diagnostics.
 	 */
 	public function MyDyingMessage($message = '', $prepend_message = true)
 	{
-		global $cfg;
-
 		if (strlen($message) > 0)
 		{
 			if ($prepend_message)
@@ -1596,7 +1792,10 @@ class MySQL
 				return $message;
 			}
 		}
-		if ($cfg['IN_DEVELOPMENT_ENVIRONMENT']) $message .= '<h1>Offending SQL query</h1><p>' . htmlspecialchars($this->last_sql, ENT_COMPAT, 'UTF-8') . '</p><h2>Error Message</h2><p> ';
+		if ($this->InDevelopmentEnvironment) 
+		{
+			$message .= '<h1>Offending SQL query</h1><p>' . htmlspecialchars($this->last_sql, ENT_COMPAT, 'UTF-8') . '</p><h2>Error Message</h2><p> ';
+		}
 
 		return $message . $this->Error();
 	}
@@ -1604,6 +1803,7 @@ class MySQL
 	/**
 	 * Seeks to the beginning of the records
 	 *
+	 * @api
 	 * @return boolean Returns TRUE on success or FALSE on error
 	 */
 	public function MoveFirst()
@@ -1623,6 +1823,7 @@ class MySQL
 	/**
 	 * Seeks to the end of the records
 	 *
+	 * @api
 	 * @return boolean Returns TRUE on success or FALSE on error
 	 */
 	public function MoveLast()
@@ -1642,6 +1843,7 @@ class MySQL
 	/**
 	 * Connect to specified MySQL server
 	 *
+	 * @api
 	 * @param string $database (Optional) Database name
 	 * @param string $server   (Optional) Host address
 	 * @param string $username (Optional) User name
@@ -1707,6 +1909,7 @@ class MySQL
 	/**
 	 * Executes the given SQL query and returns the records
 	 *
+	 * @api
 	 * @param string $sql The query string should not end with a semicolon
 	 * @return object PHP 'mysql result' resource object containing the records
 	 *                on SELECT, SHOW, DESCRIBE or EXPLAIN queries and returns;
@@ -1767,6 +1970,7 @@ class MySQL
 	/**
 	 * Executes the given SQL query and returns a multi-dimensional array
 	 *
+	 * @api
 	 * @param string $sql The query string should not end with a semicolon
 	 * @param integer $resultType (Optional) The type of array
 	 *                Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH
@@ -1790,9 +1994,12 @@ class MySQL
 	}
 
 	/**
-	 * Executes the given SQL query and returns an array of objects, where
-	 * each record is an object with the columns serving as object member variables
+	 * Executes the given SQL query
 	 *
+	 * Executes the given SQL query and returns an array of objects, where
+	 * each record is an object with the columns serving as object member variables.
+	 *
+	 * @api
 	 * @param string $sql The query string should not end with a semicolon
 	 * @return array An array of record objects containing all the data
 	 *               returned from the query or FALSE on all errors
@@ -1817,20 +2024,26 @@ class MySQL
 	/**
 	 * Returns a multidimensional array of rows from a table based on a WHERE filter
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
-	 * @param array $whereArray (Optional) An associative array containing the
+	 * @param array|string $whereArray (Optional) An associative array containing the
 	 *                          column names as keys and values as data. The
 	 *                          values must be SQL ready (i.e. quotes around
-	 *                          strings, formatted dates, ect)
-	 * @param array/string $columns (Optional) The column or list of columns to select
-	 * @param array/string $sortColumns (Optional) Column or list of columns to sort by
-	 * @param boolean $sortAscending (Optional) TRUE for ascending; FALSE for descending
-	 *                               This only works if $sortColumns are specified
-	 * @param integer/string $limit (Optional) The limit of rows to return
+	 *                          strings, formatted dates, etc.)
+	 * @param array|string $columns (Optional) The column or list of columns to select
+	 * @param array|string $sortColumns (Optional) Column or list of columns to sort by.
+	 *                          Column names may be prefixed by a plus(+) or minus(-) 
+	 *                          to indicate sort order.
+	 *                          Default is ASCending for each column.	 
+	 * @param integer|string $limit (Optional) The limit of rows to return
 	 * @param integer $resultType (Optional) The type of array
 	 *                Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH
 	 * @return array A multi-dimensional array containing all the data
 	 *               returned from the query or FALSE on all errors
+	 *
+	 * @note Any of the parameters $whereArray, $columns, $sortColumns or $limit
+	 *       may alternatively be a string, in which case these are used verbatim 
+	 *       in the query. This is useful when advanced queries are constructed.
 	 */
 	public function SelectArray($tableName, $whereArray = null, $columns = null,
 							   $sortColumns = null, $limit = null, $resultType = MYSQL_ASSOC)
@@ -1852,18 +2065,24 @@ class MySQL
 	/**
 	 * Returns an array of row (= record) objects from a table based on a WHERE filter
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
-	 * @param array $whereArray (Optional) An associative array containing the
+	 * @param array|string $whereArray (Optional) An associative array containing the
 	 *                          column names as keys and values as data. The
 	 *                          values must be SQL ready (i.e. quotes around
-	 *                          strings, formatted dates, ect)
-	 * @param array/string $columns (Optional) The column or list of columns to select
-	 * @param array/string $sortColumns (Optional) Column or list of columns to sort by
-	 * @param boolean $sortAscending (Optional) TRUE for ascending; FALSE for descending
-	 *                               This only works if $sortColumns are specified
-	 * @param integer/string $limit (Optional) The limit of rows to return
+	 *                          strings, formatted dates, etc.)
+	 * @param array|string $columns (Optional) The column or list of columns to select
+	 * @param array|string $sortColumns (Optional) Column or list of columns to sort by.
+	 *                          Column names may be prefixed by a plus(+) or minus(-) 
+	 *                          to indicate sort order.
+	 *                          Default is ASCending for each column.	 
+	 * @param integer|string $limit (Optional) The limit of rows to return
 	 * @return array An array of record objects containing all the data
 	 *               returned from the query or FALSE on all errors
+	 *
+	 * @note Any of the parameters $whereArray, $columns, $sortColumns or $limit
+	 *       may alternatively be a string, in which case these are used verbatim 
+	 *       in the query. This is useful when advanced queries are constructed.
 	 */
 	public function SelectObjects($tableName, $whereArray = null, $columns = null,
 							   $sortColumns = null, $limit = null)
@@ -1885,6 +2104,7 @@ class MySQL
 	/**
 	 * Executes the given SQL query and returns only one (the first) row
 	 *
+	 * @api
 	 * @param string $sql The query string should not end with a semicolon
 	 * @return object PHP resource object containing the first row or
 	 *                FALSE if no row is returned from the query
@@ -1908,18 +2128,24 @@ class MySQL
 	/**
 	 * Returns a single (first) row from a table based on a WHERE filter
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
-	 * @param array $whereArray (Optional) An associative array containing the
+	 * @param array|string $whereArray (Optional) An associative array containing the
 	 *                          column names as keys and values as data. The
 	 *                          values must be SQL ready (i.e. quotes around
-	 *                          strings, formatted dates, ect)
-	 * @param array/string $columns (Optional) The column or list of columns to select
-	 * @param array/string $sortColumns (Optional) Column or list of columns to sort by
-	 * @param boolean $sortAscending (Optional) TRUE for ascending; FALSE for descending
-	 *                               This only works if $sortColumns are specified
-	 * @param integer/string $limit (Optional) The limit of rows to return
+	 *                          strings, formatted dates, etc.)
+	 * @param array|string $columns (Optional) The column or list of columns to select
+	 * @param array|string $sortColumns (Optional) Column or list of columns to sort by.
+	 *                          Column names may be prefixed by a plus(+) or minus(-) 
+	 *                          to indicate sort order.
+	 *                          Default is ASCending for each column.	 
+	 * @param integer|string $limit (Optional) The limit of rows to return
 	 * @return object PHP resource object containing the first row or
 	 *                FALSE if no row is returned from the query
+	 *
+	 * @note Any of the parameters $whereArray, $columns, $sortColumns or $limit
+	 *       may alternatively be a string, in which case these are used verbatim 
+	 *       in the query. This is useful when advanced queries are constructed.
 	 */
 	public function SelectSingleRow($tableName, $whereArray = null, $columns = null,
 							   $sortColumns = null, $limit = null)
@@ -1941,6 +2167,7 @@ class MySQL
 	/**
 	 * Executes the given SQL query and returns the first row as an array
 	 *
+	 * @api
 	 * @param string $sql The query string should not end with a semicolon
 	 * @param integer $resultType (Optional) The type of array
 	 *                Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH
@@ -1966,20 +2193,26 @@ class MySQL
 	/**
 	 * Returns a single (first) row as an array from a table based on a WHERE filter
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
-	 * @param array $whereArray (Optional) An associative array containing the
+	 * @param array|string $whereArray (Optional) An associative array containing the
 	 *                          column names as keys and values as data. The
 	 *                          values must be SQL ready (i.e. quotes around
-	 *                          strings, formatted dates, ect)
-	 * @param array/string $columns (Optional) The column or list of columns to select
-	 * @param array/string $sortColumns (Optional) Column or list of columns to sort by
-	 * @param boolean $sortAscending (Optional) TRUE for ascending; FALSE for descending
-	 *                               This only works if $sortColumns are specified
-	 * @param integer/string $limit (Optional) The limit of rows to return
+	 *                          strings, formatted dates, etc.)
+	 * @param array|string $columns (Optional) The column or list of columns to select
+	 * @param array|string $sortColumns (Optional) Column or list of columns to sort by.
+	 *                          Column names may be prefixed by a plus(+) or minus(-) 
+	 *                          to indicate sort order.
+	 *                          Default is ASCending for each column.	 
+	 * @param integer|string $limit (Optional) The limit of rows to return
 	 * @param integer $resultType (Optional) The type of array
 	 *                Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH
 	 * @return array An array containing the first row or FALSE if no row
 	 *               is returned from the query
+	 *
+	 * @note Any of the parameters $whereArray, $columns, $sortColumns or $limit
+	 *       may alternatively be a string, in which case these are used verbatim 
+	 *       in the query. This is useful when advanced queries are constructed.
 	 */
 	public function SelectSingleRowArray($tableName, $whereArray = null, $columns = null,
 							   $sortColumns = null, $limit = null, $resultType = MYSQL_ASSOC)
@@ -2002,6 +2235,7 @@ class MySQL
 	 * Executes a query and returns a single value. If more than one row
 	 * is returned, only the first value in the first column is returned.
 	 *
+	 * @api
 	 * @param string $sql The query string should not end with a semicolon
 	 * @return mixed The value returned or FALSE if no value
 	 */
@@ -2025,17 +2259,23 @@ class MySQL
 	 * Returns a single value from from the first row SELECTed from a table based on a
 	 * WHERE filter.
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
-	 * @param array $whereArray (Optional) An associative array containing the
+	 * @param array|string $whereArray (Optional) An associative array containing the
 	 *                          column names as keys and values as data. The
 	 *                          values must be SQL ready (i.e. quotes around
-	 *                          strings, formatted dates, ect)
-	 * @param array/string $columns (Optional) The column or list of columns to select
-	 * @param array/string $sortColumns (Optional) Column or list of columns to sort by
-	 * @param boolean $sortAscending (Optional) TRUE for ascending; FALSE for descending
-	 *                               This only works if $sortColumns are specified
-	 * @param integer/string $limit (Optional) The limit of rows to return
+	 *                          strings, formatted dates, etc.)
+	 * @param array|string $columns (Optional) The column or list of columns to select
+	 * @param array|string $sortColumns (Optional) Column or list of columns to sort by.
+	 *                          Column names may be prefixed by a plus(+) or minus(-) 
+	 *                          to indicate sort order.
+	 *                          Default is ASCending for each column.	 
+	 * @param integer|string $limit (Optional) The limit of rows to return
 	 * @return mixed The value returned or FALSE if no value
+	 *
+	 * @note Any of the parameters $whereArray, $columns, $sortColumns or $limit
+	 *       may alternatively be a string, in which case these are used verbatim 
+	 *       in the query. This is useful when advanced queries are constructed.
 	 */
 	public function SelectSingleValue($tableName, $whereArray = null, $columns = null,
 							   $sortColumns = null, $limit = null)
@@ -2059,6 +2299,7 @@ class MySQL
 	 * Executes the given SQL query, measures it, and saves the total duration
 	 * in microseconds
 	 *
+	 * @api
 	 * @param string $sql The query string should not end with a semicolon
 	 * @return object PHP 'mysql result' resource object containing the records
 	 *                on SELECT, SHOW, DESCRIBE or EXPLAIN queries and returns
@@ -2075,6 +2316,7 @@ class MySQL
 	/**
 	 * Returns the records from the last query
 	 *
+	 * @api
 	 * @return object PHP 'mysql result' resource object containing the records
 	 *                for the last query executed
 	 */
@@ -2084,13 +2326,15 @@ class MySQL
 	}
 
 	/**
-	 * Returns all records from last query and returns contents as array of records
-	 * where each record is presented as an array of columns (fields),
-	 * or FALSE on error
+	 * Returns all records from the last query as array of arrays
 	 *
+	 * Returns all records from the last query and returns the contents as an array of records
+	 * where each record is presented as an array of columns (fields).
+	 *
+	 * @api
 	 * @param integer $resultType (Optional) The type of array representing one record
 	 *                Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH
-	 * @return Records in array form or FALSE on error. May return an
+	 * @return array Records in array form or FALSE on error. May return an
 	 *         EMPTY array when no records are available.
 	 */
 	public function RecordsArray($resultType = MYSQL_ASSOC)
@@ -2122,11 +2366,13 @@ class MySQL
 	}
 
 	/**
-	 * Returns all records from last query and returns contents as array of record objects
-	 * (where each record is an object with each column as an attribute (data member variable))
-	 * or FALSE on error
+	 * Returns all records from the last query as array of objects
 	 *
-	 * @return Records in array form or FALSE on error. May return an
+	 * Returns all records from the last query and returns the contents as an array of record objects
+	 * (where each record is an object with each column as an attribute (data member variable)).
+	 *
+	 * @api
+	 * @return array Records in object form or FALSE on error. May return an
 	 *         EMPTY array when no records are available.
 	 */
 	public function RecordsObjects()
@@ -2163,6 +2409,7 @@ class MySQL
 	 * @warning It is an (non-fatal) error to Release() a query result
 	 *          more than once.
 	 *
+	 * @api
 	 * @param resource $result (Optional) the result originally returned
 	 *                 by any previous SQL query.
 	 * @return boolean Returns TRUE on success or FALSE on failure
@@ -2189,6 +2436,7 @@ class MySQL
 	/**
 	 * Clears the internal variables from any error information
 	 *
+	 * @api
 	 */
 	private function ResetError()
 	{
@@ -2200,6 +2448,7 @@ class MySQL
 	 * Reads the current row and returns contents as a
 	 * PHP object or returns false on error
 	 *
+	 * @api
 	 * @param integer $optional_row_number (Optional) Use to specify a row
 	 * @return object PHP object or FALSE on error
 	 */
@@ -2248,6 +2497,7 @@ class MySQL
 	 * Reads the current row and returns contents as an
 	 * array or returns false on error
 	 *
+	 * @api
 	 * @param integer $optional_row_number (Optional) Use to specify a row
 	 * @param integer $resultType (Optional) The type of array
 	 *                Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH
@@ -2297,6 +2547,7 @@ class MySQL
 	/**
 	 * Returns the last query row count
 	 *
+	 * @api
 	 * @return integer Row count or FALSE on error
 	 */
 	public function RowCount()
@@ -2328,6 +2579,7 @@ class MySQL
 	 * Sets the internal database pointer to the
 	 * specified row number and returns the result
 	 *
+	 * @api
 	 * @param integer $row_number Row number
 	 * @return object Fetched row as PHP object on success or FALSE on error
 	 */
@@ -2371,6 +2623,7 @@ class MySQL
 	/**
 	 * Returns the current cursor row location
 	 *
+	 * @api
 	 * @return integer Current row number
 	 */
 	public function SeekPosition()
@@ -2381,6 +2634,7 @@ class MySQL
 	/**
 	 * Selects a different database and character set
 	 *
+	 * @api
 	 * @param string $database Database name
 	 * @param string $charset (Optional) Character set (i.e. utf8)
 	 * @return boolean Returns TRUE on success or FALSE on error
@@ -2416,6 +2670,7 @@ class MySQL
 	/**
 	 * Creates a new database and sets up the root access for the database.
 	 *
+	 * @api
 	 * @param string $database Database name
 	 * @param string $charset (Optional) Character set (i.e. utf8)
 	 * @param string $collation (Optional) Character set collation (i.e. utf8_unicode_ci)
@@ -2470,17 +2725,23 @@ class MySQL
 	/**
 	 * Gets rows in a table based on a WHERE filter
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
-	 * @param array $whereArray (Optional) An associative array containing the
+	 * @param array|string $whereArray (Optional) An associative array containing the
 	 *                          column names as keys and values as data. The
 	 *                          values must be SQL ready (i.e. quotes around
-	 *                          strings, formatted dates, ect)
-	 * @param array/string $columns (Optional) The column or list of columns to select
-	 * @param array/string $sortColumns (Optional) Column or list of columns to sort by
-	 * @param boolean $sortAscending (Optional) TRUE for ascending; FALSE for descending
-	 *                               This only works if $sortColumns are specified
-	 * @param integer/string $limit (Optional) The limit of rows to return
+	 *                          strings, formatted dates, etc.)
+	 * @param array|string $columns (Optional) The column or list of columns to select
+	 * @param array|string $sortColumns (Optional) Column or list of columns to sort by.
+	 *                          Column names may be prefixed by a plus(+) or minus(-) 
+	 *                          to indicate sort order.
+	 *                          Default is ASCending for each column.	 
+	 * @param integer|string $limit (Optional) The limit of rows to return
 	 * @return boolean Returns records on success or FALSE on error
+	 *
+	 * @note Any of the parameters $whereArray, $columns, $sortColumns or $limit
+	 *       may alternatively be a string, in which case these are used verbatim 
+	 *       in the query. This is useful when advanced queries are constructed.
 	 */
 	public function SelectRows($tableName, $whereArray = null, $columns = null,
 							   $sortColumns = null, $limit = null)
@@ -2507,6 +2768,7 @@ class MySQL
 	/**
 	 * Retrieves all rows in a specified table
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
 	 * @return boolean Returns an array of records
 	 *         (each an object where the columns are individual object member variables)
@@ -2520,6 +2782,7 @@ class MySQL
 	/**
 	 * Sets the local variables with the first error information
 	 *
+	 * @api
 	 * @param string $errorMessage The error description
 	 * @param integer $errorNumber The error number
 	 */
@@ -2577,8 +2840,10 @@ class MySQL
 	}
 
 	/**
-	 * [STATIC] Converts a boolean into a formatted TRUE or FALSE value of choice
+	 * Converts a boolean into a formatted TRUE or FALSE value of choice
 	 *
+	 * @static
+	 * @api
 	 * @param mixed $value value to analyze for TRUE or FALSE
 	 * @param mixed $trueValue value to use if TRUE
 	 * @param mixed $falseValue value to use if FALSE
@@ -2607,8 +2872,10 @@ class MySQL
 	}
 
 	/**
-	 * [STATIC] Returns string suitable for SQL
+	 * Returns string suitable for inclusion in a SQL query, i.e. properly escaped/filtered
 	 *
+	 * @static
+	 * @api
 	 * @param string $value
 	 * @return string SQL formatted value
 	 */
@@ -2618,8 +2885,10 @@ class MySQL
 	}
 
 	/**
-	 * [STATIC] Returns MySQL string as normal string
+	 * Returns MySQL string as normal string
 	 *
+	 * @static
+	 * @api
 	 * @param string $value
 	 * @return string
 	 *
@@ -2634,15 +2903,20 @@ class MySQL
 	}
 
 	/**
-	 * [STATIC] Formats any value into a string suitable for SQL statements
-	 * (NOTE: Also supports data types returned from the gettype function)
+	 * Formats any value into a string suitable for SQL statements
+	 * 
+	 * @note
+	 * Also supports data types returned from the gettype function.
 	 *
+	 * @static
+	 * @api
 	 * @param mixed $value Any value of any type to be formatted to SQL
 	 * @param string $datatype Use SQLVALUE constants or the strings:
-	 *                          string, text, varchar, char, boolean, bool,
-	 *                          Y-N, T-F, bit, date, datetime, time, integer,
-	 *                          int, number, double, float
-	 * @return string
+	 *                          'string', 'text', 'varchar', 'char', 'boolean', 'bool',
+	 *                          'Y-N', 'T-F', 'bit', 'date', 'datetime', 'time', 'integer',
+	 *                          'int', 'number', 'double', 'float'
+	 * @return string The properly quoted and escaped/filtered value as a string
+	 *                which can be safely included in a generated SQL query.
 	 */
 	static public function SQLValue($value, $datatype = self::SQLVALUE_TEXT)
 	{
@@ -2808,6 +3082,7 @@ class MySQL
 	/**
 	 * Returns last measured duration (time between TimerStart and TimerStop)
 	 *
+	 * @api
 	 * @param integer $decimals (Optional) The number of decimal places to show
 	 * @return Float Microseconds elapsed
 	 */
@@ -2818,6 +3093,8 @@ class MySQL
 
 	/**
 	 * Starts time measurement (in microseconds)
+	 * 
+	 * @api
 	 */
 	public function TimerStart()
 	{
@@ -2828,6 +3105,8 @@ class MySQL
 
 	/**
 	 * Stops time measurement (in microseconds)
+	 * 
+	 * @api
 	 */
 	public function TimerStop()
 	{
@@ -2840,6 +3119,7 @@ class MySQL
 	/**
 	 * Starts a transaction
 	 *
+	 * @api
 	 * @return boolean Returns TRUE on success or FALSE on error
 	 */
 	public function TransactionBegin()
@@ -2876,6 +3156,7 @@ class MySQL
 	/**
 	 * Ends a transaction and commits the queries
 	 *
+	 * @api
 	 * @return boolean Returns TRUE on success or FALSE on error
 	 */
 	public function TransactionEnd()
@@ -2913,6 +3194,7 @@ class MySQL
 	/**
 	 * Rolls the transaction back
 	 *
+	 * @api
 	 * @return boolean Returns TRUE on success or FALSE on failure
 	 */
 	public function TransactionRollback()
@@ -2942,6 +3224,7 @@ class MySQL
 	/**
 	 * Truncates a table removing all data
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
 	 * @return boolean Returns TRUE on success or FALSE on error
 	 */
@@ -2963,16 +3246,22 @@ class MySQL
 	 * Updates rows in a table based on a WHERE filter
 	 * (can be just one or many rows based on the filter)
 	 *
+	 * @api
 	 * @param string $tableName The name of the table
 	 * @param array $valuesArray An associative array containing the column
 	 *                            names as keys and values as data. The values
 	 *                            must be SQL ready (i.e. quotes around
-	 *                            strings, formatted dates, ect)
-	 * @param array $whereArray (Optional) An associative array containing the
+	 *                            strings, formatted dates, etc.)
+	 * @param array|string $whereArray (Optional) An associative array containing the
 	 *                           column names as keys and values as data. The
 	 *                           values must be SQL ready (i.e. quotes around
-	 *                           strings, formatted dates, ect). If not specified
+	 *                           strings, formatted dates, etc.). If not specified
 	 *                           then all values in the table are updated.
+ 	 *                           <br/>
+	 *                           This parameter may alternatively be a string, in
+	 *                           which case it is used verbatim for the WHERE 
+	 *                           clause of the query. This is useful when
+	 *                           advanced queries are constructed.
 	 * @return boolean Returns TRUE on success or FALSE on error
 	 */
 	public function UpdateRow($tableName, $valuesArray, $whereArray = null)
@@ -2994,6 +3283,7 @@ class MySQL
 	/**
 	 * Return a few database statistics in an array.
 	 *
+	 * @api
 	 * @return array Returns an array of statistics values on success or FALSE on error.
 	 */
 	public function GetStatistics()
