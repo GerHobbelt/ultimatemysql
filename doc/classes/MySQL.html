@@ -1,0 +1,1996 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Ultimate MySQL Wrapper Class for PHP 5.x » \MySQL</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Ultimate MySQL Wrapper Class for PHP 5.x</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+</ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">0</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#AutoInsertUpdate" title="AutoInsertUpdate :: UPSERT a row"><span class="description">UPSERT a row</span><pre>AutoInsertUpdate()</pre></a></li>
+<li class="method public "><a href="#BeginningOfSeek" title="BeginningOfSeek :: Test if the internal pointer is at the start of the record set"><span class="description">Test if the internal pointer is at the start of the record set</span><pre>BeginningOfSeek()</pre></a></li>
+<li class="method public "><a href="#BuildSQLDelete" title="BuildSQLDelete :: Builds a SQL DELETE statement"><span class="description">Builds a SQL DELETE statement</span><pre>BuildSQLDelete()</pre></a></li>
+<li class="method public "><a href="#BuildSQLInsert" title="BuildSQLInsert :: Builds a SQL INSERT statement"><span class="description">Builds a SQL INSERT statement</span><pre>BuildSQLInsert()</pre></a></li>
+<li class="method public "><a href="#BuildSQLSelect" title="BuildSQLSelect :: Builds a simple SQL SELECT statement"><span class="description">Builds a simple SQL SELECT statement</span><pre>BuildSQLSelect()</pre></a></li>
+<li class="method public "><a href="#BuildSQLUpdate" title="BuildSQLUpdate :: Builds a SQL UPDATE statement"><span class="description">Builds a SQL UPDATE statement</span><pre>BuildSQLUpdate()</pre></a></li>
+<li class="method public "><a href="#BuildSQLValue" title="BuildSQLValue :: Construct a value string suitable for incorporation anywhere
+in a SQL query."><span class="description">Construct a value string suitable for incorporation anywhere
+in a SQL query.</span><pre>BuildSQLValue()</pre></a></li>
+<li class="method public "><a href="#BuildSQLWhereClause" title="BuildSQLWhereClause :: Builds a SQL WHERE clause from an array."><span class="description">Builds a SQL WHERE clause from an array.</span><pre>BuildSQLWhereClause()</pre></a></li>
+<li class="method public "><a href="#Close" title="Close :: Close current MySQL connection"><span class="description">Close current MySQL connection</span><pre>Close()</pre></a></li>
+<li class="method public "><a href="#CreateDatabase" title="CreateDatabase :: Creates a new database and sets up the root access for the database."><span class="description">Creates a new database and sets up the root access for the database.</span><pre>CreateDatabase()</pre></a></li>
+<li class="method public "><a href="#DeleteRows" title="DeleteRows :: Delete selected rows."><span class="description">Delete selected rows.</span><pre>DeleteRows()</pre></a></li>
+<li class="method public "><a href="#Dump" title="Dump :: Dump the entire database as an SQL script"><span class="description">Dump the entire database as an SQL script</span><pre>Dump()</pre></a></li>
+<li class="method public "><a href="#EndOfSeek" title="EndOfSeek :: Returns true if the internal pointer is at the end of the records"><span class="description">Returns true if the internal pointer is at the end of the records</span><pre>EndOfSeek()</pre></a></li>
+<li class="method public "><a href="#Error" title="Error :: Return the last MySQL error as text"><span class="description">Return the last MySQL error as text</span><pre>Error()</pre></a></li>
+<li class="method public "><a href="#ErrorNumber" title="ErrorNumber :: Return the last MySQL error as a number"><span class="description">Return the last MySQL error as a number</span><pre>ErrorNumber()</pre></a></li>
+<li class="method public "><a href="#GetBooleanValue" title="GetBooleanValue :: Convert any value of any datatype into boolean (true or false)"><span class="description">Convert any value of any datatype into boolean (true or false)</span><pre>GetBooleanValue()</pre></a></li>
+<li class="method public "><a href="#GetColumnComments" title="GetColumnComments :: Return the comments for fields in a table"><span class="description">Return the comments for fields in a table</span><pre>GetColumnComments()</pre></a></li>
+<li class="method public "><a href="#GetColumnCount" title="GetColumnCount :: Get the number of columns"><span class="description">Get the number of columns</span><pre>GetColumnCount()</pre></a></li>
+<li class="method public "><a href="#GetColumnDataType" title="GetColumnDataType :: Return the data type for a specified column"><span class="description">Return the data type for a specified column</span><pre>GetColumnDataType()</pre></a></li>
+<li class="method public "><a href="#GetColumnID" title="GetColumnID :: Return the position of a column"><span class="description">Return the position of a column</span><pre>GetColumnID()</pre></a></li>
+<li class="method public "><a href="#GetColumnLength" title="GetColumnLength :: Return the field length"><span class="description">Return the field length</span><pre>GetColumnLength()</pre></a></li>
+<li class="method public "><a href="#GetColumnName" title="GetColumnName :: Return the field name for a specified column number"><span class="description">Return the field name for a specified column number</span><pre>GetColumnName()</pre></a></li>
+<li class="method public "><a href="#GetColumnNames" title="GetColumnNames :: Return the field names in a table or query as an array"><span class="description">Return the field names in a table or query as an array</span><pre>GetColumnNames()</pre></a></li>
+<li class="method public "><a href="#GetHTML" title="GetHTML :: Return the last query as a HTML table"><span class="description">Return the last query as a HTML table</span><pre>GetHTML()</pre></a></li>
+<li class="method public "><a href="#GetJSON" title="GetJSON :: Return the last query as a JSON document"><span class="description">Return the last query as a JSON document</span><pre>GetJSON()</pre></a></li>
+<li class="method public "><a href="#GetLastInsertID" title="GetLastInsertID :: Return the last autonumber ID field from a previous INSERT query"><span class="description">Return the last autonumber ID field from a previous INSERT query</span><pre>GetLastInsertID()</pre></a></li>
+<li class="method public "><a href="#GetLastSQL" title="GetLastSQL :: Return the last SQL statement executed"><span class="description">Return the last SQL statement executed</span><pre>GetLastSQL()</pre></a></li>
+<li class="method public "><a href="#GetStatistics" title="GetStatistics :: Return a few database statistics in an array."><span class="description">Return a few database statistics in an array.</span><pre>GetStatistics()</pre></a></li>
+<li class="method public "><a href="#GetTables" title="GetTables :: Get all table names from the database"><span class="description">Get all table names from the database</span><pre>GetTables()</pre></a></li>
+<li class="method public "><a href="#GetXML" title="GetXML :: Return the last query as an XML Document"><span class="description">Return the last query as an XML Document</span><pre>GetXML()</pre></a></li>
+<li class="method public "><a href="#HasRecords" title="HasRecords :: Determines if a query contains any rows"><span class="description">Determines if a query contains any rows</span><pre>HasRecords()</pre></a></li>
+<li class="method public "><a href="#InsertRow" title="InsertRow :: Inserts a row into a table in the connected database"><span class="description">Inserts a row into a table in the connected database</span><pre>InsertRow()</pre></a></li>
+<li class="method public "><a href="#IsConnected" title="IsConnected :: Determines if a valid connection to the database exists"><span class="description">Determines if a valid connection to the database exists</span><pre>IsConnected()</pre></a></li>
+<li class="method public "><a href="#IsDateStr" title="IsDateStr :: Determines if a value of any data type is a date PHP can convert"><span class="description">Determines if a value of any data type is a date PHP can convert</span><pre>IsDateStr()</pre></a></li>
+<li class="method public "><a href="#Kill" title="Kill :: Stop executing (die/exit) and show last MySQL error message"><span class="description">Stop executing (die/exit) and show last MySQL error message</span><pre>Kill()</pre></a></li>
+<li class="method public "><a href="#MoveFirst" title="MoveFirst :: Seeks to the beginning of the records"><span class="description">Seeks to the beginning of the records</span><pre>MoveFirst()</pre></a></li>
+<li class="method public "><a href="#MoveLast" title="MoveLast :: Seeks to the end of the records"><span class="description">Seeks to the end of the records</span><pre>MoveLast()</pre></a></li>
+<li class="method public "><a href="#MyDyingMessage" title="MyDyingMessage :: Get last error message as HTML string"><span class="description">Get last error message as HTML string</span><pre>MyDyingMessage()</pre></a></li>
+<li class="method public "><a href="#Open" title="Open :: Connect to specified MySQL server"><span class="description">Connect to specified MySQL server</span><pre>Open()</pre></a></li>
+<li class="method public "><a href="#Query" title="Query :: Executes the given SQL query and returns the records"><span class="description">Executes the given SQL query and returns the records</span><pre>Query()</pre></a></li>
+<li class="method public "><a href="#QueryArray" title="QueryArray :: Executes the given SQL query and returns a multi-dimensional array"><span class="description">Executes the given SQL query and returns a multi-dimensional array</span><pre>QueryArray()</pre></a></li>
+<li class="method public "><a href="#QueryObjects" title="QueryObjects :: Executes the given SQL query"><span class="description">Executes the given SQL query</span><pre>QueryObjects()</pre></a></li>
+<li class="method public "><a href="#QuerySingleRow" title="QuerySingleRow :: Executes the given SQL query and returns only one (the first) row"><span class="description">Executes the given SQL query and returns only one (the first) row</span><pre>QuerySingleRow()</pre></a></li>
+<li class="method public "><a href="#QuerySingleRowArray" title="QuerySingleRowArray :: Executes the given SQL query and returns the first row as an array"><span class="description">Executes the given SQL query and returns the first row as an array</span><pre>QuerySingleRowArray()</pre></a></li>
+<li class="method public "><a href="#QuerySingleValue" title="QuerySingleValue :: Executes a query and returns a single value."><span class="description">Executes a query and returns a single value.</span><pre>QuerySingleValue()</pre></a></li>
+<li class="method public "><a href="#QueryTimed" title="QueryTimed :: Executes the given SQL query, measures it, and saves the total duration
+in microseconds"><span class="description">Executes the given SQL query, measures it, and saves the total duration
+in microseconds</span><pre>QueryTimed()</pre></a></li>
+<li class="method public "><a href="#Records" title="Records :: Returns the records from the last query"><span class="description">Returns the records from the last query</span><pre>Records()</pre></a></li>
+<li class="method public "><a href="#RecordsArray" title="RecordsArray :: Returns all records from the last query as array of arrays"><span class="description">Returns all records from the last query as array of arrays</span><pre>RecordsArray()</pre></a></li>
+<li class="method public "><a href="#RecordsObjects" title="RecordsObjects :: Returns all records from the last query as array of objects"><span class="description">Returns all records from the last query as array of objects</span><pre>RecordsObjects()</pre></a></li>
+<li class="method public "><a href="#Release" title="Release :: Frees memory used by the query results and returns the function result."><span class="description">Frees memory used by the query results and returns the function result.</span><pre>Release()</pre></a></li>
+<li class="method public "><a href="#Row" title="Row :: Reads the current row and returns contents as a
+PHP object or returns false on error"><span class="description">Reads the current row and returns contents as a
+PHP object or returns false on error</span><pre>Row()</pre></a></li>
+<li class="method public "><a href="#RowArray" title="RowArray :: Reads the current row and returns contents as an
+array or returns false on error"><span class="description">Reads the current row and returns contents as an
+array or returns false on error</span><pre>RowArray()</pre></a></li>
+<li class="method public "><a href="#RowCount" title="RowCount :: Returns the last query row count"><span class="description">Returns the last query row count</span><pre>RowCount()</pre></a></li>
+<li class="method public "><a href="#SQLBooleanValue" title="SQLBooleanValue :: Converts a boolean into a formatted TRUE or FALSE value of choice"><span class="description">Converts a boolean into a formatted TRUE or FALSE value of choice</span><pre>SQLBooleanValue()</pre></a></li>
+<li class="method public "><a href="#SQLFix" title="SQLFix :: Returns string suitable for inclusion in a SQL query, i.e."><span class="description">Returns string suitable for inclusion in a SQL query, i.e.</span><pre>SQLFix()</pre></a></li>
+<li class="method public "><a href="#SQLUnfix" title="SQLUnfix :: Returns MySQL string as normal string"><span class="description">Returns MySQL string as normal string</span><pre>SQLUnfix()</pre></a></li>
+<li class="method public "><a href="#SQLValue" title="SQLValue :: Formats any value into a string suitable for SQL statements"><span class="description">Formats any value into a string suitable for SQL statements</span><pre>SQLValue()</pre></a></li>
+<li class="method public "><a href="#Seek" title="Seek :: Sets the internal database pointer to the
+specified row number and returns the result"><span class="description">Sets the internal database pointer to the
+specified row number and returns the result</span><pre>Seek()</pre></a></li>
+<li class="method public "><a href="#SeekPosition" title="SeekPosition :: Returns the current cursor row location"><span class="description">Returns the current cursor row location</span><pre>SeekPosition()</pre></a></li>
+<li class="method public "><a href="#SelectArray" title="SelectArray :: Returns a multidimensional array of rows from a table based on a WHERE filter"><span class="description">Returns a multidimensional array of rows from a table based on a WHERE filter</span><pre>SelectArray()</pre></a></li>
+<li class="method public "><a href="#SelectDatabase" title="SelectDatabase :: Selects a different database and character set"><span class="description">Selects a different database and character set</span><pre>SelectDatabase()</pre></a></li>
+<li class="method public "><a href="#SelectObjects" title="SelectObjects :: Returns an array of row (= record) objects from a table based on a WHERE filter"><span class="description">Returns an array of row (= record) objects from a table based on a WHERE filter</span><pre>SelectObjects()</pre></a></li>
+<li class="method public "><a href="#SelectRows" title="SelectRows :: Gets rows in a table based on a WHERE filter"><span class="description">Gets rows in a table based on a WHERE filter</span><pre>SelectRows()</pre></a></li>
+<li class="method public "><a href="#SelectSingleRow" title="SelectSingleRow :: Returns a single (first) row from a table based on a WHERE filter"><span class="description">Returns a single (first) row from a table based on a WHERE filter</span><pre>SelectSingleRow()</pre></a></li>
+<li class="method public "><a href="#SelectSingleRowArray" title="SelectSingleRowArray :: Returns a single (first) row as an array from a table based on a WHERE filter"><span class="description">Returns a single (first) row as an array from a table based on a WHERE filter</span><pre>SelectSingleRowArray()</pre></a></li>
+<li class="method public "><a href="#SelectSingleValue" title="SelectSingleValue :: Returns a single value from from the first row SELECTed from a table based on a
+WHERE filter."><span class="description">Returns a single value from from the first row SELECTed from a table based on a
+WHERE filter.</span><pre>SelectSingleValue()</pre></a></li>
+<li class="method public "><a href="#SelectTable" title="SelectTable :: Retrieves all rows in a specified table"><span class="description">Retrieves all rows in a specified table</span><pre>SelectTable()</pre></a></li>
+<li class="method public "><a href="#TimerDuration" title="TimerDuration :: Returns last measured duration (time between TimerStart and TimerStop)"><span class="description">Returns last measured duration (time between TimerStart and TimerStop)</span><pre>TimerDuration()</pre></a></li>
+<li class="method public "><a href="#TimerStart" title="TimerStart :: Starts time measurement (in microseconds)"><span class="description">Starts time measurement (in microseconds)</span><pre>TimerStart()</pre></a></li>
+<li class="method public "><a href="#TimerStop" title="TimerStop :: Stops time measurement (in microseconds)"><span class="description">Stops time measurement (in microseconds)</span><pre>TimerStop()</pre></a></li>
+<li class="method public "><a href="#TransactionBegin" title="TransactionBegin :: Starts a transaction"><span class="description">Starts a transaction</span><pre>TransactionBegin()</pre></a></li>
+<li class="method public "><a href="#TransactionEnd" title="TransactionEnd :: Ends a transaction and commits the queries"><span class="description">Ends a transaction and commits the queries</span><pre>TransactionEnd()</pre></a></li>
+<li class="method public "><a href="#TransactionRollback" title="TransactionRollback :: Rolls the transaction back"><span class="description">Rolls the transaction back</span><pre>TransactionRollback()</pre></a></li>
+<li class="method public "><a href="#TruncateTable" title="TruncateTable :: Truncates a table removing all data"><span class="description">Truncates a table removing all data</span><pre>TruncateTable()</pre></a></li>
+<li class="method public "><a href="#UpdateRow" title="UpdateRow :: Updates rows in a table based on a WHERE filter
+(can be just one or many rows based on the filter)"><span class="description">Updates rows in a table based on a WHERE filter
+(can be just one or many rows based on the filter)</span><pre>UpdateRow()</pre></a></li>
+<li class="method public "><a href="#__construct" title="__construct :: Constructor: Opens the connection to the database"><span class="description">Constructor: Opens the connection to the database</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#__destruct" title="__destruct :: Destructor: Closes the connection to the database"><span class="description">Destructor: Closes the connection to the database</span><pre>__destruct()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#BuildSQLColumns" title="BuildSQLColumns :: Builds a comma delimited list of columns for use with a SQL query"><span class="description">Builds a comma delimited list of columns for use with a SQL query</span><pre>BuildSQLColumns()</pre></a></li>
+<li class="method private "><a href="#ResetError" title="ResetError :: Clears the internal variables from any error information"><span class="description">Clears the internal variables from any error information</span><pre>ResetError()</pre></a></li>
+<li class="method private "><a href="#SetError" title="SetError :: Sets the local variables with the first error information"><span class="description">Sets the local variables with the first error information</span><pre>SetError()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="property public "><a href="#%24InDevelopmentEnvironment" title="$InDevelopmentEnvironment :: Provide minimal or extended error information"><span class="description">Provide minimal or extended error information</span><pre>$InDevelopmentEnvironment</pre></a></li>
+<li class="property public "><a href="#%24ThrowExceptions" title="$ThrowExceptions :: Determines if an error throws an exception"><span class="description">Determines if an error throws an exception</span><pre>$ThrowExceptions</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24active_row" title="$active_row :: current row"><span class="description">current row</span><pre>$active_row</pre></a></li>
+<li class="property private "><a href="#%24db_charset" title="$db_charset :: optional character set (i.e."><span class="description">optional character set (i.e.</span><pre>$db_charset</pre></a></li>
+<li class="property private "><a href="#%24db_charsetcollation" title="$db_charsetcollation :: optional character set collation (i.e."><span class="description">optional character set collation (i.e.</span><pre>$db_charsetcollation</pre></a></li>
+<li class="property private "><a href="#%24db_dbname" title="$db_dbname :: database name"><span class="description">database name</span><pre>$db_dbname</pre></a></li>
+<li class="property private "><a href="#%24db_host" title="$db_host :: server name"><span class="description">server name</span><pre>$db_host</pre></a></li>
+<li class="property private "><a href="#%24db_pass" title="$db_pass :: password"><span class="description">password</span><pre>$db_pass</pre></a></li>
+<li class="property private "><a href="#%24db_pcon" title="$db_pcon :: use persistent connection?"><span class="description">use persistent connection?</span><pre>$db_pcon</pre></a></li>
+<li class="property private "><a href="#%24db_user" title="$db_user :: user name"><span class="description">user name</span><pre>$db_user</pre></a></li>
+<li class="property private "><a href="#%24error_desc" title="$error_desc :: last mysql error string"><span class="description">last mysql error string</span><pre>$error_desc</pre></a></li>
+<li class="property private "><a href="#%24error_number" title="$error_number :: last mysql error number"><span class="description">last mysql error number</span><pre>$error_number</pre></a></li>
+<li class="property private "><a href="#%24in_transaction" title="$in_transaction :: used for transactions"><span class="description">used for transactions</span><pre>$in_transaction</pre></a></li>
+<li class="property private "><a href="#%24last_insert_id" title="$last_insert_id :: last id of record inserted"><span class="description">last id of record inserted</span><pre>$last_insert_id</pre></a></li>
+<li class="property private "><a href="#%24last_result" title="$last_result :: last mysql query result"><span class="description">last mysql query result</span><pre>$last_result</pre></a></li>
+<li class="property private "><a href="#%24last_sql" title="$last_sql :: last mysql query"><span class="description">last mysql query</span><pre>$last_sql</pre></a></li>
+<li class="property private "><a href="#%24mysql_link" title="$mysql_link :: mysql link resource"><span class="description">mysql link resource</span><pre>$mysql_link</pre></a></li>
+<li class="property private "><a href="#%24query_count" title="$query_count :: tracks the number of queries executed through this instance"><span class="description">tracks the number of queries executed through this instance</span><pre>$query_count</pre></a></li>
+<li class="property private "><a href="#%24time_diff" title="$time_diff :: holds the difference in time"><span class="description">holds the difference in time</span><pre>$time_diff</pre></a></li>
+<li class="property private "><a href="#%24time_start" title="$time_start :: start time for the timer"><span class="description">start time for the timer</span><pre>$time_start</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants</li>
+<li class="constant  "><a href="#SQLVALUE_BIT" title="SQLVALUE_BIT :: "><span class="description">SQLVALUE_BIT</span><pre>SQLVALUE_BIT</pre></a></li>
+<li class="constant  "><a href="#SQLVALUE_BOOLEAN" title="SQLVALUE_BOOLEAN :: "><span class="description">SQLVALUE_BOOLEAN</span><pre>SQLVALUE_BOOLEAN</pre></a></li>
+<li class="constant  "><a href="#SQLVALUE_DATE" title="SQLVALUE_DATE :: "><span class="description">SQLVALUE_DATE</span><pre>SQLVALUE_DATE</pre></a></li>
+<li class="constant  "><a href="#SQLVALUE_DATETIME" title="SQLVALUE_DATETIME :: "><span class="description">SQLVALUE_DATETIME</span><pre>SQLVALUE_DATETIME</pre></a></li>
+<li class="constant  "><a href="#SQLVALUE_ENUMERATE" title="SQLVALUE_ENUMERATE :: "><span class="description">SQLVALUE_ENUMERATE</span><pre>SQLVALUE_ENUMERATE</pre></a></li>
+<li class="constant  "><a href="#SQLVALUE_NUMBER" title="SQLVALUE_NUMBER :: "><span class="description">SQLVALUE_NUMBER</span><pre>SQLVALUE_NUMBER</pre></a></li>
+<li class="constant  "><a href="#SQLVALUE_TEXT" title="SQLVALUE_TEXT :: "><span class="description">SQLVALUE_TEXT</span><pre>SQLVALUE_TEXT</pre></a></li>
+<li class="constant  "><a href="#SQLVALUE_TIME" title="SQLVALUE_TIME :: "><span class="description">SQLVALUE_TIME</span><pre>SQLVALUE_TIME</pre></a></li>
+<li class="constant  "><a href="#SQLVALUE_T_F" title="SQLVALUE_T_F :: "><span class="description">SQLVALUE_T_F</span><pre>SQLVALUE_T_F</pre></a></li>
+<li class="constant  "><a href="#SQLVALUE_Y_N" title="SQLVALUE_Y_N :: "><span class="description">SQLVALUE_Y_N</span><pre>SQLVALUE_Y_N</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CMySQL" id="\MySQL"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/MySQL.html">MySQL</a>
+</li>
+</ul>
+<div href="../classes/MySQL.html" class="element class">
+<p class="short_description">Ultimate MySQL Wrapper Class</p>
+<div class="details">
+<p class="long_description"></p>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="AutoInsertUpdate" id="AutoInsertUpdate"></a><div class="element clickable method public AutoInsertUpdate" data-toggle="collapse" data-target=".AutoInsertUpdate .collapse">
+<h2>UPSERT a row</h2>
+<pre>AutoInsertUpdate(string $tableName, array $valuesArray, array | string $whereArray) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Automatically does an INSERT or UPDATE depending on whether a record
+already exists in a table.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$valuesArray</h4>
+<code>array</code><p>An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)</p>
+</div>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). <br/> This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="BeginningOfSeek" id="BeginningOfSeek"></a><div class="element clickable method public BeginningOfSeek" data-toggle="collapse" data-target=".BeginningOfSeek .collapse">
+<h2>Test if the internal pointer is at the start of the record set</h2>
+<pre>BeginningOfSeek() : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Returns true if the internal pointer is at the beginning of the record set produced by the last query.</p></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>TRUE if at the first row or FALSE if not</div>
+</div></div>
+</div>
+<a name="BuildSQLDelete" id="BuildSQLDelete"></a><div class="element clickable method public BuildSQLDelete" data-toggle="collapse" data-target=".BuildSQLDelete .collapse">
+<h2>Builds a SQL DELETE statement</h2>
+<pre>BuildSQLDelete(string $tableName, array | string $whereArray) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). If not specified then all values in the table are deleted. <br/> This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Returns the SQL DELETE statement</div>
+</div></div>
+</div>
+<a name="BuildSQLInsert" id="BuildSQLInsert"></a><div class="element clickable method public BuildSQLInsert" data-toggle="collapse" data-target=".BuildSQLInsert .collapse">
+<h2>Builds a SQL INSERT statement</h2>
+<pre>BuildSQLInsert(string $tableName, array $valuesArray) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$valuesArray</h4>
+<code>array</code><p>An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Returns a SQL INSERT statement</div>
+</div></div>
+</div>
+<a name="BuildSQLSelect" id="BuildSQLSelect"></a><div class="element clickable method public BuildSQLSelect" data-toggle="collapse" data-target=".BuildSQLSelect .collapse">
+<h2>Builds a simple SQL SELECT statement</h2>
+<pre>BuildSQLSelect(string $tableName, array | string $whereArray, array | string $columns, array | string $sortColumns, integer | string $limit) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>Any of the parameters $whereArray, $columns, $sortColumns or $limit
+      may alternatively be a string, in which case these are used verbatim
+      in the query. This is useful when advanced queries are constructed.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)</p>
+</div>
+<div class="subelement argument">
+<h4>$columns</h4>
+<code>array</code><code>string</code><p>(Optional) The column or list of columns to select</p>
+</div>
+<div class="subelement argument">
+<h4>$sortColumns</h4>
+<code>array</code><code>string</code><p>(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column.</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>integer</code><code>string</code><p>(Optional) The limit of rows to return</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Returns a SQL SELECT statement</div>
+</div></div>
+</div>
+<a name="BuildSQLUpdate" id="BuildSQLUpdate"></a><div class="element clickable method public BuildSQLUpdate" data-toggle="collapse" data-target=".BuildSQLUpdate .collapse">
+<h2>Builds a SQL UPDATE statement</h2>
+<pre>BuildSQLUpdate(string $tableName, array $valuesArray, array | string $whereArray) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$valuesArray</h4>
+<code>array</code><p>An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)</p>
+</div>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). If not specified then all values in the table are updated. <br/> This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Returns a SQL UPDATE statement</div>
+</div></div>
+</div>
+<a name="BuildSQLValue" id="BuildSQLValue"></a><div class="element clickable method public BuildSQLValue" data-toggle="collapse" data-target=".BuildSQLValue .collapse">
+<h2>Construct a value string suitable for incorporation anywhere
+in a SQL query.</h2>
+<pre>BuildSQLValue(\arbitrary $value) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>This methos invokes self::SQLValue() under the hood.</p></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>\arbitrary</code><p>The value to be checked and processed. Usually this would be a string, but any other type which can be cast to a string is fine as well.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Returns a string containing the SQL query ready value.</div>
+</div></div>
+</div>
+<a name="BuildSQLWhereClause" id="BuildSQLWhereClause"></a><div class="element clickable method public BuildSQLWhereClause" data-toggle="collapse" data-target=".BuildSQLWhereClause .collapse">
+<h2>Builds a SQL WHERE clause from an array.</h2>
+<pre>BuildSQLWhereClause(array | string $whereArray) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>If a key is specified, the key is used at the field name and the value
+as a comparison. If a key is not used, the value is used as the clause.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). <br/> This parameter may alternatively be a string, in which case it is returned verbatim. This is useful when advanced queries are constructed and this method is invoked internally.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Returns a string containing the SQL WHERE clause</div>
+</div></div>
+</div>
+<a name="Close" id="Close"></a><div class="element clickable method public Close" data-toggle="collapse" data-target=".Close .collapse">
+<h2>Close current MySQL connection</h2>
+<pre>Close() : object</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>Returns TRUE on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="CreateDatabase" id="CreateDatabase"></a><div class="element clickable method public CreateDatabase" data-toggle="collapse" data-target=".CreateDatabase .collapse">
+<h2>Creates a new database and sets up the root access for the database.</h2>
+<pre>CreateDatabase(string $database, string $charset, string $collation, string $admin_user, string $admin_pass) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$database</h4>
+<code>string</code><p>Database name</p></div>
+<div class="subelement argument">
+<h4>$charset</h4>
+<code>string</code><p>(Optional) Character set (i.e. utf8)</p>
+</div>
+<div class="subelement argument">
+<h4>$collation</h4>
+<code>string</code><p>(Optional) Character set collation (i.e. utf8_unicode_ci)</p>
+</div>
+<div class="subelement argument">
+<h4>$admin_user</h4>
+<code>string</code><p>(Optional) Database admin user name</p>
+</div>
+<div class="subelement argument">
+<h4>$admin_pass</h4>
+<code>string</code><p>(Optional) Database admin password</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="DeleteRows" id="DeleteRows"></a><div class="element clickable method public DeleteRows" data-toggle="collapse" data-target=".DeleteRows .collapse">
+<h2>Delete selected rows.</h2>
+<pre>DeleteRows(string $tableName, array | string $whereArray) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Deletes rows in a table based on a WHERE filter
+(can be just one or many rows based on the filter).</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). If not specified then all values in the table are deleted. <br/> This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="Dump" id="Dump"></a><div class="element clickable method public Dump" data-toggle="collapse" data-target=".Dump .collapse">
+<h2>Dump the entire database as an SQL script</h2>
+<pre>Dump(string $tables, boolean $with_sql_comments, boolean $with_structure, boolean $with_data, boolean $with_drops_and_truncates, boolean $alter_database) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Produces a SQL script representing the dump of the entire database (when no
+(optional, comma-separated set of) tables has been specified as a method
+argument) or just the specified (comma separated set of) tables.
+You may choose to have either the database/table structure or the records
+dumped. Or both, for a full-fledged database/table dump which can serve as
+a db/table backup/restore script later on.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tables</h4>
+<code>string</code><p>[Optional] Comma separated list of tables. When none are specified, the entire database is assumed (this is the default).</p>
+</div>
+<div class="subelement argument">
+<h4>$with_sql_comments</h4>
+<code>boolean</code><p>[Optional] Include SQL comments in the generated script (default: TRUE).</p>
+</div>
+<div class="subelement argument">
+<h4>$with_structure</h4>
+<code>boolean</code><p>[Optional] Whether to include the table structure creation (and tear-down) SQL statements in the generated script (default: TRUE).</p>
+</div>
+<div class="subelement argument">
+<h4>$with_data</h4>
+<code>boolean</code><p>[Optional] Whether to include the table rows (data) in the generated script (default: TRUE).</p>
+</div>
+<div class="subelement argument">
+<h4>$with_drops_and_truncates</h4>
+<code>boolean</code><p>[Optional] Whether to include the apropriate DROP TABLE and/or TRUNCATE TABLE statements in the generated script (default: TRUE).</p>
+</div>
+<div class="subelement argument">
+<h4>$alter_database</h4>
+<code>boolean</code><p>[Optional] Whether to include the apropriate ALTER DATABASE statement in the generated script to set the default database charset and collation (default: TRUE).</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>the generated SQL script, boolean FALSE when a query error occurred.</div>
+</div></div>
+</div>
+<a name="EndOfSeek" id="EndOfSeek"></a><div class="element clickable method public EndOfSeek" data-toggle="collapse" data-target=".EndOfSeek .collapse">
+<h2>Returns true if the internal pointer is at the end of the records</h2>
+<pre>EndOfSeek() : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>TRUE if at the last row or FALSE if not</div>
+</div></div>
+</div>
+<a name="Error" id="Error"></a><div class="element clickable method public Error" data-toggle="collapse" data-target=".Error .collapse">
+<h2>Return the last MySQL error as text</h2>
+<pre>Error() : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>The returned error description string is appended with the error number itself
+as ' (#<i>error_number</i>)'.</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Error text from last known error</div>
+</div></div>
+</div>
+<a name="ErrorNumber" id="ErrorNumber"></a><div class="element clickable method public ErrorNumber" data-toggle="collapse" data-target=".ErrorNumber .collapse">
+<h2>Return the last MySQL error as a number</h2>
+<pre>ErrorNumber() : integer</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>integer</code>Error number from last known error</div>
+</div></div>
+</div>
+<a name="GetBooleanValue" id="GetBooleanValue"></a><div class="element clickable method public GetBooleanValue" data-toggle="collapse" data-target=".GetBooleanValue .collapse">
+<h2>Convert any value of any datatype into boolean (true or false)</h2>
+<pre>GetBooleanValue(mixed $value) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Value to analyze for TRUE or FALSE</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE or FALSE</div>
+</div></div>
+</div>
+<a name="GetColumnComments" id="GetColumnComments"></a><div class="element clickable method public GetColumnComments" data-toggle="collapse" data-target=".GetColumnComments .collapse">
+<h2>Return the comments for fields in a table</h2>
+<pre>GetColumnComments(string $table) : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>Table name</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>An array that contains the column comments
+              or FALSE on error.</div>
+</div></div>
+</div>
+<a name="GetColumnCount" id="GetColumnCount"></a><div class="element clickable method public GetColumnCount" data-toggle="collapse" data-target=".GetColumnCount .collapse">
+<h2>Get the number of columns</h2>
+<pre>GetColumnCount(string $table) : integer</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>(Optional) If a table name is not specified, the column count is returned from the last query</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>integer</code>The total count of columns or FALSE on error</div>
+</div></div>
+</div>
+<a name="GetColumnDataType" id="GetColumnDataType"></a><div class="element clickable method public GetColumnDataType" data-toggle="collapse" data-target=".GetColumnDataType .collapse">
+<h2>Return the data type for a specified column</h2>
+<pre>GetColumnDataType(\intege | string $column, string $table) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$column</h4>
+<code>\intege</code><code>string</code><p>Column name or number (first column is 0)</p>
+</div>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>(Optional) If a table name is not specified, the last returned records are used</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The MySQL data (field) type.  If the column does not
+               exist or no records exist, return FALSE.</div>
+</div></div>
+</div>
+<a name="GetColumnID" id="GetColumnID"></a><div class="element clickable method public GetColumnID" data-toggle="collapse" data-target=".GetColumnID .collapse">
+<h2>Return the position of a column</h2>
+<pre>GetColumnID(string $column, string $table) : integer</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$column</h4>
+<code>string</code><p>Column name</p></div>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>(Optional) If a table name is not specified, the last returned records are used.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>integer</code>Column ID or FALSE on error.</div>
+</div></div>
+</div>
+<a name="GetColumnLength" id="GetColumnLength"></a><div class="element clickable method public GetColumnLength" data-toggle="collapse" data-target=".GetColumnLength .collapse">
+<h2>Return the field length</h2>
+<pre>GetColumnLength(string $column, string $table) : integer</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$column</h4>
+<code>string</code><p>Column name</p></div>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>(Optional) If a table name is not specified, the last returned records are used.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>integer</code>Field length or FALSE on error.</div>
+</div></div>
+</div>
+<a name="GetColumnName" id="GetColumnName"></a><div class="element clickable method public GetColumnName" data-toggle="collapse" data-target=".GetColumnName .collapse">
+<h2>Return the field name for a specified column number</h2>
+<pre>GetColumnName(string $columnID, string $table) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$columnID</h4>
+<code>string</code><p>Column position (0 is the first column)</p>
+</div>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>(Optional) If a table name is not specified, the last returned records are used.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The field name for a specified column number. If
+               the given column index number is invalid (does not exist)
+               or no records exist, return FALSE.</div>
+</div></div>
+</div>
+<a name="GetColumnNames" id="GetColumnNames"></a><div class="element clickable method public GetColumnNames" data-toggle="collapse" data-target=".GetColumnNames .collapse">
+<h2>Return the field names in a table or query as an array</h2>
+<pre>GetColumnNames(string $table) : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$table</h4>
+<code>string</code><p>(Optional) If a table name is not specified, the last returned records are used</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>An array that contains the column names or FALSE on error.</div>
+</div></div>
+</div>
+<a name="GetHTML" id="GetHTML"></a><div class="element clickable method public GetHTML" data-toggle="collapse" data-target=".GetHTML .collapse">
+<h2>Return the last query as a HTML table</h2>
+<pre>GetHTML(boolean $showCount, string $styleTable, string $styleHeader, string $styleData) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$showCount</h4>
+<code>boolean</code><p>(Optional) TRUE if you want to show the row count, FALSE if you do not want to show the count</p>
+</div>
+<div class="subelement argument">
+<h4>$styleTable</h4>
+<code>string</code><p>(Optional) table tag attributes, e.g. styling</p>
+</div>
+<div class="subelement argument">
+<h4>$styleHeader</h4>
+<code>string</code><p>(Optional) header row tag attributes</p>
+</div>
+<div class="subelement argument">
+<h4>$styleData</h4>
+<code>string</code><p>(Optional) cell tag attributes</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>HTML containing a table with all records listed or FALSE on error</div>
+</div></div>
+</div>
+<a name="GetJSON" id="GetJSON"></a><div class="element clickable method public GetJSON" data-toggle="collapse" data-target=".GetJSON .collapse">
+<h2>Return the last query as a JSON document</h2>
+<pre>GetJSON() : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>JSON containing all records listed</div>
+</div></div>
+</div>
+<a name="GetLastInsertID" id="GetLastInsertID"></a><div class="element clickable method public GetLastInsertID" data-toggle="collapse" data-target=".GetLastInsertID .collapse">
+<h2>Return the last autonumber ID field from a previous INSERT query</h2>
+<pre>GetLastInsertID() : integer</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>integer</code>ID number from previous INSERT query</div>
+</div></div>
+</div>
+<a name="GetLastSQL" id="GetLastSQL"></a><div class="element clickable method public GetLastSQL" data-toggle="collapse" data-target=".GetLastSQL .collapse">
+<h2>Return the last SQL statement executed</h2>
+<pre>GetLastSQL() : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Current SQL query string</div>
+</div></div>
+</div>
+<a name="GetStatistics" id="GetStatistics"></a><div class="element clickable method public GetStatistics" data-toggle="collapse" data-target=".GetStatistics .collapse">
+<h2>Return a few database statistics in an array.</h2>
+<pre>GetStatistics() : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Returns an array of statistics values on success or FALSE on error.</div>
+</div></div>
+</div>
+<a name="GetTables" id="GetTables"></a><div class="element clickable method public GetTables" data-toggle="collapse" data-target=".GetTables .collapse">
+<h2>Get all table names from the database</h2>
+<pre>GetTables(string $filter) : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filter</h4>
+<code>string</code><p>[Optional] Comma separated list of acceptable table names: no other table will be listed in the results. Alternatively, when no filter is specified, all tables are listed. This is the default behaviour of this method.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>An array that contains the table names. If the database
+              does not contain any tables, the returned value is FALSE.</div>
+</div></div>
+</div>
+<a name="GetXML" id="GetXML"></a><div class="element clickable method public GetXML" data-toggle="collapse" data-target=".GetXML .collapse">
+<h2>Return the last query as an XML Document</h2>
+<pre>GetXML() : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>XML containing all records listed</div>
+</div></div>
+</div>
+<a name="HasRecords" id="HasRecords"></a><div class="element clickable method public HasRecords" data-toggle="collapse" data-target=".HasRecords .collapse">
+<h2>Determines if a query contains any rows</h2>
+<pre>HasRecords(string $sql) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sql</h4>
+<code>string</code><p>[Optional] If specified, the query is first executed Otherwise, the last query is used for comparison</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>TRUE if records exist, FALSE if not or query error</div>
+</div></div>
+</div>
+<a name="InsertRow" id="InsertRow"></a><div class="element clickable method public InsertRow" data-toggle="collapse" data-target=".InsertRow .collapse">
+<h2>Inserts a row into a table in the connected database</h2>
+<pre>InsertRow(string $tableName, array $valuesArray) : integer</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$valuesArray</h4>
+<code>array</code><p>An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>integer</code>Returns last insert ID on success or FALSE on failure</div>
+</div></div>
+</div>
+<a name="IsConnected" id="IsConnected"></a><div class="element clickable method public IsConnected" data-toggle="collapse" data-target=".IsConnected .collapse">
+<h2>Determines if a valid connection to the database exists</h2>
+<pre>IsConnected() : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>TRUE idf connectect or FALSE if not connected</div>
+</div></div>
+</div>
+<a name="IsDateStr" id="IsDateStr"></a><div class="element clickable method public IsDateStr" data-toggle="collapse" data-target=".IsDateStr .collapse">
+<h2>Determines if a value of any data type is a date PHP can convert</h2>
+<pre>IsDateStr(string $value) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE if value is date or FALSE if not date</div>
+</div></div>
+</div>
+<a name="Kill" id="Kill"></a><div class="element clickable method public Kill" data-toggle="collapse" data-target=".Kill .collapse">
+<h2>Stop executing (die/exit) and show last MySQL error message</h2>
+<pre>Kill(string $message, boolean $prepend_message) </pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>The message to display on exit</p></div>
+<div class="subelement argument">
+<h4>$prepend_message</h4>
+<code>boolean</code><p>(Optional) Whether the message should be shown as-is (FALSE) or followed by the last error message/description (TRUE) (Default: TRUE)</p>
+</div>
+</div></div>
+</div>
+<a name="MoveFirst" id="MoveFirst"></a><div class="element clickable method public MoveFirst" data-toggle="collapse" data-target=".MoveFirst .collapse">
+<h2>Seeks to the beginning of the records</h2>
+<pre>MoveFirst() : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="MoveLast" id="MoveLast"></a><div class="element clickable method public MoveLast" data-toggle="collapse" data-target=".MoveLast .collapse">
+<h2>Seeks to the end of the records</h2>
+<pre>MoveLast() : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="MyDyingMessage" id="MyDyingMessage"></a><div class="element clickable method public MyDyingMessage" data-toggle="collapse" data-target=".MyDyingMessage .collapse">
+<h2>Get last error message as HTML string</h2>
+<pre>MyDyingMessage(string $message, boolean $prepend_message) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Return the error message ready for throwing back out to the client side
+while dying, a.k.a. Kill() without the death nor the echo'ing.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>The message to display on exit</p></div>
+<div class="subelement argument">
+<h4>$prepend_message</h4>
+<code>boolean</code><p>(Optional) Whether the message should be shown as-is (FALSE) or followed by the last error message/description (TRUE) (Default: TRUE)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Return the error message as a HTML string; when the
+        $this->InDevelopmentEnvironment configuration member has been
+        set, the offending query is included for enhanced diagnostics.</div>
+</div></div>
+</div>
+<a name="Open" id="Open"></a><div class="element clickable method public Open" data-toggle="collapse" data-target=".Open .collapse">
+<h2>Connect to specified MySQL server</h2>
+<pre>Open(string $database, string $server, string $username, string $password, string $charset, string $collation, boolean $pcon) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$database</h4>
+<code>string</code><p>(Optional) Database name</p>
+</div>
+<div class="subelement argument">
+<h4>$server</h4>
+<code>string</code><p>(Optional) Host address</p>
+</div>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>(Optional) User name</p>
+</div>
+<div class="subelement argument">
+<h4>$password</h4>
+<code>string</code><p>(Optional) Password</p>
+</div>
+<div class="subelement argument">
+<h4>$charset</h4>
+<code>string</code><p>(Optional) Character set</p>
+</div>
+<div class="subelement argument">
+<h4>$collation</h4>
+<code>string</code><p>(Optional) Character set collation</p>
+</div>
+<div class="subelement argument">
+<h4>$pcon</h4>
+<code>boolean</code><p>(Optional) Persistant connection</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="Query" id="Query"></a><div class="element clickable method public Query" data-toggle="collapse" data-target=".Query .collapse">
+<h2>Executes the given SQL query and returns the records</h2>
+<pre>Query(string $sql) : object</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sql</h4>
+<code>string</code><p>The query string should not end with a semicolon</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>PHP 'mysql result' resource object containing the records
+               on SELECT, SHOW, DESCRIBE or EXPLAIN queries and returns;
+               TRUE or FALSE for all others i.e. UPDATE, DELETE, DROP
+               AND FALSE on all errors (setting the local Error message)</div>
+</div></div>
+</div>
+<a name="QueryArray" id="QueryArray"></a><div class="element clickable method public QueryArray" data-toggle="collapse" data-target=".QueryArray .collapse">
+<h2>Executes the given SQL query and returns a multi-dimensional array</h2>
+<pre>QueryArray(string $sql, integer $resultType) : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sql</h4>
+<code>string</code><p>The query string should not end with a semicolon</p></div>
+<div class="subelement argument">
+<h4>$resultType</h4>
+<code>integer</code><p>(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>A multi-dimensional array containing all the data
+              returned from the query or FALSE on all errors</div>
+</div></div>
+</div>
+<a name="QueryObjects" id="QueryObjects"></a><div class="element clickable method public QueryObjects" data-toggle="collapse" data-target=".QueryObjects .collapse">
+<h2>Executes the given SQL query</h2>
+<pre>QueryObjects(string $sql) : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Executes the given SQL query and returns an array of objects, where
+each record is an object with the columns serving as object member variables.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sql</h4>
+<code>string</code><p>The query string should not end with a semicolon</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>An array of record objects containing all the data
+              returned from the query or FALSE on all errors</div>
+</div></div>
+</div>
+<a name="QuerySingleRow" id="QuerySingleRow"></a><div class="element clickable method public QuerySingleRow" data-toggle="collapse" data-target=".QuerySingleRow .collapse">
+<h2>Executes the given SQL query and returns only one (the first) row</h2>
+<pre>QuerySingleRow(string $sql) : object</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sql</h4>
+<code>string</code><p>The query string should not end with a semicolon</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>PHP resource object containing the first row or
+               FALSE if no row is returned from the query</div>
+</div></div>
+</div>
+<a name="QuerySingleRowArray" id="QuerySingleRowArray"></a><div class="element clickable method public QuerySingleRowArray" data-toggle="collapse" data-target=".QuerySingleRowArray .collapse">
+<h2>Executes the given SQL query and returns the first row as an array</h2>
+<pre>QuerySingleRowArray(string $sql, integer $resultType) : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sql</h4>
+<code>string</code><p>The query string should not end with a semicolon</p></div>
+<div class="subelement argument">
+<h4>$resultType</h4>
+<code>integer</code><p>(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>An array containing the first row or FALSE if no row
+              is returned from the query</div>
+</div></div>
+</div>
+<a name="QuerySingleValue" id="QuerySingleValue"></a><div class="element clickable method public QuerySingleValue" data-toggle="collapse" data-target=".QuerySingleValue .collapse">
+<h2>Executes a query and returns a single value.</h2>
+<pre>QuerySingleValue(string $sql) : mixed</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>If more than one row
+is returned, only the first value in the first column is returned.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sql</h4>
+<code>string</code><p>The query string should not end with a semicolon</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>The value returned or FALSE if no value</div>
+</div></div>
+</div>
+<a name="QueryTimed" id="QueryTimed"></a><div class="element clickable method public QueryTimed" data-toggle="collapse" data-target=".QueryTimed .collapse">
+<h2>Executes the given SQL query, measures it, and saves the total duration
+in microseconds</h2>
+<pre>QueryTimed(string $sql) : object</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sql</h4>
+<code>string</code><p>The query string should not end with a semicolon</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>PHP 'mysql result' resource object containing the records
+               on SELECT, SHOW, DESCRIBE or EXPLAIN queries and returns
+               TRUE or FALSE for all others i.e. UPDATE, DELETE, DROP</div>
+</div></div>
+</div>
+<a name="Records" id="Records"></a><div class="element clickable method public Records" data-toggle="collapse" data-target=".Records .collapse">
+<h2>Returns the records from the last query</h2>
+<pre>Records() : object</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>PHP 'mysql result' resource object containing the records
+               for the last query executed</div>
+</div></div>
+</div>
+<a name="RecordsArray" id="RecordsArray"></a><div class="element clickable method public RecordsArray" data-toggle="collapse" data-target=".RecordsArray .collapse">
+<h2>Returns all records from the last query as array of arrays</h2>
+<pre>RecordsArray(integer $resultType) : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Returns all records from the last query and returns the contents as an array of records
+where each record is presented as an array of columns (fields).</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$resultType</h4>
+<code>integer</code><p>(Optional) The type of array representing one record Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Records in array form or FALSE on error. May return an
+        EMPTY array when no records are available.</div>
+</div></div>
+</div>
+<a name="RecordsObjects" id="RecordsObjects"></a><div class="element clickable method public RecordsObjects" data-toggle="collapse" data-target=".RecordsObjects .collapse">
+<h2>Returns all records from the last query as array of objects</h2>
+<pre>RecordsObjects() : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Returns all records from the last query and returns the contents as an array of record objects
+(where each record is an object with each column as an attribute (data member variable)).</p></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Records in object form or FALSE on error. May return an
+        EMPTY array when no records are available.</div>
+</div></div>
+</div>
+<a name="Release" id="Release"></a><div class="element clickable method public Release" data-toggle="collapse" data-target=".Release .collapse">
+<h2>Frees memory used by the query results and returns the function result.</h2>
+<pre>Release(resource $result) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>warning</th>
+<td>It is an (non-fatal) error to Release() a query result
+         more than once.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$result</h4>
+<code>resource</code><p>(Optional) the result originally returned by any previous SQL query.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on failure</div>
+</div></div>
+</div>
+<a name="Row" id="Row"></a><div class="element clickable method public Row" data-toggle="collapse" data-target=".Row .collapse">
+<h2>Reads the current row and returns contents as a
+PHP object or returns false on error</h2>
+<pre>Row(integer $optional_row_number) : object</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$optional_row_number</h4>
+<code>integer</code><p>(Optional) Use to specify a row</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>PHP object or FALSE on error</div>
+</div></div>
+</div>
+<a name="RowArray" id="RowArray"></a><div class="element clickable method public RowArray" data-toggle="collapse" data-target=".RowArray .collapse">
+<h2>Reads the current row and returns contents as an
+array or returns false on error</h2>
+<pre>RowArray(integer $optional_row_number, integer $resultType) : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$optional_row_number</h4>
+<code>integer</code><p>(Optional) Use to specify a row</p>
+</div>
+<div class="subelement argument">
+<h4>$resultType</h4>
+<code>integer</code><p>(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Array that corresponds to fetched row or FALSE if no rows</div>
+</div></div>
+</div>
+<a name="RowCount" id="RowCount"></a><div class="element clickable method public RowCount" data-toggle="collapse" data-target=".RowCount .collapse">
+<h2>Returns the last query row count</h2>
+<pre>RowCount() : integer</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>integer</code>Row count or FALSE on error</div>
+</div></div>
+</div>
+<a name="SQLBooleanValue" id="SQLBooleanValue"></a><div class="element clickable method public SQLBooleanValue" data-toggle="collapse" data-target=".SQLBooleanValue .collapse">
+<h2>Converts a boolean into a formatted TRUE or FALSE value of choice</h2>
+<pre>SQLBooleanValue(mixed $value, mixed $trueValue, mixed $falseValue, string $datatype) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse">
+<div class="span4">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+<tr>
+<th>example</th>
+<td>echo MySQL::SQLBooleanValue(false, "1", "0", MySQL::SQLVALUE_NUMBER);</td>
+</tr>
+<tr>
+<th>example</th>
+<td>echo MySQL::SQLBooleanValue($test, "Jan 1, 2007 ", "2007/06/01", MySQL::SQLVALUE_DATE);</td>
+</tr>
+<tr>
+<th>example</th>
+<td>echo MySQL::SQLBooleanValue("ON", "Ya", "Nope");</td>
+</tr>
+<tr>
+<th>example</th>
+<td>echo MySQL::SQLBooleanValue(1, '+', '-');</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>value to analyze for TRUE or FALSE</p></div>
+<div class="subelement argument">
+<h4>$trueValue</h4>
+<code>mixed</code><p>value to use if TRUE</p></div>
+<div class="subelement argument">
+<h4>$falseValue</h4>
+<code>mixed</code><p>value to use if FALSE</p></div>
+<div class="subelement argument">
+<h4>$datatype</h4>
+<code>string</code><p>Use SQLVALUE constants or the strings: string, text, varchar, char, boolean, bool, Y-N, T-F, bit, date, datetime, time, integer, int, number, double, float</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>SQL formatted value of the specified data type on success or FALSE on error</div>
+</div>
+<div class="span4">
+<h3>Examples</h3>
+<pre class="prettyprint linenums"></pre>
+<pre class="prettyprint linenums"></pre>
+<pre class="prettyprint linenums"></pre>
+<pre class="prettyprint linenums"></pre>
+</div>
+</div>
+</div>
+<a name="SQLFix" id="SQLFix"></a><div class="element clickable method public SQLFix" data-toggle="collapse" data-target=".SQLFix .collapse">
+<h2>Returns string suitable for inclusion in a SQL query, i.e.</h2>
+<pre>SQLFix(string $value) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>properly escaped/filtered</p></p>
+<table class="table table-bordered"><tr>
+<th>static</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>SQL formatted value</div>
+</div></div>
+</div>
+<a name="SQLUnfix" id="SQLUnfix"></a><div class="element clickable method public SQLUnfix" data-toggle="collapse" data-target=".SQLUnfix .collapse">
+<h2>Returns MySQL string as normal string</h2>
+<pre>SQLUnfix(string $value) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+<tr>
+<th>warning</th>
+<td>Do NOT use on columns returned by a database query: such data has already
+         been adequately processed by MySQL itself.
+         The only probable place where the SQLUnfix() method MAY be useful is when
+         DIRECTLY accessing strings produced by the SQLValue() method.</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a name="SQLValue" id="SQLValue"></a><div class="element clickable method public SQLValue" data-toggle="collapse" data-target=".SQLValue .collapse">
+<h2>Formats any value into a string suitable for SQL statements</h2>
+<pre>SQLValue(mixed $value, string $datatype) : string</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>note</th>
+<td>Also supports data types returned from the gettype function.</td>
+</tr>
+<tr>
+<th>static</th>
+<td></td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Any value of any type to be formatted to SQL</p></div>
+<div class="subelement argument">
+<h4>$datatype</h4>
+<code>string</code><p>Use SQLVALUE constants or the strings: 'string', 'text', 'varchar', 'char', 'boolean', 'bool', 'Y-N', 'T-F', 'bit', 'date', 'datetime', 'time', 'integer', 'int', 'number', 'double', 'float'</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The properly quoted and escaped/filtered value as a string
+               which can be safely included in a generated SQL query.</div>
+</div></div>
+</div>
+<a name="Seek" id="Seek"></a><div class="element clickable method public Seek" data-toggle="collapse" data-target=".Seek .collapse">
+<h2>Sets the internal database pointer to the
+specified row number and returns the result</h2>
+<pre>Seek(integer $row_number) : object</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$row_number</h4>
+<code>integer</code><p>Row number</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>Fetched row as PHP object on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="SeekPosition" id="SeekPosition"></a><div class="element clickable method public SeekPosition" data-toggle="collapse" data-target=".SeekPosition .collapse">
+<h2>Returns the current cursor row location</h2>
+<pre>SeekPosition() : integer</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>integer</code>Current row number</div>
+</div></div>
+</div>
+<a name="SelectArray" id="SelectArray"></a><div class="element clickable method public SelectArray" data-toggle="collapse" data-target=".SelectArray .collapse">
+<h2>Returns a multidimensional array of rows from a table based on a WHERE filter</h2>
+<pre>SelectArray(string $tableName, array | string $whereArray, array | string $columns, array | string $sortColumns, integer | string $limit, integer $resultType) : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>Any of the parameters $whereArray, $columns, $sortColumns or $limit
+      may alternatively be a string, in which case these are used verbatim
+      in the query. This is useful when advanced queries are constructed.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)</p>
+</div>
+<div class="subelement argument">
+<h4>$columns</h4>
+<code>array</code><code>string</code><p>(Optional) The column or list of columns to select</p>
+</div>
+<div class="subelement argument">
+<h4>$sortColumns</h4>
+<code>array</code><code>string</code><p>(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column.</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>integer</code><code>string</code><p>(Optional) The limit of rows to return</p>
+</div>
+<div class="subelement argument">
+<h4>$resultType</h4>
+<code>integer</code><p>(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>A multi-dimensional array containing all the data
+              returned from the query or FALSE on all errors</div>
+</div></div>
+</div>
+<a name="SelectDatabase" id="SelectDatabase"></a><div class="element clickable method public SelectDatabase" data-toggle="collapse" data-target=".SelectDatabase .collapse">
+<h2>Selects a different database and character set</h2>
+<pre>SelectDatabase(string $database, string $charset) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$database</h4>
+<code>string</code><p>Database name</p></div>
+<div class="subelement argument">
+<h4>$charset</h4>
+<code>string</code><p>(Optional) Character set (i.e. utf8)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="SelectObjects" id="SelectObjects"></a><div class="element clickable method public SelectObjects" data-toggle="collapse" data-target=".SelectObjects .collapse">
+<h2>Returns an array of row (= record) objects from a table based on a WHERE filter</h2>
+<pre>SelectObjects(string $tableName, array | string $whereArray, array | string $columns, array | string $sortColumns, integer | string $limit) : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>Any of the parameters $whereArray, $columns, $sortColumns or $limit
+      may alternatively be a string, in which case these are used verbatim
+      in the query. This is useful when advanced queries are constructed.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)</p>
+</div>
+<div class="subelement argument">
+<h4>$columns</h4>
+<code>array</code><code>string</code><p>(Optional) The column or list of columns to select</p>
+</div>
+<div class="subelement argument">
+<h4>$sortColumns</h4>
+<code>array</code><code>string</code><p>(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column.</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>integer</code><code>string</code><p>(Optional) The limit of rows to return</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>An array of record objects containing all the data
+              returned from the query or FALSE on all errors</div>
+</div></div>
+</div>
+<a name="SelectRows" id="SelectRows"></a><div class="element clickable method public SelectRows" data-toggle="collapse" data-target=".SelectRows .collapse">
+<h2>Gets rows in a table based on a WHERE filter</h2>
+<pre>SelectRows(string $tableName, array | string $whereArray, array | string $columns, array | string $sortColumns, integer | string $limit) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>Any of the parameters $whereArray, $columns, $sortColumns or $limit
+      may alternatively be a string, in which case these are used verbatim
+      in the query. This is useful when advanced queries are constructed.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)</p>
+</div>
+<div class="subelement argument">
+<h4>$columns</h4>
+<code>array</code><code>string</code><p>(Optional) The column or list of columns to select</p>
+</div>
+<div class="subelement argument">
+<h4>$sortColumns</h4>
+<code>array</code><code>string</code><p>(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column.</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>integer</code><code>string</code><p>(Optional) The limit of rows to return</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns records on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="SelectSingleRow" id="SelectSingleRow"></a><div class="element clickable method public SelectSingleRow" data-toggle="collapse" data-target=".SelectSingleRow .collapse">
+<h2>Returns a single (first) row from a table based on a WHERE filter</h2>
+<pre>SelectSingleRow(string $tableName, array | string $whereArray, array | string $columns, array | string $sortColumns, integer | string $limit) : object</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>Any of the parameters $whereArray, $columns, $sortColumns or $limit
+      may alternatively be a string, in which case these are used verbatim
+      in the query. This is useful when advanced queries are constructed.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)</p>
+</div>
+<div class="subelement argument">
+<h4>$columns</h4>
+<code>array</code><code>string</code><p>(Optional) The column or list of columns to select</p>
+</div>
+<div class="subelement argument">
+<h4>$sortColumns</h4>
+<code>array</code><code>string</code><p>(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column.</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>integer</code><code>string</code><p>(Optional) The limit of rows to return</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>object</code>PHP resource object containing the first row or
+               FALSE if no row is returned from the query</div>
+</div></div>
+</div>
+<a name="SelectSingleRowArray" id="SelectSingleRowArray"></a><div class="element clickable method public SelectSingleRowArray" data-toggle="collapse" data-target=".SelectSingleRowArray .collapse">
+<h2>Returns a single (first) row as an array from a table based on a WHERE filter</h2>
+<pre>SelectSingleRowArray(string $tableName, array | string $whereArray, array | string $columns, array | string $sortColumns, integer | string $limit, integer $resultType) : array</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>Any of the parameters $whereArray, $columns, $sortColumns or $limit
+      may alternatively be a string, in which case these are used verbatim
+      in the query. This is useful when advanced queries are constructed.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)</p>
+</div>
+<div class="subelement argument">
+<h4>$columns</h4>
+<code>array</code><code>string</code><p>(Optional) The column or list of columns to select</p>
+</div>
+<div class="subelement argument">
+<h4>$sortColumns</h4>
+<code>array</code><code>string</code><p>(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column.</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>integer</code><code>string</code><p>(Optional) The limit of rows to return</p>
+</div>
+<div class="subelement argument">
+<h4>$resultType</h4>
+<code>integer</code><p>(Optional) The type of array Values can be: MYSQL_ASSOC, MYSQL_NUM, MYSQL_BOTH</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>An array containing the first row or FALSE if no row
+              is returned from the query</div>
+</div></div>
+</div>
+<a name="SelectSingleValue" id="SelectSingleValue"></a><div class="element clickable method public SelectSingleValue" data-toggle="collapse" data-target=".SelectSingleValue .collapse">
+<h2>Returns a single value from from the first row SELECTed from a table based on a
+WHERE filter.</h2>
+<pre>SelectSingleValue(string $tableName, array | string $whereArray, array | string $columns, array | string $sortColumns, integer | string $limit) : mixed</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>Any of the parameters $whereArray, $columns, $sortColumns or $limit
+      may alternatively be a string, in which case these are used verbatim
+      in the query. This is useful when advanced queries are constructed.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)</p>
+</div>
+<div class="subelement argument">
+<h4>$columns</h4>
+<code>array</code><code>string</code><p>(Optional) The column or list of columns to select</p>
+</div>
+<div class="subelement argument">
+<h4>$sortColumns</h4>
+<code>array</code><code>string</code><p>(Optional) Column or list of columns to sort by. Column names may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each column.</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>integer</code><code>string</code><p>(Optional) The limit of rows to return</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>The value returned or FALSE if no value</div>
+</div></div>
+</div>
+<a name="SelectTable" id="SelectTable"></a><div class="element clickable method public SelectTable" data-toggle="collapse" data-target=".SelectTable .collapse">
+<h2>Retrieves all rows in a specified table</h2>
+<pre>SelectTable(string $tableName) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns an array of records
+        (each an object where the columns are individual object member variables)
+        on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="TimerDuration" id="TimerDuration"></a><div class="element clickable method public TimerDuration" data-toggle="collapse" data-target=".TimerDuration .collapse">
+<h2>Returns last measured duration (time between TimerStart and TimerStop)</h2>
+<pre>TimerDuration(integer $decimals) : Float</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$decimals</h4>
+<code>integer</code><p>(Optional) The number of decimal places to show</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>Float</code>Microseconds elapsed</div>
+</div></div>
+</div>
+<a name="TimerStart" id="TimerStart"></a><div class="element clickable method public TimerStart" data-toggle="collapse" data-target=".TimerStart .collapse">
+<h2>Starts time measurement (in microseconds)</h2>
+<pre>TimerStart() </pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="TimerStop" id="TimerStop"></a><div class="element clickable method public TimerStop" data-toggle="collapse" data-target=".TimerStop .collapse">
+<h2>Stops time measurement (in microseconds)</h2>
+<pre>TimerStop() </pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="TransactionBegin" id="TransactionBegin"></a><div class="element clickable method public TransactionBegin" data-toggle="collapse" data-target=".TransactionBegin .collapse">
+<h2>Starts a transaction</h2>
+<pre>TransactionBegin() : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="TransactionEnd" id="TransactionEnd"></a><div class="element clickable method public TransactionEnd" data-toggle="collapse" data-target=".TransactionEnd .collapse">
+<h2>Ends a transaction and commits the queries</h2>
+<pre>TransactionEnd() : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="TransactionRollback" id="TransactionRollback"></a><div class="element clickable method public TransactionRollback" data-toggle="collapse" data-target=".TransactionRollback .collapse">
+<h2>Rolls the transaction back</h2>
+<pre>TransactionRollback() : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on failure</div>
+</div></div>
+</div>
+<a name="TruncateTable" id="TruncateTable"></a><div class="element clickable method public TruncateTable" data-toggle="collapse" data-target=".TruncateTable .collapse">
+<h2>Truncates a table removing all data</h2>
+<pre>TruncateTable(string $tableName) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="UpdateRow" id="UpdateRow"></a><div class="element clickable method public UpdateRow" data-toggle="collapse" data-target=".UpdateRow .collapse">
+<h2>Updates rows in a table based on a WHERE filter
+(can be just one or many rows based on the filter)</h2>
+<pre>UpdateRow(string $tableName, array $valuesArray, array | string $whereArray) : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tableName</h4>
+<code>string</code><p>The name of the table</p></div>
+<div class="subelement argument">
+<h4>$valuesArray</h4>
+<code>array</code><p>An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.)</p>
+</div>
+<div class="subelement argument">
+<h4>$whereArray</h4>
+<code>array</code><code>string</code><p>(Optional) An associative array containing the column names as keys and values as data. The values must be SQL ready (i.e. quotes around strings, formatted dates, etc.). If not specified then all values in the table are updated. <br/> This parameter may alternatively be a string, in which case it is used verbatim for the WHERE clause of the query. This is useful when advanced queries are constructed.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>Returns TRUE on success or FALSE on error</div>
+</div></div>
+</div>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Constructor: Opens the connection to the database</h2>
+<pre>__construct(boolean $connect, string $database, string $server, string $username, string $password, string $charset, string $collation) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$connect</h4>
+<code>boolean</code><p>(Optional) Auto-connect when object is created</p>
+</div>
+<div class="subelement argument">
+<h4>$database</h4>
+<code>string</code><p>(Optional) Database name</p>
+</div>
+<div class="subelement argument">
+<h4>$server</h4>
+<code>string</code><p>(Optional) Host address</p>
+</div>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>(Optional) User name</p>
+</div>
+<div class="subelement argument">
+<h4>$password</h4>
+<code>string</code><p>(Optional) Password</p>
+</div>
+<div class="subelement argument">
+<h4>$charset</h4>
+<code>string</code><p>(Optional) Character set</p>
+</div>
+<div class="subelement argument">
+<h4>$collation</h4>
+<code>string</code><p>(Optional) Character set collation</p>
+</div>
+</div></div>
+</div>
+<a name="__destruct" id="__destruct"></a><div class="element clickable method public __destruct" data-toggle="collapse" data-target=".__destruct .collapse">
+<h2>Destructor: Closes the connection to the database</h2>
+<pre>__destruct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="BuildSQLColumns" id="BuildSQLColumns"></a><div class="element clickable method private BuildSQLColumns" data-toggle="collapse" data-target=".BuildSQLColumns .collapse">
+<h2>Builds a comma delimited list of columns for use with a SQL query</h2>
+<pre>BuildSQLColumns(array | string $columns, boolean $addQuotes, boolean $showAlias, boolean $withSortMarker) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>This method can be used to construct a SELECT, FROM or SORT BY section of an SQL query.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$columns</h4>
+<code>array</code><code>string</code><p>Either an array containing the column names or a string. The latter is used when, for example, constructing 'advanced' queries with SUM(*) or other expressions in the SELECT fieldset section.</p>
+</div>
+<div class="subelement argument">
+<h4>$addQuotes</h4>
+<code>boolean</code><p>(Optional) TRUE to add quotes</p>
+</div>
+<div class="subelement argument">
+<h4>$showAlias</h4>
+<code>boolean</code><p>(Optional) TRUE to show column alias</p>
+</div>
+<div class="subelement argument">
+<h4>$withSortMarker</h4>
+<code>boolean</code><p>(Optional) TRUE when the field list is meant for an ORDER BY clause; fields may be prefixed by a plus(+) or minus(-) to indicate sort order. Default is ASCending for each field.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Returns the constructed SQL column list on success or NULL on failure</div>
+</div></div>
+</div>
+<a name="ResetError" id="ResetError"></a><div class="element clickable method private ResetError" data-toggle="collapse" data-target=".ResetError .collapse">
+<h2>Clears the internal variables from any error information</h2>
+<pre>ResetError() </pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SetError" id="SetError"></a><div class="element clickable method private SetError" data-toggle="collapse" data-target=".SetError .collapse">
+<h2>Sets the local variables with the first error information</h2>
+<pre>SetError(string $errorMessage, integer $errorNumber) </pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$errorMessage</h4>
+<code>string</code><p>The error description</p></div>
+<div class="subelement argument">
+<h4>$errorNumber</h4>
+<code>integer</code><p>The error number</p></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24InDevelopmentEnvironment" id="$InDevelopmentEnvironment"> </a><div class="element clickable property public $InDevelopmentEnvironment" data-toggle="collapse" data-target=".$InDevelopmentEnvironment .collapse">
+<h2>Provide minimal or extended error information</h2>
+<pre>$InDevelopmentEnvironment : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Determines if the code is running in a development or production environment: error diagnostics information
+is far more elaborate in a development environment setting to aid problem analysis and resolution.</p></p>
+<table class="table table-bordered"><tr>
+<th>api</th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a name="%24ThrowExceptions" id="$ThrowExceptions"> </a><div class="element clickable property public $ThrowExceptions" data-toggle="collapse" data-target=".$ThrowExceptions .collapse">
+<h2>Determines if an error throws an exception</h2>
+<pre>$ThrowExceptions : boolean</pre>
+<div class="labels"><span class="label label-info">API</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>api</th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a name="%24active_row" id="$active_row"> </a><div class="element clickable property private $active_row" data-toggle="collapse" data-target=".$active_row .collapse">
+<h2>current row</h2>
+<pre>$active_row </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24db_charset" id="$db_charset"> </a><div class="element clickable property private $db_charset" data-toggle="collapse" data-target=".$db_charset .collapse">
+<h2>optional character set (i.e.</h2>
+<pre>$db_charset </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"><p>utf8)</p></p></div></div>
+</div>
+<a name="%24db_charsetcollation" id="$db_charsetcollation"> </a><div class="element clickable property private $db_charsetcollation" data-toggle="collapse" data-target=".$db_charsetcollation .collapse">
+<h2>optional character set collation (i.e.</h2>
+<pre>$db_charsetcollation </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"><p>utf8_unicode_ci)</p></p></div></div>
+</div>
+<a name="%24db_dbname" id="$db_dbname"> </a><div class="element clickable property private $db_dbname" data-toggle="collapse" data-target=".$db_dbname .collapse">
+<h2>database name</h2>
+<pre>$db_dbname </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24db_host" id="$db_host"> </a><div class="element clickable property private $db_host" data-toggle="collapse" data-target=".$db_host .collapse">
+<h2>server name</h2>
+<pre>$db_host </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24db_pass" id="$db_pass"> </a><div class="element clickable property private $db_pass" data-toggle="collapse" data-target=".$db_pass .collapse">
+<h2>password</h2>
+<pre>$db_pass </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24db_pcon" id="$db_pcon"> </a><div class="element clickable property private $db_pcon" data-toggle="collapse" data-target=".$db_pcon .collapse">
+<h2>use persistent connection?</h2>
+<pre>$db_pcon </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24db_user" id="$db_user"> </a><div class="element clickable property private $db_user" data-toggle="collapse" data-target=".$db_user .collapse">
+<h2>user name</h2>
+<pre>$db_user </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24error_desc" id="$error_desc"> </a><div class="element clickable property private $error_desc" data-toggle="collapse" data-target=".$error_desc .collapse">
+<h2>last mysql error string</h2>
+<pre>$error_desc </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24error_number" id="$error_number"> </a><div class="element clickable property private $error_number" data-toggle="collapse" data-target=".$error_number .collapse">
+<h2>last mysql error number</h2>
+<pre>$error_number </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24in_transaction" id="$in_transaction"> </a><div class="element clickable property private $in_transaction" data-toggle="collapse" data-target=".$in_transaction .collapse">
+<h2>used for transactions</h2>
+<pre>$in_transaction </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24last_insert_id" id="$last_insert_id"> </a><div class="element clickable property private $last_insert_id" data-toggle="collapse" data-target=".$last_insert_id .collapse">
+<h2>last id of record inserted</h2>
+<pre>$last_insert_id </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24last_result" id="$last_result"> </a><div class="element clickable property private $last_result" data-toggle="collapse" data-target=".$last_result .collapse">
+<h2>last mysql query result</h2>
+<pre>$last_result </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24last_sql" id="$last_sql"> </a><div class="element clickable property private $last_sql" data-toggle="collapse" data-target=".$last_sql .collapse">
+<h2>last mysql query</h2>
+<pre>$last_sql </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24mysql_link" id="$mysql_link"> </a><div class="element clickable property private $mysql_link" data-toggle="collapse" data-target=".$mysql_link .collapse">
+<h2>mysql link resource</h2>
+<pre>$mysql_link </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24query_count" id="$query_count"> </a><div class="element clickable property private $query_count" data-toggle="collapse" data-target=".$query_count .collapse">
+<h2>tracks the number of queries executed through this instance</h2>
+<pre>$query_count </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24time_diff" id="$time_diff"> </a><div class="element clickable property private $time_diff" data-toggle="collapse" data-target=".$time_diff .collapse">
+<h2>holds the difference in time</h2>
+<pre>$time_diff </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="%24time_start" id="$time_start"> </a><div class="element clickable property private $time_start" data-toggle="collapse" data-target=".$time_start .collapse">
+<h2>start time for the timer</h2>
+<pre>$time_start </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a name="SQLVALUE_BIT" id="SQLVALUE_BIT"> </a><div class="element clickable constant  SQLVALUE_BIT" data-toggle="collapse" data-target=".SQLVALUE_BIT .collapse">
+<h2>SQLVALUE_BIT</h2>
+<pre>SQLVALUE_BIT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SQLVALUE_BOOLEAN" id="SQLVALUE_BOOLEAN"> </a><div class="element clickable constant  SQLVALUE_BOOLEAN" data-toggle="collapse" data-target=".SQLVALUE_BOOLEAN .collapse">
+<h2>SQLVALUE_BOOLEAN</h2>
+<pre>SQLVALUE_BOOLEAN </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SQLVALUE_DATE" id="SQLVALUE_DATE"> </a><div class="element clickable constant  SQLVALUE_DATE" data-toggle="collapse" data-target=".SQLVALUE_DATE .collapse">
+<h2>SQLVALUE_DATE</h2>
+<pre>SQLVALUE_DATE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SQLVALUE_DATETIME" id="SQLVALUE_DATETIME"> </a><div class="element clickable constant  SQLVALUE_DATETIME" data-toggle="collapse" data-target=".SQLVALUE_DATETIME .collapse">
+<h2>SQLVALUE_DATETIME</h2>
+<pre>SQLVALUE_DATETIME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SQLVALUE_ENUMERATE" id="SQLVALUE_ENUMERATE"> </a><div class="element clickable constant  SQLVALUE_ENUMERATE" data-toggle="collapse" data-target=".SQLVALUE_ENUMERATE .collapse">
+<h2>SQLVALUE_ENUMERATE</h2>
+<pre>SQLVALUE_ENUMERATE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SQLVALUE_NUMBER" id="SQLVALUE_NUMBER"> </a><div class="element clickable constant  SQLVALUE_NUMBER" data-toggle="collapse" data-target=".SQLVALUE_NUMBER .collapse">
+<h2>SQLVALUE_NUMBER</h2>
+<pre>SQLVALUE_NUMBER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SQLVALUE_TEXT" id="SQLVALUE_TEXT"> </a><div class="element clickable constant  SQLVALUE_TEXT" data-toggle="collapse" data-target=".SQLVALUE_TEXT .collapse">
+<h2>SQLVALUE_TEXT</h2>
+<pre>SQLVALUE_TEXT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SQLVALUE_TIME" id="SQLVALUE_TIME"> </a><div class="element clickable constant  SQLVALUE_TIME" data-toggle="collapse" data-target=".SQLVALUE_TIME .collapse">
+<h2>SQLVALUE_TIME</h2>
+<pre>SQLVALUE_TIME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SQLVALUE_T_F" id="SQLVALUE_T_F"> </a><div class="element clickable constant  SQLVALUE_T_F" data-toggle="collapse" data-target=".SQLVALUE_T_F .collapse">
+<h2>SQLVALUE_T_F</h2>
+<pre>SQLVALUE_T_F </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="SQLVALUE_Y_N" id="SQLVALUE_Y_N"> </a><div class="element clickable constant  SQLVALUE_Y_N" data-toggle="collapse" data-target=".SQLVALUE_Y_N .collapse">
+<h2>SQLVALUE_Y_N</h2>
+<pre>SQLVALUE_Y_N </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-10-21T22:47:08+02:00.<br></footer></div>
+</div>
+</body>
+</html>

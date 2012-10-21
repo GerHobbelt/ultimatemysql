@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor>
+  <title>Ultimate MySQL Wrapper Class for PHP 5.x</title>
+  <parser>
+    <default-package-name>UltimateMySqlClass</default-package-name>
+    <target>doc</target>
+    <markers>
+      <item>TODO</item>
+      <item>FIXME</item>
+    </markers>
+    <extensions>
+      <extension>php</extension>
+    </extensions>
+    <visibility></visibility>
+  </parser>
+  <files>
+    <ignore-hidden>on</ignore-hidden>
+    <ignore-symlinks>on</ignore-symlinks>
+	<file>mysql.class.php</file>
+	<ignore>examples/*</ignore>
+	<ignore>phpDoc/*</ignore>
+	<ignore>phpDocumentor2/*</ignore>
+  </files>
+  <transformer>
+    <target>doc</target>
+  </transformer>
+  <logging>
+    <level>warn</level>
+    <paths>
+      <default>{APP_ROOT}/data/log/{DATE}.log</default>
+      <errors>{APP_ROOT}/data/log/{DATE}.errors.log</errors>
+    </paths>
+  </logging>
+  <transformations>
+  <!-- 
+* abstract
+* checkstyle
+* new-black
+* old-ocean
+* responsive
+* zend
+-->
+    <template name="phpDocTemplate/umsqlc/" />
+  </transformations>
+</phpdocumentor>
