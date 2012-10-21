@@ -40,11 +40,7 @@
             </div>
 
             <div class="row collapse">
-                <div>
-                    <xsl:attribute name="class">
-                        <xsl:if test="docblock/tag[@name='example']">span4</xsl:if>
-                        <xsl:if test="not(docblock/tag[@name='example'])">detail-description</xsl:if>
-                    </xsl:attribute>
+                <div class="detail-description">
                     <p class="long_description">
                         <xsl:value-of select="docblock/long-description" disable-output-escaping="yes" />
                     </p>
@@ -56,11 +52,11 @@
                     </xsl:if>
                 </div>
                 <xsl:if test="docblock/tag[@name='example']">
-                    <div class="span4">
+                    <div class="detail-examples">
                         <h3>Examples</h3>
                         <xsl:for-each select="docblock/tag[@name='example']">
                             <pre class="prettyprint linenums">
-                                <xsl:value-of select="."/>
+                                <xsl:value-of select="./@description"/>
                             </pre>
                         </xsl:for-each>
                     </div>
