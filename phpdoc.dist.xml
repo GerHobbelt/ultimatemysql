@@ -16,10 +16,10 @@
   <files>
     <ignore-hidden>on</ignore-hidden>
     <ignore-symlinks>on</ignore-symlinks>
-	<file>mysql.class.php</file>
-	<ignore>examples/*</ignore>
-	<ignore>phpDoc/*</ignore>
-	<ignore>phpDocumentor2/*</ignore>
+    <file>mysql.class.php</file>
+    <ignore>examples/*</ignore>
+    <ignore>phpDoc/*</ignore>
+    <ignore>phpDocumentor2/*</ignore>
   </files>
   <transformer>
     <target>doc</target>
@@ -32,7 +32,7 @@
     </paths>
   </logging>
   <transformations>
-  <!-- 
+    <!--
 * abstract
 * checkstyle
 * new-black

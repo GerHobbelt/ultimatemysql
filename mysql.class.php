@@ -29,7 +29,7 @@
  * <li> Error handling with error numbers and text
  * <li> And much more!
  * </ul>
- * 
+ *
  * Feb 02, 2007 - Written by Jeff Williams (Initial Release)
  * Feb 11, 2007 - Contributions from Frank P. Walentynowicz
  * Feb 21, 2007 - Contribution from Larry Wakeman
@@ -50,15 +50,15 @@
  * Nov 28, 2007 - Contribution from Douglas Gintz
  * Jul 06, 2009 - GetXML() and GetJSON() contribution from Emre Erkan
  *                and ability to use a blank password if needed
- * 
+ *
  * @example
  * include("mysql.class.php");
- * 
- * $db = new MySQL(); 
- * $db = new MySQL(true, "database"); 
+ *
+ * $db = new MySQL();
+ * $db = new MySQL(true, "database");
  * $db = new MySQL(true, "database", "localhost", "username", "password");
- *  
- * 
+ *
+ *
  * @category  Ultimate MySQL Wrapper Class
  * @package Ultimate MySQL Wrapper
  * @version 2.5.1
