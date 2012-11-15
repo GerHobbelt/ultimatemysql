@@ -374,7 +374,7 @@ class MySQL
 		{
 			$wh = $this->BuildSQLWhereClause($whereArray);
 			if (!is_string($wh)) return false;
-			$sql .= $wh;
+			$sql .= ' ' . $wh;
 		}
 		return $sql;
 	}
