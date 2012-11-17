@@ -263,6 +263,7 @@ class MySQL
 	 *
 	 * This method can be used to construct a SELECT, FROM or SORT BY section of an SQL query.
 	 *
+	 * @api
 	 * @param array|string $columns Either an array containing the column names
 	 *                       or a string. The latter is used when, for example,
 	 *                       constructing 'advanced' queries with SUM(*)
@@ -275,7 +276,7 @@ class MySQL
 	 *                  Default is ASCending for each field.
 	 * @return string Returns the constructed SQL column list on success or NULL on failure
 	 */
-	private function BuildSQLColumns($columns, $addQuotes = true, $showAlias = true, $withSortMarker = false)
+	public function BuildSQLColumns($columns, $addQuotes = true, $showAlias = true, $withSortMarker = false)
 	{
 		switch (gettype($columns))
 		{
