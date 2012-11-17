@@ -311,7 +311,7 @@ class MySQL
 				}
 				if ($addQuotes)
 				{
-					$sql .= '`' . self::SQLFix($value) . '`';
+					$sql .= self::SQLFixName($value);
 				}
 				else
 				{
@@ -319,7 +319,7 @@ class MySQL
 				}
 				if ($showAlias && is_string($key) && (!empty($key)))
 				{
-					$sql .= ' AS `' . self::SQLFix($key) . '`';
+					$sql .= ' AS ' . self::SQLFixName($key);
 				}
 				else if ($withSortMarker)
 				{
@@ -329,14 +329,7 @@ class MySQL
 			return $sql;
 
 		case 'string':
-			if ($addQuotes)
-			{
-				return '`' . self::SQLFix($columns) . '`';
-			}
-			else
-			{
-				return $columns;
-			}
+			return $columns;
 
 		default:
 			return false;
@@ -369,7 +362,7 @@ class MySQL
 	 */
 	public function BuildSQLDelete($tableName, $whereArray = null)
 	{
-		$sql = 'DELETE FROM `' . self::SQLFix($tableName) . '`';
+		$sql = 'DELETE FROM ' . self::SQLFixName($tableName);
 		if (!is_null($whereArray))
 		{
 			$wh = $this->BuildSQLWhereClause($whereArray);
@@ -403,8 +396,8 @@ class MySQL
 		$columns = $this->BuildSQLColumns(array_keys($valuesArray), true, false);
 		$values  = $this->BuildSQLColumns($valuesArray, false, false);
 		if (empty($columns) || empty($values)) return false;
-		$sql = 'INSERT INTO `' . self::SQLFix($tableName) .
-		       '` (' . $columns . ') VALUES (' . $values . ')';
+		$sql = 'INSERT INTO ' . self::SQLFixName($tableName) .
+		       ' (' . $columns . ') VALUES (' . $values . ')';
 		return $sql;
 	}
 
@@ -442,7 +435,7 @@ class MySQL
 	{
 		if (!is_null($columns))
 		{
-			$sql = $this->BuildSQLColumns($columns, false, true);
+			$sql = $this->BuildSQLColumns($columns);
 			if (!is_string($sql)) return false;
 			$sql = trim($sql);
 		}
@@ -450,7 +443,7 @@ class MySQL
 		{
 			$sql = '*';
 		}
-		$sql = 'SELECT ' . $sql . ' FROM `' . self::SQLFix($tableName) . '`';
+		$sql = 'SELECT ' . $sql . ' FROM ' . $this->BuildSQLColumns($tableName);
 		if (!is_null($whereArray))
 		{
 			$wh = $this->BuildSQLWhereClause($whereArray);
@@ -459,7 +452,7 @@ class MySQL
 		}
 		if (!is_null($sortColumns))
 		{
-			$ordstr = $this->BuildSQLColumns($sortColumns, false, false, true);
+			$ordstr = $this->BuildSQLColumns($sortColumns, true, false, true);
 			if (!is_string($ordstr)) return false;
 			$ordstr = trim($ordstr);
 			if (!empty($ordstr))
@@ -523,9 +516,9 @@ class MySQL
 
 			if (strlen($sql) != 0)
 				$sql .= ', ';
-			$sql .= '`' . $key . '` = ' . $value;
+			$sql .= self::SQLFixName($key) . ' = ' . $value;
 		}
-		$sql = 'UPDATE `' . self::SQLFix($tableName) . '` SET ' . $sql;
+		$sql = 'UPDATE ' . self::SQLFixName($tableName) . ' SET ' . $sql;
 
 		if (!is_null($whereArray))
 		{
@@ -591,11 +584,11 @@ class MySQL
 				if (is_string($key) && empty($key))
 					return $this->SetError('ERROR: Invalid key specified in BuildSQLWhereClause method', -1);
 				if (empty($value) && !is_integer($value))
-					return $this->SetError('ERROR: Invalid value specified in BuildSQLWhereClause method for key "' . $key . '"', -1);
+					return $this->SetError('ERROR: Invalid value specified in BuildSQLWhereClause method for key ' . self::SQLFixName($key), -1);
 
 				if (is_string($key))
 				{
-					$where .= '`' . $key . '` = ' . $value;
+					$where .= self::SQLFixName($key) . ' = ' . $value;
 				}
 				else
 				{
@@ -843,6 +836,41 @@ class MySQL
 	}
 
 	/**
+	 * Convert a string or integer value into a DateTime instance
+	 *
+	 * @static
+	 * @api
+	 * @param mixed $value Value to convert to a DateTime instance
+	 * @return DateTime Returns the date/time encoded in the input $value on success; return a boolean FALSE on error.
+	 *
+	 * @example
+	 * echo (MySQL::GetDateTimeValue("2010-01-31")->format('Y-m-d');
+	 */
+	static public function GetDateTimeValue($value)
+	{
+		if (gettype($value) == 'boolean')
+		{
+			return false;
+		}
+		elseif (is_numeric($value))
+		{
+			$date = new DateTime();
+			$date = $date->setTimestamp(intval($value));
+		}
+		else
+		{
+			$cleaned = trim($value);
+			$date = date_create($cleaned, new DateTimeZone('UTC'));
+			// apply some common sense: MySQL can spit out dates such as 0000-00-00 00:00:00, which are nonsensical
+			if (!empty($date) && $date->getTimestamp() === false)
+			{
+				return false;
+			}
+		}
+		return $date;
+	}
+
+	/**
 	 * Return the comments for fields in a table
 	 *
 	 * @api
@@ -864,7 +892,7 @@ class MySQL
 		{
 			return $this->SetError('No connection', -1);
 		}
-		$sql = 'SHOW FULL COLUMNS FROM `' . self::SQLFix($table) . '`';
+		$sql = 'SHOW FULL COLUMNS FROM ' . self::SQLFixName($table);
 		$this->last_sql = $sql;
 		$this->query_count++;
 		$records = mysql_query($sql, $this->mysql_link);
@@ -920,7 +948,7 @@ class MySQL
 		}
 		else
 		{
-			$sql = 'SELECT * FROM `' . self::SQLFix($table) . '` LIMIT 1';
+			$sql = 'SELECT * FROM ' . self::SQLFixName($table) . ' LIMIT 1';
 			$this->last_sql = $sql;
 			$this->query_count++;
 			$records = mysql_query($sql, $this->mysql_link);
@@ -984,7 +1012,7 @@ class MySQL
 		{
 			if (is_numeric($column)) $column = $this->GetColumnName($column, $table);
 
-			$sql = 'SELECT `' . self::SQLFix($column) . '` FROM `' . self::SQLFix($table) . '` LIMIT 1';
+			$sql = 'SELECT ' . self::SQLFixName($column) . ' FROM ' . self::SQLFixName($table) . ' LIMIT 1';
 			$this->last_sql = $sql;
 			$this->query_count++;
 			$result = mysql_query($sql, $this->mysql_link);
@@ -1098,7 +1126,7 @@ class MySQL
 		}
 		else
 		{
-			$sql = 'SELECT `' . self::SQLFix($column) . '` FROM `' . self::SQLFix($table) . '` LIMIT 1';
+			$sql = 'SELECT ' . self::SQLFixName($column) . ' FROM ' . self::SQLFixName($table) . ' LIMIT 1';
 			$this->last_sql = $sql;
 			$this->query_count++;
 			$records = mysql_query($sql, $this->mysql_link);
@@ -1153,7 +1181,7 @@ class MySQL
 		}
 		else
 		{
-			$sql = 'SELECT * FROM `' . self::SQLFix($table) . '` LIMIT 1';
+			$sql = 'SELECT * FROM ' . self::SQLFixName($table) . ' LIMIT 1';
 			$this->last_sql = $sql;
 			$this->query_count++;
 			$records = mysql_query($sql, $this->mysql_link);
@@ -1217,7 +1245,7 @@ class MySQL
 		}
 		else
 		{
-			$sql = 'SHOW COLUMNS FROM `' . self::SQLFix($table) . '`';
+			$sql = 'SHOW COLUMNS FROM ' . self::SQLFixName($table);
 			$this->last_sql = $sql;
 			$this->query_count++;
 			$result = mysql_query($sql, $this->mysql_link);
@@ -1582,7 +1610,7 @@ class MySQL
 			if (!empty($this->db_dbname))
 			{
 				$value .= '--' . "\r\n";
-				$value .= '-- Database: `' . $this->db_dbname . '`' . "\r\n";
+				$value .= '-- Database: ' . self::SQLFixName($this->db_dbname) . "\r\n";
 			}
 			$value .= '--' . "\r\n" . "\r\n" . "\r\n";
 		}
@@ -1597,11 +1625,11 @@ class MySQL
 				$tv .= '-- ========================================================' . "\r\n";
 				$tv .= "\r\n";
 				$tv .= '--' . "\r\n";
-				$tv .= '-- Create the database if it doesn\'t exist yet for database `' . self::SQLFix($this->db_dbname) . '`' . "\r\n";
+				$tv .= '-- Create the database if it doesn\'t exist yet for database ' . self::SQLFixName($this->db_dbname) . "\r\n";
 				$tv .= '--' . "\r\n" . "\r\n";
 			}
 
-			$sql = 'SHOW CREATE DATABASE `' . self::SQLFix($this->db_dbname) . '`';
+			$sql = 'SHOW CREATE DATABASE ' . self::SQLFixName($this->db_dbname);
 			$this->last_sql = $sql;
 			$this->query_count++;
 			$result = $this->QuerySingleRowArray($sql);
@@ -1613,7 +1641,7 @@ class MySQL
 			$result = str_replace('CREATE DATABASE', 'CREATE DATABASE IF NOT EXISTS', $result);
 			$tv .= $result . ' ; ' . "\r\n" . "\r\n";
 
-			$tv .= 'USE `' . self::SQLFix($this->db_dbname) . '`;' . "\r\n" . "\r\n";
+			$tv .= 'USE ' . self::SQLFixName($this->db_dbname) . ';' . "\r\n" . "\r\n";
 
 			// http://stackoverflow.com/questions/1049728/how-do-i-see-what-character-set-a-database-table-column-is-in-mysql
 			$sql = 'SHOW VARIABLES LIKE "character_set_database"';
@@ -1636,7 +1664,7 @@ class MySQL
 			}
 			$collation = $collation->Value;
 
-			$result = 'ALTER DATABASE `' . self::SQLFix($this->db_dbname) . '` DEFAULT CHARACTER SET `' . self::SQLFix($charset) . '` COLLATE `' . self::SQLFix($collation) . '`;';
+			$result = 'ALTER DATABASE ' . self::SQLFixName($this->db_dbname) . ' DEFAULT CHARACTER SET `' . self::SQLFix($charset) . '` COLLATE `' . self::SQLFix($collation) . '`;';
 			$tv .= $result . "\r\n" . "\r\n" . "\r\n";
 
 			if ($with_structure && $alter_database)
@@ -1668,7 +1696,7 @@ class MySQL
 		{
 			$tv = "\r\n" . "\r\n";
 
-			$sql = 'LOCK TABLES `' . self::SQLFix($table) . '` WRITE';
+			$sql = 'LOCK TABLES ' . self::SQLFixName($table) . ' WRITE';
 			$this->last_sql = $sql;
 			$this->query_count++;
 			if (!mysql_query($sql, $this->mysql_link))
@@ -1682,14 +1710,14 @@ class MySQL
 					$tv .= '-- --------------------------------------------------------' . "\r\n";
 					$tv .= "\r\n";
 					$tv .= '--' . "\r\n";
-					$tv .= '-- Table structure for table `' . self::SQLFix($table) . '`' . "\r\n";
+					$tv .= '-- Table structure for table ' . self::SQLFixName($table) . "\r\n";
 					$tv .= '--' . "\r\n" . "\r\n";
 				}
 				if ($with_drops_and_truncates)
 				{
-					$tv .= 'DROP TABLE IF EXISTS `' . self::SQLFix($table) . '`;' . "\r\n";
+					$tv .= 'DROP TABLE IF EXISTS ' . self::SQLFixName($table) . ';' . "\r\n";
 				}
-				$sql = 'SHOW CREATE TABLE `' . self::SQLFix($table) . '`';
+				$sql = 'SHOW CREATE TABLE ' . self::SQLFixName($table);
 				$this->last_sql = $sql;
 				$this->query_count++;
 				$result = mysql_query($sql, $this->mysql_link);
@@ -1709,13 +1737,13 @@ class MySQL
 				if ($with_sql_comments)
 				{
 					$tv .= '--' . "\r\n";
-					$tv .= '-- Dumping data for table `' . self::SQLFix($table) . '`' . "\r\n";
+					$tv .= '-- Dumping data for table ' . self::SQLFixName($table) . "\r\n";
 					$tv .= '--' . "\r\n" . "\r\n";
 				}
 
 				if ($with_drops_and_truncates /* && !$with_structure */ )
 				{
-					$tv .= 'TRUNCATE TABLE `' . self::SQLFix($table) . '`;' . "\r\n" . "\r\n";
+					$tv .= 'TRUNCATE TABLE ' . self::SQLFixName($table) . ';' . "\r\n" . "\r\n";
 				}
 
 				if (!$this->SelectTable($table))
@@ -1733,7 +1761,7 @@ class MySQL
 						$d = '';
 						foreach ($row as $key => $data)
 						{
-							$k .= '`' . self::SQLFix($key) . '`, ';
+							$k .= self::SQLFixName($key) . ', ';
 							// we cope with NULL-valued columns:
 							if ($data === null)
 							{
@@ -1755,7 +1783,7 @@ class MySQL
 							{
 								$tv .= ";\r\n\r\n";
 							}
-							$tv .= 'INSERT INTO `' . self::SQLFix($table) . '` (' . $k . ') VALUES' . "\r\n";
+							$tv .= 'INSERT INTO ' . self::SQLFixName($table) . ' (' . $k . ') VALUES' . "\r\n";
 						}
 						if ($rows_dumped > 0)
 						{
@@ -1780,7 +1808,7 @@ class MySQL
 					// no data in table:
 					if ($with_sql_comments)
 					{
-						$tv .= '-- table `' . self::SQLFix($table) . '` has 0 records.' . "\r\n";
+						$tv .= '-- table ' . self::SQLFixName($table) . ' has 0 records.' . "\r\n";
 						$tv .= '--' . "\r\n" . "\r\n";
 					}
 				}
@@ -2882,7 +2910,7 @@ class MySQL
 		{
 			if (!empty($charset))
 			{
-				if (!$this->Query('SET CHARACTER SET `' . self::SQLFix($charset) . '`'))
+				if (!$this->Query('SET CHARACTER SET ' . self::SQLFixName($charset)))
 				{
 					return $this->SetError();
 				}
@@ -2916,14 +2944,14 @@ class MySQL
 			return $this->SetError('No connection', -1);
 		}
 
-		$sql = 'CREATE DATABASE `' . self::SQLFix($database) . '`';
+		$sql = 'CREATE DATABASE ' . self::SQLFixName($database);
 		if (!empty($charset))
 		{
-			$sql .= ' DEFAULT CHARSET=`' . self::SQLFix($charset) . '`';
+			$sql .= ' DEFAULT CHARSET=' . self::SQLFixName($charset);
 
 			if (!empty($collation))
 			{
-				$sql .= ' COLLATE=`' . self::SQLFix($collation) . '`';
+				$sql .= ' COLLATE=' . self::SQLFixName($collation);
 			}
 		}
 		if (!$this->Query($sql))
@@ -3152,6 +3180,38 @@ class MySQL
 	static public function SQLUnfix($value)
 	{
 		return @stripslashes($value);
+	}
+
+	/**
+	 * Returns string suitable for inclusion in a SQL query as a field, table or aliased reference
+	 *
+	 * The returned string representing the $value will be properly escaped
+	 * and filtered to use as part of a constructed SQL query.
+	 *
+	 * @static
+	 * @api
+	 * @param string $value
+	 * @return string SQL formatted value, will be surrounded by '`'-quotes when containing non-standard characters
+	 *
+	 * @example
+	 * $value = MySQL::SQLFix("table.column_name");
+	 * echo $value . "\n" . MySQL::SQLFixName($value);
+	 */
+	static public function SQLFixName($value)
+	{
+		$s = @mysql_real_escape_string($value);
+		$e = explode('.', $s);
+		foreach($e as &$fn)
+		{
+			// field and table names should never start with a digit and consist of alphanumerics only:
+			$quoting = (strspn($fn, '0123456789') > 0 || strlen($fn) !== strspn($fn, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'));
+			if ($quoting && $fn !== '*')
+			{
+				$fn = '`' . $fn . '`';
+			}
+		}
+		$s = implode('.', $e);
+		return $s;
 	}
 
 	/**
@@ -3554,7 +3614,7 @@ class MySQL
 		}
 		else
 		{
-			$sql = 'TRUNCATE TABLE `' . self::SQLFix($tableName) . '`';
+			$sql = 'TRUNCATE TABLE ' . self::SQLFixName($tableName);
 			return !!$this->Query($sql);
 		}
 	}
@@ -3641,4 +3701,3 @@ class MySQL
 		}
 	}
 }
-?>
