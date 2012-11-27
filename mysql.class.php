@@ -38,11 +38,11 @@
  * Mar 22, 2007 - Added array types to RecordsArray and RowArray
  * Jul 01, 2007 - Class name change, constructor values, static methods, fixe
  * Jul 16, 2007 - Bug fix, removed test, major improvements in error handling
- * Aug 11, 2007 - Added InsertRow() and UpdateRows() methods
+ * Aug 11, 2007 - Added InsertRow() and UpdateRow() methods
  * Aug 19, 2007 - Added BuildSQL static functions, DeleteRows(), SelectRows(),
  *                IsConnected(), and ability to throw Exceptions on errors
  * Sep 07, 2007 - Enhancements to SQL SELECT (column aliases, sorting, limits)
- * Sep 09, 2007 - Updated SelectRows(), UpdateRows() and added SelectTable(),
+ * Sep 09, 2007 - Updated SelectRows(), UpdateRow() and added SelectTable(),
  *                TruncateTable() and SQLVALUE constants for SQLValue()
  * Oct 23, 2007 - Added QueryArray(), QuerySingleRow(), QuerySingleRowArray(),
  *                QuerySingleValue(), HasRecords(), AutoInsertUpdate()
@@ -3651,7 +3651,7 @@ class MySQL
 	 * $update["Age"]  = MySQL::SQLValue(25, MySQL::SQLVALUE_NUMBER);
 	 *
 	 * // Execute the update where the ID is 1
-	 * if (!$db->UpdateRows("test", $values, array("id" => 1))) $db->Kill();
+	 * if (!$db->UpdateRow("test", $values, array("id" => 1))) $db->Kill();
 	 */
 	public function UpdateRow($tableName, $valuesArray, $whereArray = null)
 	{
