@@ -36,7 +36,7 @@
  * Feb 21, 2007 - Bug Fixes and PHPDoc
  * Mar 09, 2007 - Contribution from Nicola Abbiuso
  * Mar 22, 2007 - Added array types to RecordsArray and RowArray
- * Jul 01, 2007 - Class name change, constructor values, static methods, fixe
+ * Jul 01, 2007 - Class name change, constructor values, static methods, fixed
  * Jul 16, 2007 - Bug fix, removed test, major improvements in error handling
  * Aug 11, 2007 - Added InsertRow() and UpdateRow() methods
  * Aug 19, 2007 - Added BuildSQL static functions, DeleteRows(), SelectRows(),
@@ -242,7 +242,7 @@ class MySQL
 	 * @example
 	 * if ($db->BeginningOfSeek())
 	 * {
-	 *     echo "We are at the beggining of the record set";
+	 *     echo "We are at the beginning of the record set";
 	 * }
 	 */
 	public function BeginningOfSeek()
@@ -532,7 +532,7 @@ class MySQL
 
 	/**
 	 * Construct a value string suitable for incorporation anywhere
-	 * in a SQL query. This methos invokes self::SQLValue() under the hood.
+	 * in a SQL query. This method invokes self::SQLValue() under the hood.
 	 *
 	 * @static
 	 * @api
@@ -913,7 +913,7 @@ class MySQL
 			{
 				$index = 0;
 				$columns = array();
-				// Fetchs the array to be returned (column 8 is field comment):
+				// Fetches the array to be returned (column 8 is field comment):
 				while ($array_data = mysql_fetch_array($records, MYSQL_NUM))
 				{
 					$columns[$index] = $array_data[8];
@@ -975,7 +975,7 @@ class MySQL
 	 * Return the data type for a specified column
 	 *
 	 * @api
-	 * @param intege|string $column Column name or number (first column is 0)
+	 * @param integer|string $column Column name or number (first column is 0)
 	 * @param string $table (Optional) If a table name is not specified, the
 	 *                      last returned records are used
 	 * @return string The MySQL data (field) type.  If the column does not
@@ -1581,9 +1581,9 @@ class MySQL
 	 * @param boolean $with_data [Optional] Whether to include the table rows (data)
 	 *                       in the generated script (default: TRUE).
 	 * @param boolean $with_drops_and_truncates [Optional] Whether to include the
-	 *                       apropriate DROP TABLE and/or TRUNCATE TABLE statements
+	 *                       appropriate DROP TABLE and/or TRUNCATE TABLE statements
 	 *                       in the generated script (default: TRUE).
-	 * @param boolean $alter_database [Optional] Whether to include the apropriate
+	 * @param boolean $alter_database [Optional] Whether to include the appropriate
 	 *                       ALTER DATABASE statement in the generated script to
 	 *                       set the default database charset and collation (default: TRUE).
 	 *
@@ -1908,7 +1908,7 @@ class MySQL
 	 * Determines if a valid connection to the database exists
 	 *
 	 * @api
-	 * @return boolean TRUE idf connectect or FALSE if not connected
+	 * @return boolean TRUE if connected or FALSE if not connected
 	 */
 	public function IsConnected()
 	{
@@ -2057,7 +2057,7 @@ class MySQL
 	 * @param string $password (Optional) Password
 	 * @param string $charset  (Optional) Character set
 	 * @param string $collation (Optional) Character set collation
-	 * @param boolean $pcon    (Optional) Persistant connection
+	 * @param boolean $pcon    (Optional) Persistent connection
 	 * @return boolean Returns TRUE on success or FALSE on error
 	 *
 	 * @example
@@ -3099,8 +3099,8 @@ class MySQL
 			}
 		}
 		if ($this->ThrowExceptions)
-		{ 
-			if (isset($this->error_desc) && $this->error_desc != NULL) 
+		{
+			if (isset($this->error_desc) && $this->error_desc != NULL)
 			{
 				throw new Exception($this->error_desc . ' (' . __LINE__ . ')');
 			}
