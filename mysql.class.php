@@ -2472,7 +2472,7 @@ class MySQL
 		}
 	}
 	/**
-	 * Returns a single value from from the first row SELECTed from a table based on a
+	 * Returns a single value from the first row SELECTed from a table based on a
 	 * WHERE filter.
 	 *
 	 * @api
